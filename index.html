@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<title>Gym Builder — Fichas</title>
+<style>
+:root{--red:#c0281e;--red2:#8f1a13;--bg:#0e0e10;--card:#17181b;--card2:#1e2024;
+--line:#2a2c31;--txt:#e9e9ec;--mut:#9a9ba1;--inpbg:#000;--inptxt:#ffd54a;
+--warnbg:#241315;--codebg:#000;--codetxt:#ffd0cc;}
+html[data-theme="light"]{--bg:#f3f4f6;--card:#ffffff;--card2:#eceef1;
+--line:#d6d9de;--txt:#1a1b1e;--mut:#5f636a;--inpbg:#fffdf5;--inptxt:#8a5a00;
+--warnbg:#fdeceb;--codebg:#eceef1;--codetxt:#a3271e;}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+body{margin:0;background:var(--bg);color:var(--txt);
+font:17px/1.6 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
+padding-bottom:60px;}
+header{position:sticky;top:0;z-index:50;background:#000;border-bottom:2px solid var(--red);}
+.brandrow{display:flex;align-items:center;justify-content:space-between;padding:10px 14px 6px;}
+.brand{font-weight:800;letter-spacing:.5px;color:var(--red);font-size:14px;}
+.themebtn{background:transparent;border:1px solid #333;border-radius:20px;
+padding:5px 12px;font-size:15px;cursor:pointer;color:#fff;line-height:1;}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:0 10px 10px;scrollbar-width:none;}
+.tabs::-webkit-scrollbar{display:none;}
+.tab{flex:0 0 auto;min-width:62px;padding:8px 10px;border:1px solid var(--line);
+border-radius:12px;background:var(--card);color:var(--mut);text-align:center;cursor:pointer;}
+.tab b{display:block;font-size:20px;line-height:1;color:var(--txt);}
+.tab small{font-size:10px;opacity:.85;}
+.tab.active{background:var(--red);border-color:var(--red);}
+.tab.active b,.tab.active small{color:#fff;}
+main{max-width:760px;margin:0 auto;padding:14px;}
+.ficha{display:none;}
+.ficha.active{display:block;animation:f .2s ease;}
+@keyframes f{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:none;}}
+h1{font-size:23px;margin:.2em 0 .4em;color:var(--txt);}
+h2.ex{font-size:18px;margin:22px 0 8px;padding:11px 13px;background:var(--card2);
+border-left:4px solid var(--red);border-radius:8px;color:var(--txt);}
+h3{font-size:15px;color:var(--red);margin:16px 0 6px;
+border-bottom:2px solid var(--red2);padding-bottom:4px;}
+p{margin:8px 0;}
+p.note{color:var(--mut);font-style:italic;font-size:14px;}
+strong{color:var(--txt);font-weight:700;}
+code{background:var(--codebg);padding:1px 5px;border-radius:5px;font-size:13px;color:var(--codetxt);}
+hr{border:0;border-top:1px solid var(--line);margin:14px 0;}
+.callout{background:var(--card2);border:1px solid var(--line);border-left:4px solid var(--mut);
+padding:11px 13px;border-radius:8px;margin:12px 0;font-size:15px;}
+.callout.warn{border-left-color:var(--red);background:var(--warnbg);}
+.tbl-wrap{overflow-x:auto;margin:8px 0;}
+table{border-collapse:collapse;width:100%;font-size:15px;}
+th{background:var(--red);color:#fff;padding:7px 8px;text-align:left;font-weight:700;}
+td{border:1px solid var(--line);padding:6px 8px;}
+td.exname{font-weight:600;}
+input.load{width:100%;min-width:52px;background:var(--inpbg);border:1px solid var(--line);
+border-radius:6px;color:var(--inptxt);padding:7px 4px;text-align:center;font-size:15px;font-weight:700;}
+input.load:focus{outline:none;border-color:var(--red);}
+footer{text-align:center;color:var(--mut);font-size:12px;padding:20px 14px;}
+footer button{background:var(--card);color:var(--mut);border:1px solid var(--line);
+border-radius:8px;padding:8px 14px;font-size:13px;cursor:pointer;}
+.saved{color:#5bd66f;font-size:12px;margin-left:8px;}
+</style>
+</head>
+<body>
+<header>
+  <div class="brandrow">
+    <div class="brand">GYM BUILDER · ARNOLD</div>
+    <button class="themebtn" id="themebtn" onclick="toggleTheme()">🌙</button>
+  </div>
+  <div class="tabs"><div class="tab" data-f="a"><b>A</b><small>Peito + Ombro</small></div><div class="tab" data-f="b"><b>B</b><small>Costas + Tríceps</small></div><div class="tab" data-f="c"><b>C</b><small>Perna + Bíceps</small></div><div class="tab" data-f="d"><b>D</b><small>Peito + Ombro</small></div><div class="tab" data-f="e"><b>E</b><small>Perna + Abs</small></div></div>
+</header>
+<main>
+<section class="ficha" id="ficha-a"><h1>Ficha A — Peito SUPERIOR + Ombro (Pesado)</h1>
+<p><strong>Mesociclo:</strong> Acumulação | <strong>Semana:</strong> 1/5 | <strong>Gerada em:</strong> 2026-07-03<br><strong>Duração estimada:</strong> ~38 min | <strong>Princípios:</strong> Peito superior primeiro, pressão PESADA na máquina de chest press inclinado (sem barra, sem depender de halter), tri-sets agonistas, composto pesado standalone, lateral 3D.</p>
+<div class="callout">🔥 Novo ciclo, Leonardo! Peito superior é a moldura do peitoral — é o que faz o peito parecer uma armadura. Hoje a gente move PESO de verdade: nada de barra que machuca sua lombar, nada de halter leve. A máquina de chest press inclinado carrega o que você aguentar. <strong>Complete TODO o peito antes de tocar em ombro.</strong></div>
+<hr>
+<h2 class="ex">Aquecimento: Manguito rotador externo</h2>
+<p><strong>3 × 15</strong> | Sem descanso entre lados</p>
+<p>Obrigatório antes de peito/ombro. Cotovelo a 90° colado ao corpo, rotação externa com halter leve ou elástico. Isso é seguro pro ombro — não é treino, é seguro de vida. Pula e paga com lesão.</p>
+<hr>
+<h1>🎯 BLOCO PEITO (superior)</h1>
+<h2 class="ex">1. Supino inclinado na máquina (chest press inclinado)</h2>
+<p class="note"><strong>4 × 8-10</strong> | Descanso: 90s | <strong>SEM superset — foco TOTAL na carga</strong></p>
+<p>O composto principal do dia e a resposta pros seus dois problemas: assento fixo e trajetória guiada (zero dor na lombar do banco ruim) e peso ILIMITADO (nada de halter de 20kg leve). Regular o banco/pegada na <strong>inclinação</strong> — porção clavicular do peito. Descer 3s controlando, pausar 1s embaixo, explodir na subida.</p>
+<p><strong>4ª série — REST-PAUSE:</strong> 8 reps → descansar 15&quot; → mais 5 reps com o mesmo peso. A última gota de força do peito superior.</p>
+<p>Bateu 10 reps limpas nas 4 séries? Sobe a carga na próxima sessão.</p>
+<hr>
+<h2 class="ex">2. Crucifixo inclinado halteres (A) + Chest press RETO (B) — SUPERSET</h2>
+<p><strong>3 × 10-12 + 10-12</strong> | Descanso: 75s após o par</p>
+<p>Dois PADRÕES diferentes, não dois flys por fazer: um estica o peito, o outro empurra num ângulo novo. Isso é o que arredonda o peitoral inteiro com viés no superior.</p>
+<div class="tbl-wrap"><table><thead><tr><th>#</th><th>Exercício</th><th>Reps</th><th>Papel</th></tr></thead><tbody><tr><td>A</td><td>Crucifixo inclinado com halteres</td><td>10-12</td><td><strong>Estica</strong> o peito superior (fase alongada — onde mais cresce). Aqui 20kg sobra</td></tr><tr><td>B</td><td>Chest press no ajuste reto/plano</td><td>10-12</td><td><strong>Empurra</strong> em ângulo reto — pega peito médio/inferior que o inclinado não pega</td></tr></tbody></table></div>
+<p><strong>Crucifixo inclinado</strong>: banco 30°, abertura ampla, cotovelos levemente flexionados, descer controlando o alongamento, squeeze 1-2s no topo.<br><strong>Chest press reto</strong>: mesma máquina do exercício 1, agora regulada no ângulo reto/plano. Pode ir pesado — segurança pra treinar até perto da falha. Descer 2-3s, explodir na subida.</p>
+<hr>
+<h2 class="ex">3. TRI-SET: Pullover + Canivete + Desenvolvimento na máquina 🔥🔥🔥</h2>
+<p class="note"><strong>3 × 12 + 15 + 8-10</strong> | Descanso: 75s após o trio | <em>transição peito→ombro</em></p>
+<p>Trio esperto pra adiantar o treino: cada exercício pega uma área diferente (peito/dorsal → abs → ombro), então <strong>nenhum fatiga o deltóide</strong> — o desenvolvimento chega FRESCO e você não perde carga no press. Fecha o peito e já abre o ombro na mesma corrida.</p>
+<div class="tbl-wrap"><table><thead><tr><th>#</th><th>Exercício</th><th>Reps</th><th>Área</th></tr></thead><tbody><tr><td>A</td><td>Pullover com halter</td><td>12</td><td>Peito superior / caixa torácica / dorsal</td></tr><tr><td>B</td><td>Canivete</td><td>15</td><td>Abdômen (reto)</td></tr><tr><td>C</td><td>Desenvolvimento na máquina</td><td>8-10</td><td>Ombro (anterior + medial) — <strong>pesado</strong></td></tr></tbody></table></div>
+<p><strong>Pullover</strong>: perpendicular no banco, quadril baixo, halter bem atrás da cabeça — alongamento máximo, voltar contraindo o peito.<br><strong>Canivete</strong>: pernas e tronco sobem juntos, sem impulso.<br><strong>Desenvolvimento</strong>: carrega pesado (nada de halter leve). Descer abaixo da linha do queixo pra ROM completo, subir sem travar o cotovelo. Mesmo dentro do tri-set, é o construtor pesado do ombro — não alivie a carga.</p>
+<p><strong>3ª série do desenvolvimento — DROP SET:</strong> 8-10 reps → reduzir 30% → falha.</p>
+<hr>
+<h1>🎯 BLOCO OMBRO (continuação)</h1>
+<hr>
+<h2 class="ex">4. Elevação lateral halteres (A) + Face pull (B) — SUPERSET</h2>
+<p><strong>3 × 15 + 15</strong> | Descanso: 60s após o par</p>
+<p>🔥 <strong>MEDIAL + POSTERIOR</strong> — as duas cabeças que os pressings NÃO pegam. Seus 3 pressings (chest press, desenvolvimento, Arnold) já martelam o deltóide anterior; aqui a gente cobre o resto.</p>
+<p><strong>Elevação lateral</strong>: dedo mínimo levemente pra cima, &quot;derramar água da jarra&quot;, elevar até o paralelo/acima. Sem balançar o corpo — o deltóide é que trabalha. É a cabeça que dá o ombro &quot;3D&quot;.<br><strong>Face pull</strong>: corda na polia alta, puxar pra cara com os cotovelos ALTOS, squeeze 2s. Deltóide posterior + saúde da articulação.</p>
+<div class="tbl-wrap"><table><thead><tr><th>Exercício</th><th>Reps</th></tr></thead><tbody><tr><td>Elevação lateral com halteres</td><td>15</td></tr><tr><td>Face pull</td><td>15</td></tr></tbody></table></div>
+<hr>
+<h2 class="ex">5. Elevação lateral inclinada (A) + Elevação posterior curvado (B) — SUPERSET</h2>
+<p><strong>3 × 12 + 12</strong> | Descanso: 45s após o par</p>
+<p>🔥 <strong>MEDIAL + POSTERIOR (2ª dose)</strong> — mesma lógica, ângulos novos. A lateral segue prioridade (é seu alvo 3D), mas quebrada por posterior no meio pra não virar monotonia.</p>
+<p><strong>Lateral inclinada (leaning)</strong>: apoiar num poste/máquina e inclinar o corpo, halter na mão de fora — isola o lateral PURO, sem trapaça, tensão desde o início do movimento.<br><strong>Posterior curvado</strong>: tronco inclinado à frente, abrir os halteres pros lados, squeeze 2s no topo. Fecha o deltóide posterior.</p>
+<div class="tbl-wrap"><table><thead><tr><th>Exercício</th><th>Reps</th></tr></thead><tbody><tr><td>Elevação lateral inclinada</td><td>12</td></tr><tr><td>Elevação posterior curvado</td><td>12</td></tr></tbody></table></div>
+<hr>
+<h2 class="ex">Resumo</h2>
+<div class="tbl-wrap"><table><thead><tr><th>Grupo</th><th>Séries</th><th>Exercícios</th></tr></thead><tbody><tr><td>Peito (completo, viés superior)</td><td>13</td><td>Chest press inclinado, crucifixo inclinado, chest press reto, pullover</td></tr><tr><td>Ombro</td><td>15</td><td>Desenvolvimento (no tri-set), 2× (lateral + posterior), face pull</td></tr><tr><td>Abs</td><td>3</td><td>Canivete</td></tr><tr><td><strong>Total</strong></td><td><strong>31 séries</strong> (+ aquecimento)</td><td><strong>~38 min</strong></td></tr></tbody></table></div>
+<p class="note"><em>Peito: 1 padrão de empurrar horizontal (press) + esticar (crucifixo) + empurrar vertical (mergulho) + caixa torácica (pullover) = peito inteiro, viés superior. Ombro: lateral direto = 6 séries aqui (+3 na Ficha D = ~9/semana, alvo 3D mantido), agora intercalado com posterior.</em></p>
+<h2 class="ex">Registro de Cargas</h2>
+<div class="tbl-wrap"><table><thead><tr><th>Exercício</th><th>S1</th><th>S2</th><th>S3</th><th>S4</th></tr></thead><tbody><tr><td class="exname">Chest press inclinado</td><td><input class="load" inputmode="decimal" data-key="a|Chest press inclinado|S1"></td><td><input class="load" inputmode="decimal" data-key="a|Chest press inclinado|S2"></td><td><input class="load" inputmode="decimal" data-key="a|Chest press inclinado|S3"></td><td><input class="load" inputmode="decimal" data-key="a|Chest press inclinado|S4"></td></tr><tr><td class="exname">Crucifixo inclinado halteres</td><td><input class="load" inputmode="decimal" data-key="a|Crucifixo inclinado halteres|S1"></td><td><input class="load" inputmode="decimal" data-key="a|Crucifixo inclinado halteres|S2"></td><td><input class="load" inputmode="decimal" data-key="a|Crucifixo inclinado halteres|S3"></td><td><input class="load" inputmode="decimal" data-key="a|Crucifixo inclinado halteres|S4"></td></tr><tr><td class="exname">Chest press reto</td><td><input class="load" inputmode="decimal" data-key="a|Chest press reto|S1"></td><td><input class="load" inputmode="decimal" data-key="a|Chest press reto|S2"></td><td><input class="load" inputmode="decimal" data-key="a|Chest press reto|S3"></td><td><input class="load" inputmode="decimal" data-key="a|Chest press reto|S4"></td></tr><tr><td class="exname">Pullover halter</td><td><input class="load" inputmode="decimal" data-key="a|Pullover halter|S1"></td><td><input class="load" inputmode="decimal" data-key="a|Pullover halter|S2"></td><td><input class="load" inputmode="decimal" data-key="a|Pullover halter|S3"></td><td><input class="load" inputmode="decimal" data-key="a|Pullover halter|S4"></td></tr><tr><td class="exname">Canivete</td><td><input class="load" inputmode="decimal" data-key="a|Canivete|S1"></td><td><input class="load" inputmode="decimal" data-key="a|Canivete|S2"></td><td><input class="load" inputmode="decimal" data-key="a|Canivete|S3"></td><td><input class="load" inputmode="decimal" data-key="a|Canivete|S4"></td></tr><tr><td class="exname">Desenvolvimento máquina</td><td><input class="load" inputmode="decimal" data-key="a|Desenvolvimento máquina|S1"></td><td><input class="load" inputmode="decimal" data-key="a|Desenvolvimento máquina|S2"></td><td><input class="load" inputmode="decimal" data-key="a|Desenvolvimento máquina|S3"></td><td><input class="load" inputmode="decimal" data-key="a|Desenvolvimento máquina|S4"></td></tr><tr><td class="exname">Elevação lateral halteres</td><td><input class="load" inputmode="decimal" data-key="a|Elevação lateral halteres|S1"></td><td><input class="load" inputmode="decimal" data-key="a|Elevação lateral halteres|S2"></td><td><input class="load" inputmode="decimal" data-key="a|Elevação lateral halteres|S3"></td><td><input class="load" inputmode="decimal" data-key="a|Elevação lateral halteres|S4"></td></tr><tr><td class="exname">Face pull</td><td><input class="load" inputmode="decimal" data-key="a|Face pull|S1"></td><td><input class="load" inputmode="decimal" data-key="a|Face pull|S2"></td><td><input class="load" inputmode="decimal" data-key="a|Face pull|S3"></td><td><input class="load" inputmode="decimal" data-key="a|Face pull|S4"></td></tr><tr><td class="exname">Elevação lateral inclinada</td><td><input class="load" inputmode="decimal" data-key="a|Elevação lateral inclinada|S1"></td><td><input class="load" inputmode="decimal" data-key="a|Elevação lateral inclinada|S2"></td><td><input class="load" inputmode="decimal" data-key="a|Elevação lateral inclinada|S3"></td><td><input class="load" inputmode="decimal" data-key="a|Elevação lateral inclinada|S4"></td></tr><tr><td class="exname">Elevação posterior curvado</td><td><input class="load" inputmode="decimal" data-key="a|Elevação posterior curvado|S1"></td><td><input class="load" inputmode="decimal" data-key="a|Elevação posterior curvado|S2"></td><td><input class="load" inputmode="decimal" data-key="a|Elevação posterior curvado|S3"></td><td><input class="load" inputmode="decimal" data-key="a|Elevação posterior curvado|S4"></td></tr></tbody></table></div></section><section class="ficha" id="ficha-b"><h1>Ficha B — Costas + Tríceps</h1>
+<p><strong>Mesociclo:</strong> Acumulação | <strong>Semana:</strong> 1/5 | <strong>Gerada em:</strong> 2026-07-03<br><strong>Duração estimada:</strong> ~40 min | <strong>Princípios:</strong> TODO o bloco de costas primeiro → TODO o bloco de tríceps depois (não alternar grupos). Supersets agonistas costas+costas e tríceps+tríceps, 1 tri-set de tríceps, técnicas intensificadoras.</p>
+<div class="callout">Costas e tríceps só treinam UMA vez na semana — sessão DENSA. Faz TODA a costas primeiro (com o dorsal fresco), depois ataca o tríceps. Bônus: as puxadas usam bíceps, não tríceps — então seu tríceps chega inteiro pro bloco dele.</div>
+<hr>
+<h1>🎯 BLOCO COSTAS (tudo primeiro)</h1>
+<h2 class="ex">1. Puxada frontal aberta (A) + Remada baixa triângulo (B) — SUPERSET</h2>
+<p><strong>3 × 12 + 10</strong> | Descanso: 60s após o par</p>
+<p>🔥 <strong>COSTAS+COSTAS</strong> — largura (puxada) + espessura (remada). Os dois pilares do dorsal.</p>
+<p><strong>Puxada aberta</strong>: puxar até a clavícula, retrair escápulas no fim, controlar a subida (2s excêntrico). Constrói LARGURA — o &quot;V&quot;.<br><strong>Remada baixa triângulo</strong>: puxar pro abdômen, peito estufado, NÃO usar o lombar. Cotovelos rentes ao corpo, apertar a escápula no fim. Constrói ESPESSURA.</p>
+<div class="tbl-wrap"><table><thead><tr><th>Exercício</th><th>Reps</th></tr></thead><tbody><tr><td>Puxada frontal aberta</td><td>12</td></tr><tr><td>Remada baixa triângulo</td><td>10</td></tr></tbody></table></div>
+<hr>
+<h2 class="ex">2. Remada baixa com barra reta (A) + Puxada supinada (B) — SUPERSET</h2>
+<p><strong>3 × 10 + 12</strong> | Descanso: 60s após o par</p>
+<p>🔥 <strong>COSTAS+COSTAS</strong> — espessura PESADA (remada barra reta) + largura/dorsal inferior (puxada supinada).</p>
+<p><strong>Remada baixa barra reta</strong>: na polia baixa, pegada PRONADA e ABERTA (diferente da triângulo do ex. 1 — aqui pega mais costas alta, trapézio médio e posterior de ombro). Carrega DE VERDADE — costas aguentam muito peso, resolve o limite do halter de 20kg. Peito estufado, puxar pro abdômen/baixo do peito, apertar a escápula 1s, NÃO usar o lombar. A cada série aumentar o peso.<br><strong>Puxada supinada</strong>: pegada FECHADA e SUPINADA (mãos viradas pra você). Puxar a barra até o peito alto, cotovelos rentes ao corpo — ataca o dorsal INFERIOR e traz mais amplitude. Ângulo totalmente diferente da puxada aberta do ex. 1.</p>
+<div class="tbl-wrap"><table><thead><tr><th>Exercício</th><th>Reps</th></tr></thead><tbody><tr><td>Remada baixa barra reta (pegada aberta)</td><td>10</td></tr><tr><td>Puxada supinada (pegada fechada)</td><td>12</td></tr></tbody></table></div>
+<hr>
+<h2 class="ex">3. Barra fixa pegada aberta — FINISHER COSTAS</h2>
+<p><strong>2 × Máx</strong> | Descanso: 60s</p>
+<p>Favorito #1 do Arnold pra largura. Fecha o bloco de costas com TUDO que sobrou. Pegada aberta, queixo passa a barra, descer com controle.<br>&quot;A última rep — essa é a que constrói campeões!&quot;</p>
+<hr>
+<h1>🎯 BLOCO TRÍCEPS (tudo depois)</h1>
+<h2 class="ex">4. TRI-SET tríceps 🔥🔥🔥</h2>
+<p><strong>3 × 10 + 15 + Máx</strong> | Descanso: 75s após o trio</p>
+<p>As 3 cabeças do tríceps em sequência: composto pesado → isolador → peso corporal até a falha. Tríceps chega fresco aqui (as costas usaram bíceps, não ele).</p>
+<div class="tbl-wrap"><table><thead><tr><th>#</th><th>Exercício</th><th>Reps</th><th>Cabeça</th></tr></thead><tbody><tr><td>A</td><td>Tríceps testa barra EZ</td><td>10</td><td>Longa (descer atrás da cabeça)</td></tr><tr><td>B</td><td>Tríceps pulley corda</td><td>15</td><td>Lateral/medial (abrir as mãos embaixo)</td></tr><tr><td>C</td><td>Mergulho no banco</td><td>Máx</td><td>Todas (pés à frente pra dificultar)</td></tr></tbody></table></div>
+<p><strong>Testa EZ</strong>: descer ATRÁS da cabeça, não na testa — favorito do Arnold pra cabeça longa.<br><strong>Mergulho no banco</strong>: mãos no banco atrás, pés à frente, descer 90° no cotovelo. Até a falha — TUDO que sobrou.</p>
+<hr>
+<h2 class="ex">5. Tríceps coice halter (A) + Prancha lateral (B) — SUPERSET</h2>
+<p class="note"><strong>3 × 12 cada braço + 45-60s cada lado</strong> | Descanso: 45s após o par | <strong>Drop set no coice na última</strong></p>
+<p>🔥 <strong>TRÍCEPS + CORE</strong> — áreas diferentes, dá pra fazer junto sem interferência e ainda adianta o treino.</p>
+<p><strong>Coice halter</strong>: cotovelo alinhado ao corpo, estender pra trás, contração máxima no topo. Unilateral = foco total. O halter de 20kg dá conta — é isolador.<br><strong>Última série do coice — DROP SET:</strong> 12 reps → reduzir 30% → falha.<br><strong>Prancha lateral</strong>: segurar o MÁXIMO que aguentar (mais de 30s, até a falha de sustentação). Quadril ALTO, corpo em linha reta, oblíquos e core anti-rotação. Alterna os lados a cada série.</p>
+<div class="tbl-wrap"><table><thead><tr><th>Exercício</th><th>Reps</th></tr></thead><tbody><tr><td>Tríceps coice halter</td><td>12 cada braço</td></tr><tr><td>Prancha lateral</td><td>45-60s cada lado (ou até a falha)</td></tr></tbody></table></div>
+<hr>
+<h2 class="ex">Resumo</h2>
+<div class="tbl-wrap"><table><thead><tr><th>Grupo</th><th>Séries</th><th>Exercícios</th></tr></thead><tbody><tr><td>Costas</td><td>14</td><td>Puxada aberta, remada triângulo, remada barra reta, puxada supinada, barra fixa</td></tr><tr><td>Tríceps</td><td>12</td><td>Tri-set (testa/corda/mergulho), coice</td></tr><tr><td>Abs</td><td>3</td><td>Prancha lateral</td></tr><tr><td><strong>Total</strong></td><td><strong>29 séries</strong></td><td><strong>~40 min</strong></td></tr></tbody></table></div>
+<p class="note"><em>Ordem: todo o dorsal fresco primeiro (largura + espessura + isolador + finisher), depois todo o tríceps. Sem ping-pong entre estações.</em></p>
+<h2 class="ex">Registro de Cargas</h2>
+<div class="tbl-wrap"><table><thead><tr><th>Exercício</th><th>S1</th><th>S2</th><th>S3</th></tr></thead><tbody><tr><td class="exname">Puxada frontal aberta</td><td><input class="load" inputmode="decimal" data-key="b|Puxada frontal aberta|S1"></td><td><input class="load" inputmode="decimal" data-key="b|Puxada frontal aberta|S2"></td><td><input class="load" inputmode="decimal" data-key="b|Puxada frontal aberta|S3"></td></tr><tr><td class="exname">Remada baixa triângulo</td><td><input class="load" inputmode="decimal" data-key="b|Remada baixa triângulo|S1"></td><td><input class="load" inputmode="decimal" data-key="b|Remada baixa triângulo|S2"></td><td><input class="load" inputmode="decimal" data-key="b|Remada baixa triângulo|S3"></td></tr><tr><td class="exname">Remada baixa barra reta</td><td><input class="load" inputmode="decimal" data-key="b|Remada baixa barra reta|S1"></td><td><input class="load" inputmode="decimal" data-key="b|Remada baixa barra reta|S2"></td><td><input class="load" inputmode="decimal" data-key="b|Remada baixa barra reta|S3"></td></tr><tr><td class="exname">Puxada supinada</td><td><input class="load" inputmode="decimal" data-key="b|Puxada supinada|S1"></td><td><input class="load" inputmode="decimal" data-key="b|Puxada supinada|S2"></td><td><input class="load" inputmode="decimal" data-key="b|Puxada supinada|S3"></td></tr><tr><td class="exname">Barra fixa aberta</td><td><input class="load" inputmode="decimal" data-key="b|Barra fixa aberta|S1"></td><td><input class="load" inputmode="decimal" data-key="b|Barra fixa aberta|S2"></td><td><input class="load" inputmode="decimal" data-key="b|Barra fixa aberta|S3"></td></tr><tr><td class="exname">Tríceps testa EZ</td><td><input class="load" inputmode="decimal" data-key="b|Tríceps testa EZ|S1"></td><td><input class="load" inputmode="decimal" data-key="b|Tríceps testa EZ|S2"></td><td><input class="load" inputmode="decimal" data-key="b|Tríceps testa EZ|S3"></td></tr><tr><td class="exname">Tríceps pulley corda</td><td><input class="load" inputmode="decimal" data-key="b|Tríceps pulley corda|S1"></td><td><input class="load" inputmode="decimal" data-key="b|Tríceps pulley corda|S2"></td><td><input class="load" inputmode="decimal" data-key="b|Tríceps pulley corda|S3"></td></tr><tr><td class="exname">Mergulho banco</td><td><input class="load" inputmode="decimal" data-key="b|Mergulho banco|S1"></td><td><input class="load" inputmode="decimal" data-key="b|Mergulho banco|S2"></td><td><input class="load" inputmode="decimal" data-key="b|Mergulho banco|S3"></td></tr><tr><td class="exname">Tríceps coice halter</td><td><input class="load" inputmode="decimal" data-key="b|Tríceps coice halter|S1"></td><td><input class="load" inputmode="decimal" data-key="b|Tríceps coice halter|S2"></td><td><input class="load" inputmode="decimal" data-key="b|Tríceps coice halter|S3"></td></tr><tr><td class="exname">Prancha lateral</td><td><input class="load" inputmode="decimal" data-key="b|Prancha lateral|S1"></td><td><input class="load" inputmode="decimal" data-key="b|Prancha lateral|S2"></td><td><input class="load" inputmode="decimal" data-key="b|Prancha lateral|S3"></td></tr></tbody></table></div></section><section class="ficha" id="ficha-c"><h1>Ficha C — Perna (retomada) + Bíceps</h1>
+<p><strong>Mesociclo:</strong> Acumulação | <strong>Semana:</strong> 1/5 | <strong>Gerada em:</strong> 2026-07-03<br><strong>Duração estimada:</strong> ~38 min | <strong>Princípios:</strong> Perna 2x/semana com MESMOS exercícios (bloco de perna idêntico ao da Ficha E). Aqui a perna é cruzada com BÍCEPS em tri-sets (perna descansa enquanto 2 bíceps trabalham). Carga de perna conservadora, RPE ≤7, sem falha, sem técnica intensificadora na perna.</p>
+<div class="callout warn">⚠️ <strong>Retomada pós-op joelho (1 mês pós-liberação da fisio).</strong> Frequência subiu pra 2x/semana, mas a carga continua conservadora (40-50%). Sentiu QUALQUER desconforto no joelho → parar a série e reduzir. RPE máx: 7. As técnicas intensificadoras são só pro BÍCEPS, NUNCA pra perna.<br>🔁 <strong>O bloco de perna é idêntico na Ficha E.</strong> A única diferença: em C a perna casa com bíceps, em E casa com abs. Mesmos exercícios de perna, mesma execução — assim você progride a perna com consistência.</div>
+<hr>
+<h2 class="ex">Aquecimento: Elástico nas 3 direções (lado / frente / trás)</h2>
+<p><strong>2 rounds × 10 reps cada direção</strong> | Sem descanso</p>
+<p>Elástico no tornozelo, apoio firme, abdômen contraído. Lateral (glúteo médio) → frente (flexor de quadril) → atrás (glúteo + posterior). Prescrito pelo fisio — <strong>NÃO PULAR</strong>. É o que mantém o joelho seguro.</p>
+<hr>
+<h2 class="ex">1. TRI-SET perna + bíceps + bíceps 🔥</h2>
+<p><strong>3 × 12 + 10 + 12</strong> | Descanso: 75s após o trio</p>
+<p>A perna descansa enquanto DOIS bíceps trabalham — fadiga local máxima no braço, zero fadiga cumulativa no joelho.</p>
+<div class="tbl-wrap"><table><thead><tr><th>#</th><th>Exercício</th><th>Reps</th><th>Grupo</th></tr></thead><tbody><tr><td>A</td><td>Agachamento (pouco peso, sem passar do paralelo)</td><td>12</td><td>Perna</td></tr><tr><td>B</td><td>Rosca direta barra EZ</td><td>10</td><td>Bíceps</td></tr><tr><td>C</td><td>Rosca martelo</td><td>12</td><td>Bíceps (braquial/espessura)</td></tr></tbody></table></div>
+<p><strong>Agachamento</strong>: 40-50% do pré-cirurgia, SEM passar do paralelo, descer 2s, subir controlado. Joelho alinhado à ponta do pé — NÃO valgizar. Sem falha, RPE ≤7.<br><strong>Rosca EZ</strong>: cotovelos colados, sem balançar. <strong>Martelo</strong>: pegada neutra — &quot;braço GROSSO é rosca martelo&quot;.</p>
+<hr>
+<h2 class="ex">2. TRI-SET perna + bíceps + bíceps 🔥</h2>
+<p><strong>3 × 15 + 12 + 10</strong> | Descanso: 75s após o trio</p>
+<div class="tbl-wrap"><table><thead><tr><th>#</th><th>Exercício</th><th>Reps</th><th>Grupo</th></tr></thead><tbody><tr><td>A</td><td>Elevação pélvica na máquina</td><td>15</td><td>Glúteo (seguro pro joelho)</td></tr><tr><td>B</td><td>Rosca alternada com halteres</td><td>12 (6 c/ braço)</td><td>Bíceps</td></tr><tr><td>C</td><td>Rosca scott barra EZ</td><td>10</td><td>Bíceps (pico)</td></tr></tbody></table></div>
+<p><strong>Elevação pélvica</strong>: exercício REI do glúteo, mínimo estresse no joelho. Empurrar com os calcanhares, contrair o glúteo 2s no topo.<br><strong>Alternada</strong>: supinar no topo (girar o mindinho pra fora). <strong>Scott</strong>: cotovelo apoiado, descer com controle — sem trapaça, pico puro.</p>
+<hr>
+<h2 class="ex">3. Cadeira extensora UNILATERAL (A) + Panturrilha em pé (B) — SUPERSET</h2>
+<p><strong>3 × 12 cada perna + 15</strong> | Descanso: 45s após o par</p>
+<p>🔥 Quadríceps (extensora) + panturrilha (gastrocnêmio). A panturrilha NÃO estressa o joelho — então ela serve de &quot;descanso&quot; pro joelho entre as séries de extensora. Cross-superset seguro, e ainda adianta o treino.</p>
+<p><strong>Extensora unilateral</strong>: prescrito pelo fisio, uma perna de cada vez — corrige assimetria e controla a carga individual. Subir 2s, segurar 1s no topo, descer 2s. NÃO travar o joelho.<br><strong>Panturrilha em pé</strong>: gastrocnêmio (joelho estendido). Alongamento máximo embaixo, contração 1s no topo. Reps lentas, ROM completo.</p>
+<div class="tbl-wrap"><table><thead><tr><th>Exercício</th><th>Reps</th></tr></thead><tbody><tr><td>Cadeira extensora unilateral</td><td>12 cada perna</td></tr><tr><td>Panturrilha em pé</td><td>15</td></tr></tbody></table></div>
+<p class="note"><em>Sem máquina de panturrilha sentada — aqui treina só o gastrocnêmio. Se um dia quiser pegar o sólio, dá pra improvisar sentado com um halter apoiado sobre os joelhos.</em></p>
+<hr>
+<h2 class="ex">4. Cadeira flexora UNILATERAL (A) + Cadeira abdutora (B) — SUPERSET</h2>
+<p><strong>3 × 12 cada perna + 15</strong> | Descanso: 45s após o par</p>
+<p>🔥 Posterior de coxa (flexora) + glúteo médio (abdutora). A abdutora é movimento de quadril — não estressa o joelho, então serve de &quot;descanso&quot; pro joelho entre as séries de flexora.</p>
+<div class="callout warn">⚠️ <strong>Cadeira abdutora = progressão PENDENTE de OK do fisio</strong> (não estava na lista original). Carrega mais que o elástico = mais força de glúteo médio. <strong>Enquanto o fisio não liberar, usar o elástico abertura lateral no lugar</strong> (mesmo movimento, mais leve).</div>
+<p><strong>Flexora unilateral</strong>: uma perna por vez, subir 2s, segurar 1s contraído, descer 2s. NÃO travar o joelho na extensão.<br><strong>Cadeira abdutora</strong>: sentado, abrir os joelhos contra a resistência, contrair o glúteo médio no fim. Tronco levemente à frente pega mais glúteo. Carga progressiva, RPE ≤7.</p>
+<div class="tbl-wrap"><table><thead><tr><th>Exercício</th><th>Reps</th></tr></thead><tbody><tr><td>Cadeira flexora unilateral</td><td>12 cada perna</td></tr><tr><td>Cadeira abdutora</td><td>15</td></tr></tbody></table></div>
+<p class="note"><em>O elástico abertura lateral (glúteo médio) agora fica só no aquecimento das 3 direções — não repete aqui.</em></p>
+<hr>
+<h2 class="ex">Resumo</h2>
+<div class="tbl-wrap"><table><thead><tr><th>Grupo</th><th>Séries</th><th>Exercícios</th></tr></thead><tbody><tr><td>Perna</td><td>18</td><td>Agachamento, pélvica, extensora uni (3x), flexora uni (3x), panturrilha em pé, abdutora</td></tr><tr><td>Bíceps</td><td>12</td><td>Rosca EZ, martelo, alternada, scott</td></tr><tr><td><strong>Total</strong></td><td><strong>30 séries</strong></td><td><strong>~37 min</strong></td></tr></tbody></table></div>
+<p class="note"><em>Perna: agach/extensora/flexora = ~9 séries de carga direta no joelho — o resto é glúteo/panturrilha/abdutora (movimentos de quadril/tornozelo, seguros pro joelho). Progredir só quando bater todas as reps com RPE ≤7 e zero desconforto.</em></p>
+<h2 class="ex">Registro de Cargas</h2>
+<div class="tbl-wrap"><table><thead><tr><th>Exercício</th><th>S1</th><th>S2</th><th>S3</th></tr></thead><tbody><tr><td class="exname">Agachamento (pouco peso)</td><td><input class="load" inputmode="decimal" data-key="c|Agachamento (pouco peso)|S1"></td><td><input class="load" inputmode="decimal" data-key="c|Agachamento (pouco peso)|S2"></td><td><input class="load" inputmode="decimal" data-key="c|Agachamento (pouco peso)|S3"></td></tr><tr><td class="exname">Rosca direta EZ</td><td><input class="load" inputmode="decimal" data-key="c|Rosca direta EZ|S1"></td><td><input class="load" inputmode="decimal" data-key="c|Rosca direta EZ|S2"></td><td><input class="load" inputmode="decimal" data-key="c|Rosca direta EZ|S3"></td></tr><tr><td class="exname">Rosca martelo</td><td><input class="load" inputmode="decimal" data-key="c|Rosca martelo|S1"></td><td><input class="load" inputmode="decimal" data-key="c|Rosca martelo|S2"></td><td><input class="load" inputmode="decimal" data-key="c|Rosca martelo|S3"></td></tr><tr><td class="exname">Elevação pélvica máquina</td><td><input class="load" inputmode="decimal" data-key="c|Elevação pélvica máquina|S1"></td><td><input class="load" inputmode="decimal" data-key="c|Elevação pélvica máquina|S2"></td><td><input class="load" inputmode="decimal" data-key="c|Elevação pélvica máquina|S3"></td></tr><tr><td class="exname">Rosca alternada halteres</td><td><input class="load" inputmode="decimal" data-key="c|Rosca alternada halteres|S1"></td><td><input class="load" inputmode="decimal" data-key="c|Rosca alternada halteres|S2"></td><td><input class="load" inputmode="decimal" data-key="c|Rosca alternada halteres|S3"></td></tr><tr><td class="exname">Rosca scott EZ</td><td><input class="load" inputmode="decimal" data-key="c|Rosca scott EZ|S1"></td><td><input class="load" inputmode="decimal" data-key="c|Rosca scott EZ|S2"></td><td><input class="load" inputmode="decimal" data-key="c|Rosca scott EZ|S3"></td></tr><tr><td class="exname">Cadeira extensora unilateral</td><td><input class="load" inputmode="decimal" data-key="c|Cadeira extensora unilateral|S1"></td><td><input class="load" inputmode="decimal" data-key="c|Cadeira extensora unilateral|S2"></td><td><input class="load" inputmode="decimal" data-key="c|Cadeira extensora unilateral|S3"></td></tr><tr><td class="exname">Panturrilha em pé</td><td><input class="load" inputmode="decimal" data-key="c|Panturrilha em pé|S1"></td><td><input class="load" inputmode="decimal" data-key="c|Panturrilha em pé|S2"></td><td><input class="load" inputmode="decimal" data-key="c|Panturrilha em pé|S3"></td></tr><tr><td class="exname">Cadeira flexora unilateral</td><td><input class="load" inputmode="decimal" data-key="c|Cadeira flexora unilateral|S1"></td><td><input class="load" inputmode="decimal" data-key="c|Cadeira flexora unilateral|S2"></td><td><input class="load" inputmode="decimal" data-key="c|Cadeira flexora unilateral|S3"></td></tr><tr><td class="exname">Cadeira abdutora</td><td><input class="load" inputmode="decimal" data-key="c|Cadeira abdutora|S1"></td><td><input class="load" inputmode="decimal" data-key="c|Cadeira abdutora|S2"></td><td><input class="load" inputmode="decimal" data-key="c|Cadeira abdutora|S3"></td></tr></tbody></table></div>
+<p><strong>Notas pós-treino:</strong> _registrar dor/desconforto no joelho, RPE de cada exercício de perna, observações da fisio._</p></section><section class="ficha" id="ficha-d"><h1>Ficha D — Peito SUPERIOR + Ombro (Variação / 2ª frequência)</h1>
+<p><strong>Mesociclo:</strong> Acumulação | <strong>Semana:</strong> 1/5 | <strong>Gerada em:</strong> 2026-07-03<br><strong>Duração estimada:</strong> ~34 min | <strong>Princípios:</strong> 2ª frequência de peito/ombro na semana, ângulos DIFERENTES dos da Ficha A, carga moderada (60-70%), sem falha. Arnold press (assinatura) + foco lateral 3D. Peito superior completo → ombro completo.</p>
+<div class="callout">Esse é o dia de ESTÍMULO, não destruição. Mesmos músculos prioritários (peito superior + ombro), mas variações e cargas diferentes da Ficha A — o músculo cresce quando você bate nele de vários ângulos. Deixa 2-3 reps na reserva.</div>
+<hr>
+<h2 class="ex">Aquecimento: Manguito rotador externo</h2>
+<p><strong>3 × 15</strong> | Sem descanso entre lados</p>
+<p>Cotovelo a 90°, rotação externa leve. Obrigatório antes de peito/ombro.</p>
+<hr>
+<h1>🎯 BLOCO PEITO (superior)</h1>
+<h2 class="ex">1. Chest press inclinado (A) + Crossover polia baixa (B) — SUPERSET</h2>
+<p><strong>3 × 12 + 15</strong> | Descanso: 60s após o par</p>
+<p>🔥 <strong>PRESS + CABO</strong> — dois padrões diferentes (empurrar + apertar), carga moderada (2ª frequência da semana).</p>
+<p><strong>Chest press inclinado</strong>: mesma máquina da Ficha A, mas mais leve e mais reps (12) — estímulo, não carga máxima. Peito superior.<br><strong>Crossover baixo</strong>: cabos na polia baixa, subir cruzando na frente até a altura do queixo, squeeze 2s. Peito superior na fase contraída — curva de resistência oposta ao press.</p>
+<div class="tbl-wrap"><table><thead><tr><th>Exercício</th><th>Reps</th></tr></thead><tbody><tr><td>Chest press inclinado</td><td>12</td></tr><tr><td>Crossover polia baixa</td><td>15</td></tr></tbody></table></div>
+<hr>
+<h2 class="ex">2. Pullover com halter (A) + Canivete (B) — FINISHER PEITO + ABS</h2>
+<p><strong>3 × 12 + 15</strong> | Descanso: 45s após o par</p>
+<p><strong>Pullover</strong>: o Arnold sagrado — caixa torácica + peito superior + serrátil. Perpendicular no banco, quadril baixo, halter bem atrás da cabeça, alongamento máximo. Voltar contraindo o peito.<br><strong>Canivete</strong>: pernas e tronco sobem juntos, reto abdominal completo.</p>
+<div class="tbl-wrap"><table><thead><tr><th>Exercício</th><th>Reps</th></tr></thead><tbody><tr><td>Pullover com halter</td><td>12</td></tr><tr><td>Canivete</td><td>15</td></tr></tbody></table></div>
+<hr>
+<h1>🎯 BLOCO OMBRO</h1>
+<h2 class="ex">3. Arnold Press sentado</h2>
+<p><strong>3 × 10</strong> | Descanso: 75s | SEM superset</p>
+<p>O ÚNICO exercício que leva seu nome. Aqui o halter de 20kg dá conta (dia moderado). Palmas começam viradas pra você, rotacionar durante a subida — as 3 cabeças do deltóide de uma vez. Domine esse movimento.</p>
+<hr>
+<h2 class="ex">4. Elevação lateral sentado (A) + Elevação posterior no cabo (B) — SUPERSET</h2>
+<p><strong>3 × 12 + 15</strong> | Descanso: 60s após o par</p>
+<p>🔥 <strong>MEDIAL + POSTERIOR</strong> — ângulos diferentes dos da Ficha A (lá foi lateral em pé + inclinada; aqui sentado). Completa as ~9 séries de lateral direto/semana (6 na A + 3 aqui) e reforça o posterior.</p>
+<p><strong>Lateral sentado</strong>: elimina o impulso do corpo — isolamento puro do deltóide medial. Dedo mínimo levemente pra cima.<br><strong>Posterior no cabo (reverse)</strong>: cabo cruzado na altura do ombro, abrir pra trás, squeeze 2s. Contrapeso essencial de tanto empurrar.</p>
+<div class="tbl-wrap"><table><thead><tr><th>Exercício</th><th>Reps</th></tr></thead><tbody><tr><td>Elevação lateral sentado</td><td>12</td></tr><tr><td>Elevação posterior no cabo</td><td>15</td></tr></tbody></table></div>
+<hr>
+<h2 class="ex">Resumo</h2>
+<div class="tbl-wrap"><table><thead><tr><th>Grupo</th><th>Séries</th><th>Exercícios</th></tr></thead><tbody><tr><td>Peito (viés superior)</td><td>9</td><td>Chest press inclinado, crossover baixo, pullover</td></tr><tr><td>Ombro</td><td>9</td><td>Arnold press, lateral sentado, posterior cabo</td></tr><tr><td>Abs</td><td>3</td><td>Canivete</td></tr><tr><td><strong>Total</strong></td><td><strong>21 séries</strong></td><td><strong>~32 min</strong></td></tr></tbody></table></div>
+<p class="note"><em>2ª frequência semanal — press moderado + cabo + pullover no peito; Arnold press + lateral + posterior no ombro. Lateral direto = 3 séries aqui (+6 na Ficha A = ~9/semana, alvo 3D). Sem 3 laterais empilhadas — cada padrão com um papel.</em></p>
+<h2 class="ex">Registro de Cargas</h2>
+<div class="tbl-wrap"><table><thead><tr><th>Exercício</th><th>S1</th><th>S2</th><th>S3</th></tr></thead><tbody><tr><td class="exname">Chest press inclinado</td><td><input class="load" inputmode="decimal" data-key="d|Chest press inclinado|S1"></td><td><input class="load" inputmode="decimal" data-key="d|Chest press inclinado|S2"></td><td><input class="load" inputmode="decimal" data-key="d|Chest press inclinado|S3"></td></tr><tr><td class="exname">Crossover polia baixa</td><td><input class="load" inputmode="decimal" data-key="d|Crossover polia baixa|S1"></td><td><input class="load" inputmode="decimal" data-key="d|Crossover polia baixa|S2"></td><td><input class="load" inputmode="decimal" data-key="d|Crossover polia baixa|S3"></td></tr><tr><td class="exname">Pullover halter</td><td><input class="load" inputmode="decimal" data-key="d|Pullover halter|S1"></td><td><input class="load" inputmode="decimal" data-key="d|Pullover halter|S2"></td><td><input class="load" inputmode="decimal" data-key="d|Pullover halter|S3"></td></tr><tr><td class="exname">Canivete</td><td><input class="load" inputmode="decimal" data-key="d|Canivete|S1"></td><td><input class="load" inputmode="decimal" data-key="d|Canivete|S2"></td><td><input class="load" inputmode="decimal" data-key="d|Canivete|S3"></td></tr><tr><td class="exname">Arnold Press sentado</td><td><input class="load" inputmode="decimal" data-key="d|Arnold Press sentado|S1"></td><td><input class="load" inputmode="decimal" data-key="d|Arnold Press sentado|S2"></td><td><input class="load" inputmode="decimal" data-key="d|Arnold Press sentado|S3"></td></tr><tr><td class="exname">Elevação lateral sentado</td><td><input class="load" inputmode="decimal" data-key="d|Elevação lateral sentado|S1"></td><td><input class="load" inputmode="decimal" data-key="d|Elevação lateral sentado|S2"></td><td><input class="load" inputmode="decimal" data-key="d|Elevação lateral sentado|S3"></td></tr><tr><td class="exname">Elevação posterior cabo</td><td><input class="load" inputmode="decimal" data-key="d|Elevação posterior cabo|S1"></td><td><input class="load" inputmode="decimal" data-key="d|Elevação posterior cabo|S2"></td><td><input class="load" inputmode="decimal" data-key="d|Elevação posterior cabo|S3"></td></tr></tbody></table></div></section><section class="ficha" id="ficha-e"><h1>Ficha E — Perna (retomada) + Abdômen</h1>
+<p><strong>Mesociclo:</strong> Acumulação | <strong>Semana:</strong> 1/5 | <strong>Gerada em:</strong> 2026-07-03<br><strong>Duração estimada:</strong> ~36 min | <strong>Princípios:</strong> MESMO bloco de perna da Ficha C (exercícios idênticos, mesma execução). Aqui a perna é cruzada com ABS em tri-sets, abs intercalado ao longo da sessão. Carga conservadora, RPE ≤7, sem falha, sem técnica intensificadora na perna.</p>
+<div class="callout warn">⚠️ <strong>Retomada pós-op joelho.</strong> Mesma carga conservadora da Ficha C. RPE máx: 7, sem falha.<br>🔁 <strong>Bloco de perna IDÊNTICO ao da Ficha C</strong> — mesmos exercícios, mesmas séries/reps, mesma carga. A diferença é só o parceiro: em C a perna casa com bíceps, aqui casa com abs. É essa repetição que faz a perna progredir com segurança.</div>
+<hr>
+<h2 class="ex">Aquecimento: Elástico nas 3 direções (lado / frente / trás)</h2>
+<p><strong>2 rounds × 10 reps cada direção</strong> | Sem descanso</p>
+<p>Lateral (glúteo médio) → frente (flexor de quadril) → atrás (glúteo + posterior). Prescrito pelo fisio — <strong>NÃO PULAR</strong>.</p>
+<hr>
+<h2 class="ex">1. TRI-SET perna + abs + abs 🔥</h2>
+<p><strong>3 × 12 + 20 + 15</strong> | Descanso: 75s após o trio</p>
+<p>A perna descansa enquanto DOIS abs trabalham — abs intercalado desde o começo, não só no fim.</p>
+<div class="tbl-wrap"><table><thead><tr><th>#</th><th>Exercício</th><th>Reps</th><th>Grupo</th></tr></thead><tbody><tr><td>A</td><td>Agachamento (pouco peso, sem passar do paralelo)</td><td>12</td><td>Perna</td></tr><tr><td>B</td><td>Abdominal supra corda polia</td><td>20</td><td>Abs (reto superior)</td></tr><tr><td>C</td><td>Canivete</td><td>15</td><td>Abs (reto completo)</td></tr></tbody></table></div>
+<p><strong>Agachamento</strong>: idêntico à Ficha C — 40-50% do pré-cirurgia, sem passar do paralelo, joelho alinhado, RPE ≤7, sem falha.<br><strong>Supra corda</strong>: ajoelhado, flexionar o tronco, expirar forte na contração. <strong>Canivete</strong>: pernas e tronco sobem juntos, sem impulso.</p>
+<hr>
+<h2 class="ex">2. TRI-SET perna + abs + abs 🔥</h2>
+<p><strong>3 × 15 + 20 + 30s</strong> | Descanso: 75s após o trio</p>
+<div class="tbl-wrap"><table><thead><tr><th>#</th><th>Exercício</th><th>Reps</th><th>Grupo</th></tr></thead><tbody><tr><td>A</td><td>Elevação pélvica na máquina</td><td>15</td><td>Glúteo (seguro pro joelho)</td></tr><tr><td>B</td><td>Russian twist</td><td>20 (10 c/ lado)</td><td>Abs (oblíquos)</td></tr><tr><td>C</td><td>Prancha frontal</td><td>30s</td><td>Abs (core/estabilidade)</td></tr></tbody></table></div>
+<p><strong>Elevação pélvica</strong>: idêntica à Ficha C — empurrar com os calcanhares, contrair o glúteo 2s no topo.<br><strong>Russian twist</strong>: tronco 45°, pés no ar, rotacionar com halter/anilha. <strong>Prancha</strong>: corpo em linha reta, abdômen e glúteo contraídos.</p>
+<hr>
+<h2 class="ex">3. Cadeira extensora UNILATERAL (A) + Panturrilha em pé (B) — SUPERSET</h2>
+<p><strong>3 × 12 cada perna + 15</strong> | Descanso: 45s após o par</p>
+<p>🔥 Idêntico à Ficha C. Quadríceps (extensora) + panturrilha (gastrocnêmio) — a panturrilha não estressa o joelho, então serve de &quot;descanso&quot; pro joelho entre as séries de extensora.</p>
+<p><strong>Extensora unilateral</strong>: uma perna por vez, subir 2s, segurar 1s, descer 2s. NÃO travar o joelho.<br><strong>Panturrilha em pé</strong>: gastrocnêmio, alongamento máximo embaixo, contração 1s no topo.</p>
+<div class="tbl-wrap"><table><thead><tr><th>Exercício</th><th>Reps</th></tr></thead><tbody><tr><td>Cadeira extensora unilateral</td><td>12 cada perna</td></tr><tr><td>Panturrilha em pé</td><td>15</td></tr></tbody></table></div>
+<p class="note"><em>Sem máquina de panturrilha sentada — só gastrocnêmio (em pé).</em></p>
+<hr>
+<h2 class="ex">4. Cadeira flexora UNILATERAL (A) + Cadeira abdutora (B) — SUPERSET</h2>
+<p><strong>3 × 12 cada perna + 15</strong> | Descanso: 45s após o par</p>
+<p>🔥 Idêntico à Ficha C. Posterior de coxa (flexora) + glúteo médio (abdutora) — a abdutora é movimento de quadril, não estressa o joelho.</p>
+<div class="callout warn">⚠️ <strong>Cadeira abdutora = progressão PENDENTE de OK do fisio.</strong> Enquanto não liberar, usar o elástico abertura lateral no lugar (mais leve).</div>
+<p><strong>Flexora unilateral</strong>: uma perna por vez, subir 2s, segurar 1s, descer 2s. NÃO travar o joelho.<br><strong>Cadeira abdutora</strong>: sentado, abrir os joelhos contra a resistência, contrair o glúteo médio. Carga progressiva, RPE ≤7.</p>
+<div class="tbl-wrap"><table><thead><tr><th>Exercício</th><th>Reps</th></tr></thead><tbody><tr><td>Cadeira flexora unilateral</td><td>12 cada perna</td></tr><tr><td>Cadeira abdutora</td><td>15</td></tr></tbody></table></div>
+<p class="note"><em>O elástico abertura lateral fica só no aquecimento das 3 direções.</em></p>
+<hr>
+<h2 class="ex">Resumo</h2>
+<div class="tbl-wrap"><table><thead><tr><th>Grupo</th><th>Séries</th><th>Exercícios</th></tr></thead><tbody><tr><td>Perna</td><td>18</td><td>Agachamento, pélvica, extensora uni (3x), flexora uni (3x), panturrilha em pé, abdutora</td></tr><tr><td>Abs</td><td>12</td><td>Supra corda, canivete, russian twist, prancha</td></tr><tr><td><strong>Total</strong></td><td><strong>30 séries</strong></td><td><strong>~37 min</strong></td></tr></tbody></table></div>
+<p class="note"><em>Bloco de perna idêntico à Ficha C — mesma carga, mesma progressão. Abs intercalado ao longo da sessão. Perna 2x/semana total.</em></p>
+<h2 class="ex">Registro de Cargas</h2>
+<div class="tbl-wrap"><table><thead><tr><th>Exercício</th><th>S1</th><th>S2</th><th>S3</th></tr></thead><tbody><tr><td class="exname">Agachamento (pouco peso)</td><td><input class="load" inputmode="decimal" data-key="e|Agachamento (pouco peso)|S1"></td><td><input class="load" inputmode="decimal" data-key="e|Agachamento (pouco peso)|S2"></td><td><input class="load" inputmode="decimal" data-key="e|Agachamento (pouco peso)|S3"></td></tr><tr><td class="exname">Supra corda polia</td><td><input class="load" inputmode="decimal" data-key="e|Supra corda polia|S1"></td><td><input class="load" inputmode="decimal" data-key="e|Supra corda polia|S2"></td><td><input class="load" inputmode="decimal" data-key="e|Supra corda polia|S3"></td></tr><tr><td class="exname">Canivete</td><td><input class="load" inputmode="decimal" data-key="e|Canivete|S1"></td><td><input class="load" inputmode="decimal" data-key="e|Canivete|S2"></td><td><input class="load" inputmode="decimal" data-key="e|Canivete|S3"></td></tr><tr><td class="exname">Elevação pélvica máquina</td><td><input class="load" inputmode="decimal" data-key="e|Elevação pélvica máquina|S1"></td><td><input class="load" inputmode="decimal" data-key="e|Elevação pélvica máquina|S2"></td><td><input class="load" inputmode="decimal" data-key="e|Elevação pélvica máquina|S3"></td></tr><tr><td class="exname">Russian twist</td><td><input class="load" inputmode="decimal" data-key="e|Russian twist|S1"></td><td><input class="load" inputmode="decimal" data-key="e|Russian twist|S2"></td><td><input class="load" inputmode="decimal" data-key="e|Russian twist|S3"></td></tr><tr><td class="exname">Prancha frontal</td><td><input class="load" inputmode="decimal" data-key="e|Prancha frontal|S1"></td><td><input class="load" inputmode="decimal" data-key="e|Prancha frontal|S2"></td><td><input class="load" inputmode="decimal" data-key="e|Prancha frontal|S3"></td></tr><tr><td class="exname">Cadeira extensora unilateral</td><td><input class="load" inputmode="decimal" data-key="e|Cadeira extensora unilateral|S1"></td><td><input class="load" inputmode="decimal" data-key="e|Cadeira extensora unilateral|S2"></td><td><input class="load" inputmode="decimal" data-key="e|Cadeira extensora unilateral|S3"></td></tr><tr><td class="exname">Panturrilha em pé</td><td><input class="load" inputmode="decimal" data-key="e|Panturrilha em pé|S1"></td><td><input class="load" inputmode="decimal" data-key="e|Panturrilha em pé|S2"></td><td><input class="load" inputmode="decimal" data-key="e|Panturrilha em pé|S3"></td></tr><tr><td class="exname">Cadeira flexora unilateral</td><td><input class="load" inputmode="decimal" data-key="e|Cadeira flexora unilateral|S1"></td><td><input class="load" inputmode="decimal" data-key="e|Cadeira flexora unilateral|S2"></td><td><input class="load" inputmode="decimal" data-key="e|Cadeira flexora unilateral|S3"></td></tr><tr><td class="exname">Cadeira abdutora</td><td><input class="load" inputmode="decimal" data-key="e|Cadeira abdutora|S1"></td><td><input class="load" inputmode="decimal" data-key="e|Cadeira abdutora|S2"></td><td><input class="load" inputmode="decimal" data-key="e|Cadeira abdutora|S3"></td></tr></tbody></table></div>
+<p><strong>Notas pós-treino:</strong> _registrar dor/desconforto no joelho, RPE de cada exercício de perna, observações da fisio._</p></section>
+<footer>
+  As cargas que você digita ficam salvas neste aparelho.<br><br>
+  <button onclick="limpar()">Limpar cargas salvas</button>
+</footer>
+</main>
+<script>
+const tabs=[...document.querySelectorAll('.tab')];
+const fichas=[...document.querySelectorAll('.ficha')];
+function show(id){
+  fichas.forEach(f=>f.classList.toggle('active',f.id==='ficha-'+id));
+  tabs.forEach(t=>t.classList.toggle('active',t.dataset.f===id));
+  localStorage.setItem('gb_active',id);
+  window.scrollTo({top:0});
+}
+tabs.forEach(t=>t.addEventListener('click',()=>show(t.dataset.f)));
+document.querySelectorAll('input.load').forEach(inp=>{
+  const k='gb_'+inp.dataset.key;
+  const v=localStorage.getItem(k);
+  if(v!==null) inp.value=v;
+  inp.addEventListener('input',()=>localStorage.setItem(k,inp.value));
+});
+function limpar(){
+  if(!confirm('Apagar TODAS as cargas salvas?')) return;
+  Object.keys(localStorage).filter(k=>k.startsWith('gb_')&&k!=='gb_active')
+    .forEach(k=>localStorage.removeItem(k));
+  document.querySelectorAll('input.load').forEach(i=>i.value='');
+}
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  document.getElementById('themebtn').textContent = t==='light' ? '🌙' : '☀️';
+  localStorage.setItem('gb_theme',t);
+}
+function toggleTheme(){
+  const cur=document.documentElement.getAttribute('data-theme');
+  applyTheme(cur==='light'?'dark':'light');
+}
+applyTheme(localStorage.getItem('gb_theme')||'light');
+show(localStorage.getItem('gb_active')||'a');
+</script>
+</body>
+</html>
