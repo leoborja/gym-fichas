@@ -107,15 +107,21 @@ header{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 8
 .row .n small{display:block;color:var(--mute);font-weight:500;font-size:12.5px;margin-top:1px}
 
 /* set logger */
-.sets{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:6px;padding:0 12px 10px}
+.sets{display:grid;gap:6px;padding:0 12px 12px}
 .row + .sets{padding-top:0}
-.set{position:relative;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);height:56px;display:grid;grid-template-rows:1fr auto;overflow:hidden}
-.set input{border:0;background:transparent;width:100%;text-align:center;font:700 19px/1 var(--display);color:var(--ink);padding:8px 4px 0;font-variant-numeric:tabular-nums;min-width:0}
-.set input::placeholder{color:var(--mute);font-weight:600;opacity:.7}
-.set label{font-size:10px;letter-spacing:.06em;color:var(--mute);text-align:center;padding-bottom:5px;font-weight:600;cursor:pointer}
-.set.on{background:var(--ok-soft);border-color:var(--ok)}
-.set.on label{color:var(--ok)}
-.set.on:after{content:"✓";position:absolute;top:4px;right:6px;color:var(--ok);font-size:11px;font-weight:700}
+.set{display:grid;grid-template-columns:38px minmax(0,1fr) 64px;align-items:stretch;border:1px solid var(--line);border-radius:12px;background:var(--surface-2);height:58px;overflow:hidden}
+.set .s{display:grid;place-items:center;font:800 15px/1 var(--display);color:var(--mute);border-right:1px solid var(--line-2)}
+.set .kg{display:flex;align-items:center;gap:6px;padding:0 6px 0 10px;min-width:0}
+.set .kg input{border:0;background:transparent;width:100%;min-width:0;font:800 26px/1 var(--display);color:var(--ink);padding:0;font-variant-numeric:tabular-nums}
+.set .kg input::placeholder{color:var(--mute);opacity:.55}
+.set .kg .u{font-size:12px;font-weight:600;color:var(--mute);letter-spacing:.04em}
+.set .kg .last{margin-left:auto;font-size:11.5px;color:var(--mute);white-space:nowrap;font-variant-numeric:tabular-nums}
+.set .chk{border:0;border-left:1px solid var(--line);background:var(--surface);color:var(--mute);font-size:22px;display:grid;place-items:center;cursor:pointer;transition:background .15s,color .15s}
+.set .chk:active{transform:scale(.96)}
+.set.on{border-color:var(--ok);background:var(--ok-soft)}
+.set.on .s{color:var(--ok)}
+.set.on .kg input{color:var(--ok)}
+.set.on .chk{background:var(--ok);color:#fff;border-left-color:var(--ok)}
 
 /* how-to */
 .how{border-top:1px solid var(--line-2)}
@@ -126,11 +132,12 @@ header{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 8
 .how[open] > summary .chev{transform:rotate(180deg)}
 .howbody{padding:0 12px 12px;display:grid;gap:10px}
 .media{aspect-ratio:16/9;border-radius:10px;background:var(--media);position:relative;overflow:hidden;display:grid;place-items:center;color:#fff}
-.media svg{position:absolute;inset:0;width:100%;height:100%}
+.media img,.media iframe{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0}
+.media img{opacity:.85}
+.media .name{position:absolute;bottom:9px;left:10px;right:10px;font:700 13px/1.2 var(--display);letter-spacing:.02em;text-shadow:0 1px 6px rgba(0,0,0,.7)}
 .media .tag{position:absolute;left:10px;top:9px;font:700 11px/1 var(--display);letter-spacing:.1em;text-transform:uppercase;background:rgba(255,255,255,.14);padding:5px 8px;border-radius:5px;backdrop-filter:blur(4px)}
 .media .play{width:48px;height:48px;border-radius:50%;background:var(--accent);display:grid;place-items:center;position:relative;box-shadow:0 6px 18px rgba(226,60,48,.45)}
 .media .play:after{content:"";border-left:14px solid #fff;border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:4px}
-.media .cap{position:absolute;bottom:9px;left:10px;right:10px;font-size:11.5px;color:rgba(255,255,255,.75);display:flex;justify-content:space-between}
 .cues{margin:0;padding:0;list-style:none;display:grid;gap:5px}
 .cues li{display:grid;grid-template-columns:18px 1fr;gap:6px;font-size:14px;color:var(--ink-2)}
 .cues li:before{content:"→";color:var(--accent);font-weight:700}
@@ -163,7 +170,7 @@ body.study .how > summary .chev{display:none}
 </head>
 <body>
 
-<div class="note"><b>Prévia v2</b> — a ficha atual continua em <a href="index.html" style="color:var(--accent)">index.html</a>. — Ficha A reconstruída. Toque num set pra marcar feito (abre o cronômetro de descanso), digite a carga direto no set, abra “Como fazer” pra ver o slot de vídeo. Alterne <b>Treino / Estudo</b> no topo.</div>
+<div class="note"><b>Prévia v2</b> — a ficha atual continua em <a href="index.html" style="color:var(--accent)">index.html</a>. — Ficha A reconstruída. Toque num set pra marcar feito (abre o cronômetro de descanso), digite a carga direto no set, abra “Como fazer” pra ver o vídeo do exercício. Alterne <b>Treino / Estudo</b> no topo.</div>
 
 <header>
   <div class="wrap">
@@ -222,43 +229,42 @@ body.study .how > summary .chev{display:none}
 </div>
 
 <script>
-const MEDIA = `<svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2A3040"/><stop offset="1" stop-color="#0F1216"/></linearGradient></defs><rect width="320" height="180" fill="url(#g)"/><g stroke="#ffffff" stroke-opacity=".18" stroke-width="1"><line x1="0" y1="140" x2="320" y2="140"/><line x1="40" y1="0" x2="40" y2="180"/><line x1="280" y1="0" x2="280" y2="180"/></g><g fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><circle cx="160" cy="58" r="12" fill="#fff" fill-opacity=".55" stroke="none"/><path d="M160 72 L160 112 M160 78 L128 96 M160 78 L192 96 M160 112 L142 140 M160 112 L178 140"/><path d="M118 92 L138 92 M182 92 L202 92" stroke="#E23C30" stroke-opacity=".9"/></g></svg>`;
 
 const FICHA = [
-  {warm:true, name:"Manguito rotador externo", tags:["aquecimento","ombro"], sets:3, reps:"15", rest:0,
+  {warm:true, name:"Manguito rotador externo", yt:"EcWRUlH63eg", tags:["aquecimento","ombro"], sets:3, reps:"15", rest:0,
    cues:["Cotovelo a 90° colado ao corpo","Halter leve ou elástico, rotação externa","Sem descanso entre lados"],
    why:"Não é treino, é seguro de vida do ombro. Pula e paga com lesão."},
   {block:"Bloco peito · superior"},
-  {n:1, name:"Supino sentado no cross · inclinado", tags:["peito superior"], tech:"Rest-pause na 4ª", sets:4, reps:"8–10", rest:90, last:[32,32,34,34],
+  {n:1, name:"Supino sentado no cross · inclinado", yt:"G20cqd_4goE", tags:["peito superior"], tech:"Rest-pause na 4ª", sets:4, reps:"8–10", rest:90, last:[32,32,34,34],
    cues:["Banco a 30–40°, cabos na altura do peito alto","Empurrar à frente/cima juntando na linha do peito","Descer em 3s, explodir na subida","4ª série: 8 reps → 15s → +5 reps mesmo peso"],
    why:"Composto principal do dia, sem superset. Tensão constante, coluna apoiada, zero lombar. Bateu 10 limpas nas 4 séries → sobe a carga."},
   {n:2, name:"Superset · Crucifixo inclinado + Supino cross reto", tags:["peito superior","peito médio"], sets:3, reps:"10–12", rest:75,
    parts:[
-     {l:"A", name:"Crucifixo inclinado com halteres", sub:"Estica · fase alongada", last:[16,16,18]},
-     {l:"B", name:"Supino sentado no cross · reto", sub:"Empurra · ângulo reto", last:[28,28,30]}
+     {l:"A", name:"Crucifixo inclinado com halteres", yt:"RIfdP8Jfc-Q", sub:"Estica · fase alongada", last:[16,16,18]},
+     {l:"B", name:"Supino sentado no cross · reto", yt:"nybEfmrz1Ro", sub:"Empurra · ângulo reto", last:[28,28,30]}
    ],
    cues:["Crucifixo: banco 30°, abertura ampla, squeeze 1–2s no topo","Cross reto: banco plano, cabos na altura do peito, descer 2–3s"],
    why:"Dois padrões diferentes, não dois flys: um estica, o outro empurra num ângulo novo. Isso arredonda o peitoral inteiro."},
   {n:3, name:"Tri-set · Pullover + Canivete + Desenvolvimento", tags:["peito","abs","ombro"], tech:"Drop set no desenvolvimento (3ª)", sets:3, reps:"12 · 15 · 8–10", rest:75,
    parts:[
-     {l:"A", name:"Pullover com halter", sub:"Caixa torácica · 12", last:[20,20,20]},
-     {l:"B", name:"Canivete", sub:"Abs · 15", last:["pc","pc","pc"]},
-     {l:"C", name:"Desenvolvimento na máquina", sub:"Ombro pesado · 8–10", last:[45,45,50]}
+     {l:"A", name:"Pullover com halter", yt:"UicU0kXYKTI", sub:"Caixa torácica · 12", last:[20,20,20]},
+     {l:"B", name:"Canivete", yt:"yFKPFCnpFJs", sub:"Abs · 15", last:["pc","pc","pc"]},
+     {l:"C", name:"Desenvolvimento na máquina", yt:"aTnjvuuf_yo", sub:"Ombro pesado · 8–10", last:[45,45,50]}
    ],
    cues:["Pullover: perpendicular no banco, quadril baixo, halter bem atrás da cabeça","Canivete: pernas e tronco sobem juntos, sem impulso","Desenvolvimento: descer abaixo do queixo, subir sem travar cotovelo","3ª série do desenvolvimento: 8–10 → −30% → falha"],
    why:"Cada um pega uma área diferente, nenhum fatiga o deltóide. O desenvolvimento chega fresco: é o construtor pesado do ombro."},
   {block:"Bloco ombro · medial + posterior"},
   {n:4, name:"Superset · Elevação lateral + Face pull", tags:["deltóide medial","posterior"], sets:3, reps:"15 + 15", rest:60,
    parts:[
-     {l:"A", name:"Elevação lateral com halteres", sub:"Medial · o 3D", last:[10,10,10]},
-     {l:"B", name:"Face pull na corda", sub:"Posterior + saúde articular", last:[25,25,25]}
+     {l:"A", name:"Elevação lateral com halteres", yt:"W5hRdgwEoEA", sub:"Medial · o 3D", last:[10,10,10]},
+     {l:"B", name:"Face pull na corda", yt:"On1ysBmSWrA", sub:"Posterior + saúde articular", last:[25,25,25]}
    ],
    cues:["Lateral: mindinho levemente pra cima, “derramar a jarra”, sem balançar","Face pull: cotovelos ALTOS, puxar pra cara, squeeze 2s"],
    why:"As duas cabeças que os pressings não pegam. Anterior já foi martelado pelos 3 presses."},
   {n:5, name:"Superset · Lateral inclinada + Posterior curvado", tags:["deltóide medial","posterior"], sets:3, reps:"12 + 12", rest:45,
    parts:[
-     {l:"A", name:"Elevação lateral inclinada (leaning)", sub:"Isola o lateral puro", last:[8,8,8]},
-     {l:"B", name:"Elevação posterior curvado", sub:"Fecha o posterior", last:[8,8,10]}
+     {l:"A", name:"Elevação lateral inclinada (leaning)", yt:"Qc3v4fAdv9c", sub:"Isola o lateral puro", last:[8,8,8]},
+     {l:"B", name:"Elevação posterior curvado", yt:"HrL-KPhJ9r0", sub:"Fecha o posterior", last:[8,8,10]}
    ],
    cues:["Apoiar num poste, inclinar o corpo, halter na mão de fora","Curvado: tronco à frente, abrir pros lados, squeeze 2s no topo"],
    why:"2ª dose de medial + posterior, ângulos novos. Lateral segue prioridade."}
@@ -271,15 +277,22 @@ const save = (k,v) => { try { localStorage.setItem('gb2_'+k, v); } catch(e){} };
 function setBox(key, i, last){
   const on = store(key+'|done'+i)==='1';
   const val = store(key+'|kg'+i) ?? '';
+  const unit = last==='pc' ? 'corpo' : 'kg';
   return `<div class="set ${on?'on':''}" data-key="${key}" data-i="${i}">
-    <input inputmode="decimal" placeholder="${last??''}" value="${val}" aria-label="Carga série ${i+1}">
-    <label>S${i+1}${last!=null?` · últ ${last}`:''}</label></div>`;
+    <div class="s">S${i+1}</div>
+    <div class="kg"><input inputmode="decimal" placeholder="${last==='pc'?'—':(last??'')}" value="${val}" aria-label="Carga série ${i+1}"><span class="u">${unit}</span>${last!=null&&last!=='pc'?`<span class="last">últ. ${last}</span>`:''}</div>
+    <button class="chk" type="button" aria-pressed="${on}" aria-label="Série ${i+1} feita">${on?'✓':'○'}</button></div>`;
+}
+function media(yt, name){
+  return `<div class="media" data-yt="${yt}" role="button" tabindex="0" aria-label="Ver vídeo: ${name}">
+    <img src="https://i.ytimg.com/vi/${yt}/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()">
+    <span class="tag">Vídeo</span><span class="play"></span><span class="name">${name}</span></div>`;
 }
 function howBlock(ex){
+  const vids = ex.parts ? ex.parts.map(p=>media(p.yt,p.name)).join('') : media(ex.yt,ex.name);
   return `<details class="how"><summary><span class="pl">▶</span>Como fazer<span class="chev">▾</span></summary>
     <div class="howbody">
-      <div class="media">${MEDIA}<span class="tag">GIF · loop 3s</span><span class="play"></span>
-        <span class="cap"><span>Vídeo/GIF do exercício entra aqui</span><span>0:06</span></span></div>
+      ${vids}
       <ul class="cues">${ex.cues.map(c=>`<li>${c}</li>`).join('')}</ul>
       ${ex.tech?`<div class="techbox"><b>Técnica:</b> ${ex.tech}</div>`:''}
       <p class="why">${ex.why}</p>
@@ -307,15 +320,21 @@ function render(){
 }
 function bind(){
   document.querySelectorAll('.set').forEach(s=>{
-    const inp = s.querySelector('input'), lab = s.querySelector('label');
+    const inp = s.querySelector('input'), chk = s.querySelector('.chk');
     const k = s.dataset.key+'|', i = s.dataset.i;
     inp.addEventListener('input',()=>save(k+'kg'+i, inp.value));
-    lab.addEventListener('click',e=>{ e.preventDefault(); toggle(s); });
+    chk.addEventListener('click',()=>toggle(s));
+  });
+  document.querySelectorAll('.media[data-yt]').forEach(m=>{
+    const play=()=>{ m.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${m.dataset.yt}?autoplay=1&rel=0&playsinline=1&modestbranding=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`; m.removeAttribute('data-yt'); };
+    m.addEventListener('click',play);
+    m.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); play(); } });
   });
 }
 function toggle(s){
   const on = !s.classList.contains('on');
   s.classList.toggle('on', on);
+  const b=s.querySelector('.chk'); b.textContent=on?'✓':'○'; b.setAttribute('aria-pressed',on);
   save(s.dataset.key+'|done'+s.dataset.i, on?'1':'0');
   const card = s.closest('.ex');
   const all = [...card.querySelectorAll('.set')];
