@@ -10,7 +10,7 @@ Site estático em https://leoborja.github.io/gym-fichas/ . Sem build: editar arq
 | `app.css` / `app.js` | Template compartilhado: visual, abas, registro de séries, cronômetro, vídeos, "Finalizar treino". **Toda mudança de design/comportamento vai aqui**, nunca inline nas páginas. |
 | `videos.js` | Biblioteca `V` de vídeos de execução (ID do YouTube por exercício), com canal e duração no comentário. |
 | `fichas/leo.js` | Dados das fichas do Leo + `CICLO` + `window.GB` (config da página). |
-| `homero.html` | Ficha do amigo Homero (Full Body 3x, base Refundini). Hoje ainda é self-contained (CSS+JS inline, prefixo `fb_`); migrar pra `app.js` + `fichas/homero.js` quando for mexer nela. Restrições do Leo NÃO valem pra ele (ver `docs/refundini/`). |
+| `homero.html` + `fichas/homero.js` | Ficha do amigo Homero (Full Body 3x, base Refundini). Casca igual ao index (manifest e título próprios, `<small class="who">`), dados em `fichas/homero.js` com prefixo `fb_`, `rules` e `altLabel:'Laércio explica'` (2º vídeo `lr` = Laércio comentando, com `start`). Restrições do Leo NÃO valem pra ele: avançado, ombros lesionados (nada acima da cabeça), academia completa. Ver `docs/refundini/`. |
 | `v1.html` | Ficha antiga do Leo (formato de texto corrido), arquivada. `v2.html` e `fullbody.html` só redirecionam. |
 | `tools/yt.py` | Busca candidatos no YouTube e verifica IDs via oEmbed. |
 
@@ -58,4 +58,4 @@ Um por exercício (por parte, em superset). Clipe curto (< 1 min ideal), em port
 
 ## Design
 
-Tipografia Barlow Condensed (números, títulos) + Barlow (texto). Vermelho `#E23C30` é a única cor de destaque; verde = série feita; laranja = cuidado médico. Light/dark por token em `app.css`. Página pensada pro celular na academia: modo Treino (coaching recolhido) é o padrão, modo Estudo abre tudo.
+Tipografia Barlow Condensed (números, títulos) + Barlow (texto). Vermelho `#E23C30` é a única cor de destaque; verde = série feita; laranja = cuidado médico. Light/dark por token em `app.css`. Header e cronômetro respeitam `env(safe-area-inset-*)` (app instalado na tela inicial). Página pensada pro celular na academia: modo Treino (coaching recolhido) é o padrão, modo Estudo abre tudo.
