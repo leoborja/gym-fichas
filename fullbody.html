@@ -406,7 +406,7 @@ function howBlock(ex){
     <div class="howbody">${vids}
       <ul class="cues">${ex.cues.map(c=>`<li>${c}</li>`).join('')}</ul>
       ${ex.tech?`<div class="techbox"><b>Intensidade:</b> ${ex.tech}</div>`:''}
-      ${ex.care?`<div class="carebox"><b>Ombro:</b> ${ex.care}</div>`:''}
+      ${ex.care?`<div class="carebox">${ex.care.replace(/^([^:]+):\s*/,'<b>$1:</b> ')}</div>`:''}
       <p class="why">${ex.why}</p>
     </div></details>`;
 }
