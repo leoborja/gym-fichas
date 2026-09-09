@@ -58,7 +58,7 @@ Um por exercício (por parte, em superset). Clipe curto (< 1 min ideal), em port
 
 ## Design
 
-Tipografia Barlow Condensed (números, títulos) + Barlow (texto). Vermelho `#E23C30` é a única cor de destaque; verde = série feita; laranja = cuidado médico. Light/dark por token em `app.css`. Header e cronômetro respeitam `env(safe-area-inset-*)` (app instalado na tela inicial). Página pensada pro celular na academia: modo Treino (coaching recolhido) é o padrão, modo Estudo abre tudo.
+Tipografia Barlow Condensed (números, títulos) + Barlow (texto). Vermelho `#E23C30` é a única cor de destaque; verde = série feita; laranja = cuidado médico. Light/dark por token em `app.css`. Header e cronômetro respeitam `env(safe-area-inset-*)` (app instalado na tela inicial). Cronômetro de descanso é por horário de término salvo no `localStorage` (`rest_end`), ressincroniza em `visibilitychange`/`pageshow`, pede Wake Lock enquanto conta e avisa com vibração + bipe (AudioContext desbloqueado no toque da série). Página pensada pro celular na academia: modo Treino (coaching recolhido) é o padrão, modo Estudo abre tudo.
 
 ## Como criar uma ficha pra outra pessoa (Homero, ou qualquer outra)
 

@@ -176,7 +176,7 @@ function finish(){
     if(v) save(k+'prev'+i, v);
     drop(k+'kg'+i); drop(k+'done'+i);
   });
-  clearInterval(tick); rest.classList.remove('show');
+  stopRest();
   render(); window.scrollTo({top:0});
 }
 function clearAll(){
@@ -187,18 +187,64 @@ function clearAll(){
 }
 
 /* ---------- cronômetro de descanso ---------- */
-let tick=null;
+/* Baseado em horário de término (Date.now), não em contagem: continua certo quando a tela apaga,
+ * o app vai pro fundo ou a página é reaberta. Durante o descanso pede Wake Lock (tela não apaga). */
+let tick=null, wakeLock=null, audio=null;
 const rest=document.getElementById('rest'), restT=document.getElementById('restT'), restNext=document.getElementById('restNext');
 const fmt = s => Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
-function startRest(sec, card){
-  clearInterval(tick);
-  let left=sec;
-  const nxt = card.querySelector('.set:not(.on)') ? card.dataset.next : (card.nextElementSibling?.dataset.next ?? 'Fim da ficha');
-  restNext.textContent = nxt;
-  restT.textContent=fmt(left); rest.classList.add('show');
-  tick=setInterval(()=>{ left--; restT.textContent=fmt(left); if(left<=0){ clearInterval(tick); rest.classList.remove('show'); if(navigator.vibrate) navigator.vibrate([120,60,120]); } },1000);
+
+function beep(){
+  try{
+    audio = audio || new (window.AudioContext||window.webkitAudioContext)();
+    if(audio.state==='suspended') audio.resume();
+    [0,0.18,0.36].forEach(t=>{
+      const o=audio.createOscillator(), g=audio.createGain();
+      o.type='square'; o.frequency.value=t?1320:880; g.gain.value=0.0001;
+      o.connect(g); g.connect(audio.destination);
+      const at=audio.currentTime+t; o.start(at);
+      g.gain.exponentialRampToValueAtTime(0.25, at+0.01); g.gain.exponentialRampToValueAtTime(0.0001, at+0.14); o.stop(at+0.15);
+    });
+  }catch(e){}
 }
-document.getElementById('restSkip').onclick=()=>{ clearInterval(tick); rest.classList.remove('show'); };
+async function keepAwake(on){
+  try{
+    if(on){ if(!wakeLock && navigator.wakeLock) wakeLock = await navigator.wakeLock.request('screen'); }
+    else if(wakeLock){ await wakeLock.release(); wakeLock=null; }
+  }catch(e){ wakeLock=null; }
+}
+function stopRest(){
+  clearInterval(tick); tick=null; rest.classList.remove('show'); drop('rest_end'); drop('rest_next'); keepAwake(false);
+}
+function finishRest(){
+  stopRest();
+  if(navigator.vibrate) navigator.vibrate([150,80,150,80,300]);
+  beep();
+}
+function renderRest(){
+  const end=+store('rest_end'); if(!end) return;
+  const left=Math.ceil((end-Date.now())/1000);
+  if(left<=0){ finishRest(); return; }
+  restT.textContent=fmt(left);
+}
+function runRest(){
+  clearInterval(tick);
+  restNext.textContent = store('rest_next') || '—';
+  rest.classList.add('show'); renderRest(); keepAwake(true);
+  tick=setInterval(renderRest, 250);
+}
+function startRest(sec, card){
+  const nxt = card.querySelector('.set:not(.on)') ? card.dataset.next : (card.nextElementSibling?.dataset.next ?? 'Fim da ficha');
+  save('rest_end', String(Date.now()+sec*1000)); save('rest_next', nxt);
+  // desbloqueia o áudio no gesto do usuário (iOS só toca depois de um toque)
+  try{ audio = audio || new (window.AudioContext||window.webkitAudioContext)(); if(audio.state==='suspended') audio.resume(); }catch(e){}
+  runRest();
+}
+document.getElementById('restSkip').onclick=stopRest;
+/* voltou pro app / tela acendeu: ressincroniza e repede o Wake Lock (o iOS solta ao esconder) */
+document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='visible'){ if(store('rest_end')) runRest(); } });
+window.addEventListener('pageshow',()=>{ if(store('rest_end')) runRest(); });
+/* descanso em andamento ao abrir a página (app foi fechado e reaberto) */
+if(store('rest_end')){ if(+store('rest_end')>Date.now()) runRest(); else { drop('rest_end'); drop('rest_next'); } }
 
 /* ---------- modos + tema ---------- */
 const mT=document.getElementById('mTreino'), mE=document.getElementById('mEstudo');
