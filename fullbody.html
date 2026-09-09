@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#E23C30">
+<title>Gym Builder — Full Body 3x</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --accent:#E23C30; --accent-soft:#FBE7E4;
+  --ok:#1F9D6B; --ok-soft:#DFF3EA;
+  --warn:#B25A12; --warn-soft:#FFF2E6;
+  --bg:#EEF0F3; --surface:#FFFFFF; --surface-2:#F5F6F8; --line:#DFE3E9; --line-2:#EDF0F4;
+  --ink:#15181D; --ink-2:#4B535E; --mute:#7C8592;
+  --rail:#15181D; --rail-ink:#fff;
+  --shadow:0 1px 2px rgba(21,24,29,.05),0 10px 24px -12px rgba(21,24,29,.18);
+  --media:#1B1F26;
+  --display:'Barlow Condensed','Arial Narrow',Impact,sans-serif;
+  --body:'Barlow','Helvetica Neue',Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --accent:#F0483B; --accent-soft:#3A1C19;
+    --ok:#3BC48A; --ok-soft:#173026;
+    --warn:#F0AD5E; --warn-soft:#2C2013;
+    --bg:#0E1013; --surface:#171A1F; --surface-2:#1E2228; --line:#2A2F37; --line-2:#22262D;
+    --ink:#EDEFF3; --ink-2:#B6BCC6; --mute:#7F8794;
+    --rail:#EDEFF3; --rail-ink:#0E1013;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 12px 28px -12px rgba(0,0,0,.6);
+    --media:#0A0C0F;
+  }
+}
+:root[data-theme="dark"]{
+  --accent:#F0483B; --accent-soft:#3A1C19;
+  --ok:#3BC48A; --ok-soft:#173026;
+  --warn:#F0AD5E; --warn-soft:#2C2013;
+  --bg:#0E1013; --surface:#171A1F; --surface-2:#1E2228; --line:#2A2F37; --line-2:#22262D;
+  --ink:#EDEFF3; --ink-2:#B6BCC6; --mute:#7F8794;
+  --rail:#EDEFF3; --rail-ink:#0E1013;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 12px 28px -12px rgba(0,0,0,.6);
+  --media:#0A0C0F;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 var(--body);-webkit-font-smoothing:antialiased;padding-bottom:110px}
+button{font-family:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:560px;margin:0 auto;padding:0 14px}
+
+/* header */
+header{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px) saturate(1.3);border-bottom:1px solid var(--line)}
+.top{display:flex;align-items:center;justify-content:space-between;padding:12px 0 8px}
+.brand{font:800 18px/1 var(--display);letter-spacing:.04em;text-transform:uppercase}
+.brand em{font-style:normal;color:var(--accent)}
+.tools{display:flex;gap:6px}
+.iconbtn{width:34px;height:34px;border-radius:9px;border:1px solid var(--line);background:var(--surface);color:var(--ink);display:grid;place-items:center;font-size:14px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--surface)}
+.seg button{border:0;background:transparent;color:var(--mute);padding:0 12px;height:32px;font-weight:600;font-size:13px}
+.seg button[aria-pressed="true"]{background:var(--rail);color:var(--rail-ink)}
+.tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:2px 0 10px}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;border:1px solid var(--line);background:var(--surface);color:var(--mute);border-radius:10px;padding:6px 12px 6px 10px;display:flex;align-items:baseline;gap:8px}
+.tab b{font:800 20px/1 var(--display);color:var(--ink)}
+.tab small{font-size:12px;font-weight:600;letter-spacing:.02em}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.tab[aria-selected="true"] b{color:#fff}
+.progress{height:3px;background:var(--line-2)}
+.progress i{display:block;height:100%;background:var(--ok);width:0;transition:width .3s}
+
+/* ficha head */
+.fhead{padding:18px 0 4px;display:grid;gap:6px}
+.fhead h1{margin:0;font:800 34px/1 var(--display);text-transform:uppercase;letter-spacing:.01em;text-wrap:balance}
+.fhead h1 span{color:var(--accent)}
+.stats{display:flex;flex-wrap:wrap;gap:6px 18px;color:var(--mute);font-size:13px;font-variant-numeric:tabular-nums}
+.stats b{color:var(--ink);font:700 18px/1 var(--display);margin-right:3px}
+.brief{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14px;color:var(--ink-2);margin-top:10px}
+.brief strong{color:var(--ink)}
+.brief.warn{border-color:var(--warn);background:var(--warn-soft);color:var(--ink)}
+.brief.warn strong{color:var(--warn)}
+
+/* blocks */
+.block{margin:22px 0 10px;display:flex;align-items:center;gap:10px;font:700 13px/1 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.block:after{content:"";flex:1;height:1px;background:var(--line)}
+.block b{color:var(--accent)}
+
+/* exercise card */
+.ex{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);margin-bottom:10px;overflow:hidden;position:relative}
+.ex.done{border-color:var(--ok)}
+.ex.done .exhead{background:var(--ok-soft)}
+.exhead{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:10px;align-items:start;padding:12px 12px 10px}
+.rail{width:34px;height:34px;border-radius:9px;background:var(--rail);color:var(--rail-ink);display:grid;place-items:center;font:800 18px/1 var(--display)}
+.rail.warm{background:var(--surface-2);color:var(--mute);font-size:14px}
+.title{min-width:0}
+.title h2{margin:0;font:700 19px/1.15 var(--display);letter-spacing:.01em}
+.title .sub{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.chip{font-size:11.5px;font-weight:600;letter-spacing:.02em;padding:2px 7px;border-radius:6px;background:var(--surface-2);color:var(--ink-2);border:1px solid var(--line-2)}
+.chip.tech{background:var(--accent-soft);color:var(--accent);border-color:transparent}
+.chip.care{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+.rx{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;max-width:40%}
+.rx b{display:block;font:800 26px/1 var(--display);letter-spacing:-.01em}
+.rx small{display:block;color:var(--mute);font-size:12px;margin-top:3px}
+.rx small span{color:var(--ink);font-weight:600}
+
+/* superset rows */
+.row{display:grid;grid-template-columns:22px 1fr;gap:8px;align-items:start;padding:10px 12px;border-top:1px solid var(--line-2)}
+.row .l{font:800 14px/22px var(--display);color:var(--accent);text-align:center}
+.row .n{font-weight:600;font-size:14.5px;line-height:1.3}
+.row .n small{display:block;color:var(--mute);font-weight:500;font-size:12.5px;margin-top:1px}
+
+/* set logger */
+.sets{display:grid;gap:6px;padding:0 12px 12px}
+.row + .sets{padding-top:0}
+.set{display:grid;grid-template-columns:38px minmax(0,1fr) 64px;align-items:stretch;border:1px solid var(--line);border-radius:12px;background:var(--surface-2);height:58px;overflow:hidden}
+.set .s{display:grid;place-items:center;font:800 15px/1 var(--display);color:var(--mute);border-right:1px solid var(--line-2)}
+.set .kg{display:flex;align-items:center;gap:6px;padding:0 6px 0 10px;min-width:0}
+.set .kg input{border:0;background:transparent;width:3.2em;flex:0 0 auto;min-width:0;font:800 26px/1 var(--display);color:var(--ink);padding:0;font-variant-numeric:tabular-nums}
+.set .kg input::placeholder{color:var(--mute);opacity:.55}
+.set .kg .u{font-size:12px;font-weight:600;color:var(--mute);letter-spacing:.04em}
+.set .kg .last{margin-left:auto;font-size:11.5px;color:var(--mute);white-space:nowrap;font-variant-numeric:tabular-nums}
+.set .chk{border:0;border-left:1px solid var(--line);background:var(--surface);color:var(--mute);font-size:22px;display:grid;place-items:center;cursor:pointer;transition:background .15s,color .15s}
+.set .chk:active{transform:scale(.96)}
+.set.on{border-color:var(--ok);background:var(--ok-soft)}
+.set.on .s{color:var(--ok)}
+.set.on .kg input{color:var(--ok)}
+.set.on .chk{background:var(--ok);color:#fff;border-left-color:var(--ok)}
+
+/* how-to */
+.how{border-top:1px solid var(--line-2)}
+.how > summary{list-style:none;display:flex;align-items:center;gap:8px;padding:9px 12px;font-size:13px;font-weight:600;color:var(--ink-2);cursor:pointer;user-select:none}
+.how > summary::-webkit-details-marker{display:none}
+.how > summary .pl{width:22px;height:22px;border-radius:6px;background:var(--rail);color:var(--rail-ink);display:grid;place-items:center;font-size:9px}
+.how > summary .chev{margin-left:auto;color:var(--mute);transition:transform .2s}
+.how[open] > summary .chev{transform:rotate(180deg)}
+.howbody{padding:0 12px 12px;display:grid;gap:10px}
+.media{aspect-ratio:16/9;border-radius:10px;background:var(--media);position:relative;overflow:hidden;display:grid;place-items:center;color:#fff;cursor:pointer}
+.media img,.media iframe{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0}
+.media img{opacity:.85}
+.media .tag{position:absolute;left:10px;top:9px;font:700 11px/1 var(--display);letter-spacing:.1em;text-transform:uppercase;background:rgba(0,0,0,.45);padding:5px 8px;border-radius:5px;backdrop-filter:blur(4px)}
+.media .play{width:48px;height:48px;border-radius:50%;background:var(--accent);display:grid;place-items:center;position:relative;box-shadow:0 6px 18px rgba(226,60,48,.45)}
+.media .play:after{content:"";border-left:14px solid #fff;border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:4px}
+.media .name{position:absolute;bottom:9px;left:10px;right:10px;font:700 13px/1.2 var(--display);letter-spacing:.02em;text-shadow:0 1px 6px rgba(0,0,0,.8)}
+.cues{margin:0;padding:0;list-style:none;display:grid;gap:5px}
+.cues li{display:grid;grid-template-columns:18px 1fr;gap:6px;font-size:14px;color:var(--ink-2)}
+.cues li:before{content:"→";color:var(--accent);font-weight:700}
+.why{font-size:13px;color:var(--mute);border-left:2px solid var(--line);padding-left:10px;margin:0}
+.techbox{background:var(--accent-soft);color:var(--ink);border-radius:8px;padding:8px 10px;font-size:13.5px}
+.techbox b{color:var(--accent)}
+.carebox{background:var(--warn-soft);color:var(--ink);border-radius:8px;padding:8px 10px;font-size:13.5px}
+.carebox b{color:var(--warn)}
+body.study .how > summary .chev{display:none}
+
+/* summary + finish */
+.sum{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-top:18px}
+.sum h3{margin:0 0 8px;font:700 15px/1 var(--display);letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.sum table{width:100%;border-collapse:collapse;font-size:13.5px;font-variant-numeric:tabular-nums}
+.sum td{padding:6px 0;border-top:1px solid var(--line-2)}
+.sum td:last-child{text-align:right;font:700 16px/1 var(--display)}
+.sum tr:first-child td{border-top:0}
+.sum .note{font-size:12.5px;color:var(--mute);margin:8px 0 0}
+.finish{margin:14px 0 0;display:grid;gap:8px}
+.finish button{border:0;border-radius:12px;padding:14px;font:700 17px/1 var(--display);letter-spacing:.06em;text-transform:uppercase;background:var(--rail);color:var(--rail-ink)}
+.finish p{margin:0;text-align:center;font-size:12.5px;color:var(--mute)}
+.finish .clear{background:transparent;border:1px solid var(--line);color:var(--mute);font:600 13px/1 var(--body);text-transform:none;letter-spacing:0;padding:10px}
+
+/* rest timer */
+.rest{position:fixed;left:0;right:0;bottom:0;z-index:40;transform:translateY(110%);transition:transform .25s;padding:0 14px}
+.rest.show{transform:none}
+.rest .in{max-width:532px;margin:0 auto 12px;padding:12px 14px;background:var(--rail);color:var(--rail-ink);border-radius:14px;display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:12px;box-shadow:0 18px 40px -10px rgba(0,0,0,.45)}
+.rest .lbl{font-size:12px;letter-spacing:.1em;text-transform:uppercase;opacity:.7;font-weight:600}
+.rest .next{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rest .t{font:800 38px/1 var(--display);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.rest button{border:1px solid color-mix(in srgb,var(--rail-ink) 30%,transparent);background:transparent;color:var(--rail-ink);border-radius:9px;padding:8px 12px;font-weight:600;font-size:13px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* rules card (full body) */
+.rules{background:var(--surface);border:1px solid var(--line);border-radius:12px;margin-top:10px;overflow:hidden}
+.rules > summary{list-style:none;display:flex;align-items:center;gap:8px;padding:10px 14px;font-size:13px;font-weight:600;color:var(--ink-2);cursor:pointer;user-select:none}
+.rules > summary::-webkit-details-marker{display:none}
+.rules > summary .chev{margin-left:auto;color:var(--mute);transition:transform .2s}
+.rules[open] > summary .chev{transform:rotate(180deg)}
+.rules table{width:100%;border-collapse:collapse;font-size:13px}
+.rules td{padding:7px 14px;border-top:1px solid var(--line-2);vertical-align:top;color:var(--ink-2)}
+.rules td:first-child{font-weight:700;color:var(--ink);white-space:nowrap;width:1%}
+.rules td b{color:var(--ink)}
+.rules .foot{padding:10px 14px;font-size:12.5px;color:var(--mute);border-top:1px solid var(--line-2)}
+.rules .foot a{color:var(--accent)}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="top">
+      <div class="brand">Gym <em>Builder</em> <small style="font:600 11px/1 var(--body);letter-spacing:.08em;color:var(--mute)">FULL BODY</small></div>
+      <div class="tools">
+        <div class="seg" role="group" aria-label="Modo">
+          <button id="mTreino" aria-pressed="true">Treino</button>
+          <button id="mEstudo" aria-pressed="false">Estudo</button>
+        </div>
+        <button class="iconbtn" id="theme" title="Tema">◐</button>
+      </div>
+    </div>
+    <div class="tabs" role="tablist" id="tabs"></div>
+  </div>
+  <div class="progress"><i id="bar"></i></div>
+</header>
+
+<main class="wrap" id="main"></main>
+
+<div class="rest" id="rest">
+  <div class="in">
+    <div><div class="lbl">Descanso · próximo</div><div class="next" id="restNext">—</div></div>
+    <div class="t" id="restT">1:30</div>
+    <button id="restSkip">Pular</button>
+  </div>
+</div>
+
+<script>
+/* ---------- dados das fichas ---------- */
+/* Full Body 3x/semana · base Laércio Refundini · ver docs/refundini/ */
+const YT = {
+  manguito:"EcWRUlH63eg", elastico:"A5G5ddF9gCg",
+  // vídeos do Refundini (start = segundo em que ele fala do exercício)
+  peito:"QAEr4jvDFD4", puxar:"Fj5tD6qgNDo", ombro:"Xq7SgSwiYeI", melhores:"yLTyV6NGrrU", bicepsLargo:"zRBWM0MsViA",
+  posterior:"9DK3AyZWllg", agacho:"vPCsDfkMa3o", gluteo:"DfoqpAwabWY",
+  extensoraLR:"I_uBK4DDflU", legpressLR:"adPY6cd4h58", panturrilhaLR:"emujvqD_Pq8", lateralCaboLR:"wGsKrK0bhps", marteloCordaLR:"S0FvPUzOceY", francesLR:"zjbKswHOH_I",
+  // demos curtas (exercícios que ele não cobre)
+  remadaPronada:"pfgEEiouvAs", flexoraPe:"T--10UN1jKs", mesaFlexora:"dMYsB4Eb2BY", pranchaLat:"2NjO5KrlVEM", canivete:"yFKPFCnpFJs"
+};
+
+const AQ_MANGUITO = {warm:true, name:"Manguito rotador externo", tags:["aquecimento","ombro"], sets:2, reps:"15–20", rest:0, yt:YT.manguito,
+  cues:["Cotovelo a 90° colado ao corpo, halter leve ou elástico","Só acordar o manguito: longe da fadiga","Sem descanso entre lados"],
+  why:"Refundini: aquecer o manguito sem fatigar, senão o deltoide anterior rouba o trabalho do peito."};
+const AQ_ELASTICO = {warm:true, name:"Elástico nas 3 direções + 5 min elíptico", tags:["aquecimento","fisio"], sets:2, reps:"10 cada direção", rest:0, yt:YT.elastico, u:"round",
+  cues:["Antes: 5 min de elíptico com braços","Elástico no tornozelo: lado (glúteo médio) → frente → trás","Depois, no 1º exercício: 30% da carga × 15 e 50% × 10, longe da falha"],
+  why:"Elástico é do fisio e mantém o joelho seguro. As séries a 30% e 50% são o aquecimento específico que ele prescreve."};
+
+const RULES = `<details class="rules" id="rules">
+  <summary>Regras da ficha · Refundini + joelho/lombar<span class="chev">▾</span></summary>
+  <table>
+    <tr><td>Superiores</td><td>Séries 1 e 2 param a 1–2 reps da falha. <b>Só a 3ª série vai até a falha</b>, com técnica limpa. Nunca falha em todas.</td></tr>
+    <tr><td>Perna</td><td><b>Nenhuma série na falha</b> (RIR 2–3, RPE ≤ 8). Agachamento e leg press só até o paralelo. Desconforto no joelho → encerra a série e reduz.</td></tr>
+    <tr><td>Reps</td><td>Faixa é guia, não meta. Pesado 6–10 · isoladores 10–15 · panturrilha 10–20. Fechou o topo nas 3 séries → sobe carga na próxima.</td></tr>
+    <tr><td>Descanso</td><td>Pesado 2–3 min · intermediário 1m30 · isolador 1 min. FC ainda alta? Espera mais.</td></tr>
+    <tr><td>Cadência</td><td>1:1 controlada, “conduza o peso”. Nunca deixa o peso encaixar: não fecha até relaxar, não desce a lateral até a coxa, não trava o cotovelo.</td></tr>
+    <tr><td>Ordem</td><td>Pesado do dia primeiro. Posterior de coxa antes do quadríceps. Isoladores no fim.</td></tr>
+    <tr><td>Ciclo</td><td>Sem 1–2: RIR 2 em tudo. Sem 3–4: falha na 3ª (superiores). Sem 5–7: +1 série em peito, costas, lateral e posterior. Sem 8: regenerativa (2 séries, −10% carga).</td></tr>
+  </table>
+  <div class="foot">Volume semanal inicial: 9 séries em peito, costas, deltoide lateral, quadríceps e posterior · 6 em bíceps e tríceps · 8 panturrilha. Método e fontes: <a href="https://github.com/leoborja/gym-fichas/blob/main/docs/refundini/METODO.md">METODO.md</a> · <a href="https://github.com/leoborja/gym-fichas/blob/main/docs/refundini/FICHA-FULLBODY-3x.md">FICHA-FULLBODY-3x.md</a> · <a href="index.html">fichas A–E</a></div>
+</details>`;
+
+const FICHAS = {
+  a:{tab:"Peito pesado", title:"Full Body · peito pesado", sub:"Segunda", sets:25, min:58, cycle:"Ciclo 1 · sem 1/8",
+    brief:"<strong>Pesado do dia: supino no cross reto.</strong> Posterior antes do quadríceps. Superiores: 3ª série na falha. Perna: nada de falha, RPE ≤ 8.",
+    items:[
+      AQ_MANGUITO, AQ_ELASTICO,
+      {block:"Pesado do dia"},
+      {n:1, name:"Supino sentado no cross · reto", tags:["peito","médio"], tech:"3ª série na falha", sets:3, reps:"6–10", rest:150, yt:YT.peito, start:108,
+       cues:["Escápulas fechadas, coluna apoiada no banco","Cabos na altura do peito, empurrar à frente sem travar o cotovelo","Descer até o ombro “avisar”, nunca além","Séries 1–2 a 1–2 reps da falha; a 3ª até a falha"],
+       why:"Refundini abre o treino de peito com press pesado em máquina (6–10 reps) por segurança e carga. Aqui o cross sentado faz esse papel: resistência constante e lombar protegida, o que barra e máquina não te dão."},
+      {block:"Perna · posterior primeiro"},
+      {n:2, name:"Cadeira flexora bilateral", tags:["posterior","alongado"], care:"Sem falha · RIR 2–3", sets:3, reps:"10–12", rest:90, yt:YT.posterior, start:115,
+       cues:["Ponta do pé puxada pra cima","Alongar bem no topo, controlar a volta em 1:1","Parar a 2–3 reps da falha"],
+       why:"Pra ele a cadeira flexora ganha da mesa flexora em hipertrofia porque trabalha o posterior alongado. Posterior vem antes do quadríceps e com o mesmo volume."},
+      {n:3, name:"Cadeira extensora unilateral", tags:["quadríceps","encurtado"], care:"Sem falha · RPE ≤ 7–8", sets:3, reps:"12 cada", rest:90, yt:YT.extensoraLR,
+       cues:["Subir 2s, segurar 1s no topo, descer 2s","Não travar o joelho na extensão","Uma perna por vez: corrige assimetria e controla a carga"],
+       why:"Do fisio. Refundini não condena a extensora; entra como o exercício de quadríceps em posição encurtada da semana."},
+      {block:"Superiores"},
+      {n:4, name:"Remada baixa pronada aberta", tags:["costas","meio · romboide"], tech:"3ª série na falha", sets:3, reps:"8–10", rest:90, yt:YT.remadaPronada,
+       cues:["Pegada pronada e aberta na polia baixa","Peito pra fora, cotovelo pra trás, apertar a escápula 1s","Sem usar a lombar. Se houver remada máquina com apoio de peito, pode trocar"],
+       why:"É o exercício de “profundidade” das costas que ele coloca no treino de puxar: meio das costas, senão fica largo sem espessura."},
+      {n:5, name:"Elevação lateral com halteres", tags:["deltoide lateral","torque no topo"], tech:"3ª série na falha", sets:3, reps:"10–15", rest:60, yt:YT.ombro, start:127,
+       cues:["Subir até a linha do ombro, sem balançar o corpo","Não descer até a coxa: mantém tensão embaixo","Mindinho levemente pra cima"],
+       why:"Lateral é a prioridade nº 1 de ombro pra ele, porque não trabalha em peito nem em costas. Halter cobre o torque no topo."},
+      {n:6, name:"Rosca 45° em banco inclinado", tags:["bíceps","alongado"], tech:"3ª série na falha", sets:3, reps:"10–12", rest:60, yt:YT.melhores, start:236,
+       cues:["Banco a 45°, braço bem pra trás pra alongar","Cotovelo parado, não vem à frente","Se o ombro reclamar, sobe um pouco o banco"],
+       why:"A rosca que ele mais elogia: “melhor segundo a ciência”, pelo alongamento. Único estudo que ele cita nesse lote: 45° > Scott."},
+      {n:7, name:"Crucifixo inverso na máquina", tags:["deltoide posterior"], tech:"3ª série na falha", sets:3, reps:"12–15", rest:60, yt:YT.ombro, start:71,
+       cues:["Apoiar só o abdômen, não o peito","Não arquear as costas, senão o dorsal entra","Abrir até a linha do ombro, controlar a volta"],
+       why:"Ele fecha o dia de ombro e o de costas com posterior em máquina: alavanca constante, isola sem o dorsal roubar."},
+      {n:8, name:"Panturrilha em pé", tags:["panturrilha","gastrocnêmio"], sets:4, reps:"10–20", rest:60, yt:YT.panturrilhaLR,
+       cues:["Alongar bem embaixo, 1s de contração no topo","Controlada, sem quicar","Unilateral quando ficar fácil"],
+       why:"Refundini: 4 séries de 10–20 controladas, não precisa de reps altíssimas. Sem máquina sentada aqui, então só gastrocnêmio."}
+    ],
+    volume:[["Peito",3],["Posterior de coxa",3],["Quadríceps",3],["Costas (meio)",3],["Deltoide lateral",3],["Bíceps",3],["Deltoide posterior",3],["Panturrilha",4],["Total",25]],
+    note:"Cada músculo recebe 1 exercício por sessão: dose baixa recupera em 24–48 h (regra dele). Na semana 5 a 4ª série entra em peito, costas, lateral e posterior."},
+
+  b:{tab:"Costas pesada", title:"Full Body · costas pesada", sub:"Quarta", sets:25, min:58, cycle:"Ciclo 1 · sem 1/8",
+    brief:"<strong>Pesado do dia: puxada alta.</strong> Agachamento só até o paralelo, RPE ≤ 7. Peito hoje é pico de contração no crucifixo máquina.",
+    items:[
+      AQ_MANGUITO, AQ_ELASTICO,
+      {block:"Pesado do dia"},
+      {n:1, name:"Puxada alta pronada", tags:["costas","médio · pesado"], tech:"3ª série na falha", sets:3, reps:"6–10", rest:150, yt:YT.puxar,
+       cues:["Cotovelos pra baixo, subir o peito no fim da puxada","Controlar a subida, não soltar","Pegada um pouco mais aberta que o ombro"],
+       why:"Ele abre o treino de puxar com puxada alta pesada em 6–10 reps: tensão mecânica no dorsal em comprimento médio."},
+      {block:"Perna · quadríceps pesado hoje"},
+      {n:2, name:"Agachamento até o paralelo", tags:["quadríceps","glúteo","médio"], care:"Sem falha · RPE ≤ 7 · paralelo", sets:3, reps:"8–12", rest:120, yt:YT.agacho, start:15,
+       cues:["Pés na posição natural do salto, joelho apontando pro pé","Barra leve ou goblet com halter; peso na sola inteira","Descer 2s até o paralelo, subir quadril e tronco juntos","Desconforto no joelho → mudar a posição dos pés antes de pôr carga"],
+       why:"O único exercício de quadríceps que Refundini detalha. A técnica é dele; o limite no paralelo e o RPE ≤ 7 são do seu joelho."},
+      {n:3, name:"Flexora em pé unilateral", tags:["posterior","médio"], care:"Sem falha · RIR 2–3", sets:3, reps:"10–12 cada", rest:90, yt:YT.posterior, start:560,
+       cues:["Quadril encaixado, tronco parado","Subir 1s, descer 2s controlando","Se a academia não tiver: cadeira flexora unilateral"],
+       why:"Segundo exercício de posterior da semana, em comprimento médio. Ele: posterior é “delicado”, técnica antes de carga."},
+      {block:"Superiores"},
+      {n:4, name:"Crucifixo na máquina (peck deck)", tags:["peito","encurtado · pico"], tech:"3ª série na falha", sets:3, reps:"10–12", rest:90, yt:YT.peito, start:83,
+       cues:["Apertar mão contra mão no fim, 1s","Não relaxar no topo: o peso nunca “encaixa”","Abrir só até onde o ombro permitir"],
+       why:"“O melhor exercício de peito” pra ele: alavanca constante, alonga e encurta muito, impossível perder tensão."},
+      {n:5, name:"Elevação lateral no cabo baixo · diagonal", tags:["deltoide lateral","torque no início"], tech:"3ª série na falha", sets:3, reps:"12–15", rest:60, yt:YT.lateralCaboLR,
+       cues:["Cabo passando por trás do corpo, subir em diagonal","Tensão desde o início do movimento","Não descer até relaxar"],
+       why:"Segunda faixa de torque do lateral (início do movimento), que o halter não cobre. Ele monta lateral em 3 exercícios por isso."},
+      {n:6, name:"Tríceps francês unilateral", tags:["tríceps","alongado · cabeça longa"], tech:"3ª série na falha", sets:3, reps:"10–12 cada", rest:60, yt:YT.francesLR,
+       cues:["Halter ou polia acima da cabeça","Cotovelo apontando pra frente, descer bem atrás da cabeça","Estender sem travar"],
+       why:"“Top dos tops” pra ele: o que mais gera hipertrofia no tríceps, pelo alongamento da cabeça longa."},
+      {n:7, name:"Panturrilha em pé", tags:["panturrilha","gastrocnêmio"], sets:4, reps:"10–20", rest:60, yt:YT.panturrilhaLR,
+       cues:["Alongar bem embaixo, 1s de contração no topo","Controlada, sem quicar"],
+       why:"Igual à Ficha A. 8 séries por semana."},
+      {n:8, name:"Core · Canivete ou prancha lateral", tags:["core"], sets:3, reps:"15 ou 45s", rest:45, yt:YT.pranchaLat, u:"corpo",
+       cues:["Canivete: pernas e tronco sobem juntos, sem impulso","Prancha lateral: quadril alto, corpo em linha, alternar os lados"],
+       why:"Não vem do Refundini (ele quase não fala de abdômen). Mantido da sua ficha atual, opcional."}
+    ],
+    volume:[["Costas",3],["Quadríceps",3],["Posterior de coxa",3],["Peito",3],["Deltoide lateral",3],["Tríceps",3],["Panturrilha",4],["Core",3],["Total",25]],
+    note:"Quadríceps vem antes do posterior só hoje, porque é o exercício pesado de perna da semana. Perna não sobe de volume enquanto o joelho estiver em retomada."},
+
+  c:{tab:"Perna pesada", title:"Full Body · perna pesada", sub:"Sexta", sets:27, min:60, cycle:"Ciclo 1 · sem 1/8",
+    brief:"<strong>Pesado do dia: perna.</strong> Glúteo e posterior antes do leg press. Peito superior a 30°, remada “do Lalá”, lateral na máquina fecha 9 séries na semana.",
+    items:[
+      AQ_MANGUITO, AQ_ELASTICO,
+      {block:"Pesado do dia · perna"},
+      {n:1, name:"Elevação pélvica na máquina (hip thrust)", tags:["glúteo","encurtado"], care:"Sem falha · RIR 2", sets:3, reps:"8–12", rest:120, yt:YT.gluteo, start:39,
+       cues:["Empurrar com o calcanhar, contrair o glúteo 2s no topo","Queixo recolhido, costela pra baixo","Não hiperestender a lombar no topo"],
+       why:"Um dos 2 exercícios de glúteo que ele endossa (o outro, step-down, carrega o joelho: fica pro ciclo 2 com OK do fisio). Glúteo sem força de extensão final vira dor lombar."},
+      {n:2, name:"Mesa flexora", tags:["posterior","encurtado"], care:"Sem falha · RIR 2–3", sets:3, reps:"10–12", rest:90, yt:YT.mesaFlexora,
+       cues:["Quadril colado no banco, não levantar","Subir 1s, descer 2s","Se não houver mesa: cadeira flexora bilateral com carga diferente da A"],
+       why:"Fecha os 3 comprimentos do posterior na semana (alongado A, médio B, encurtado C). Volume igual ao de quadríceps, regra dele."},
+      {n:3, name:"Leg press até o paralelo", tags:["quadríceps","alongado controlado"], care:"Sem falha · RPE ≤ 7 · joelho 90°", sets:3, reps:"10–12", rest:120, yt:YT.legpressLR,
+       cues:["Pés na largura do agachamento, apoiados por inteiro","Descer só até o joelho a 90°","Não travar o joelho no topo","Se não houver: extensora bilateral"],
+       why:"Terceiro estímulo de quadríceps, com mais alongamento que a extensora e mais estabilidade que o agachamento. Amplitude limitada pelo joelho, não pela regra dele."},
+      {block:"Superiores"},
+      {n:4, name:"Supino sentado no cross · inclinado 30°", tags:["peito superior","médio"], tech:"3ª série na falha", sets:3, reps:"8–10", rest:120, yt:YT.peito, start:381,
+       cues:["Banco a 30°, não 45°","Empurrar pra frente e pra cima, sem travar o cotovelo","Coluna apoiada, escápulas fechadas"],
+       why:"Único exercício de peitoral superior que ele prescreve: “30° > 45°”. Aqui no cross pela lombar e pelos 20 kg de halter."},
+      {n:5, name:"Remada unilateral na polia baixa · “do Lalá”", tags:["costas","dorsal · encurtado"], tech:"3ª série na falha", sets:3, reps:"10–12 cada", rest:90, yt:YT.puxar, start:121,
+       cues:["Puxar a mão em direção ao quadril, não ao peito","Cotovelo perto do corpo, tronco parado","Alongar bem no início, sem girar o tronco"],
+       why:"A remada que ele chama de “do Lalá”: a mão indo ao quadril encurta a dorsal e tira bíceps e trapézio da jogada."},
+      {n:6, name:"Elevação lateral na máquina", tags:["deltoide lateral","torque constante"], tech:"3ª série na falha", sets:3, reps:"12–15", rest:60, yt:YT.ombro, start:84,
+       cues:["Cotovelo na almofada, subir até a linha do ombro","Não deixar o braço cair até relaxar","Postura encaixada"],
+       why:"“A melhor de todas” pra ele: vetor circular, torque constante. Fecha 9 séries de lateral na semana em 3 faixas."},
+      {n:7, name:"Desenvolvimento na máquina", tags:["deltoide anterior"], tech:"3ª série na falha", sets:3, reps:"8–10", rest:90, yt:YT.peito, start:416,
+       cues:["Descer até o queixo, subir sem travar","Costas apoiadas, sem arquear"],
+       why:"Único trabalho direto de anterior da semana. Ele: anterior já trabalha em peito, então pouco volume dedicado, e o desenvolvimento entra no fim."},
+      {n:8, name:"Superset · Tríceps corda + Rosca martelo corda", tags:["tríceps","braquiorradial"], tech:"3ª série na falha", sets:3, reps:"12–15 + 10–12", rest:60,
+       parts:[
+         {l:"A", name:"Tríceps corda na polia alta", sub:"Encurtado · abrir as mãos embaixo", yt:YT.melhores, start:348},
+         {l:"B", name:"Rosca martelo com corda na polia baixa", sub:"Braquiorradial · mão “pra fora” no fim", yt:YT.marteloCordaLR}
+       ],
+       cues:["Corda no lugar da barra nos dois (troca explícita dele)","Tríceps: cotovelo parado, abrir as mãos no fim","Martelo: cotovelo colado, girar a mão pra fora no topo"],
+       why:"Corda em vez de barra no pulley é troca dele. Martelo com corda ataca o braquiorradial, o “bíceps largo”."}
+    ],
+    volume:[["Glúteo",3],["Posterior de coxa",3],["Quadríceps",3],["Peito superior",3],["Costas (dorsal)",3],["Deltoide lateral",3],["Deltoide anterior",3],["Tríceps + bíceps",6],["Total",27]],
+    note:"Semana fecha com 9 séries em peito, costas, lateral, quadríceps e posterior. Ciclo 2: trocar variantes (“o melhor treino é o que você ainda não fez”)."}
+};
+
+/* ---------- storage ---------- */
+const store = k => { try { return localStorage.getItem('fb_'+k); } catch(e){ return null; } };
+const save = (k,v) => { try { localStorage.setItem('fb_'+k, v); } catch(e){} };
+const drop = k => { try { localStorage.removeItem('fb_'+k); } catch(e){} };
+const UNITS = {kg:"kg", reps:"reps", seg:"seg", corpo:"corpo", round:"round"};
+
+/* ---------- render ---------- */
+let current = 'a';
+const main = document.getElementById('main'), tabsEl = document.getElementById('tabs');
+
+function setBox(key, i, unit){
+  const on = store(key+'|done'+i)==='1';
+  const val = store(key+'|kg'+i) ?? '';
+  const last = store(key+'|prev'+i);
+  const u = UNITS[unit||'kg'];
+  const noInput = unit==='corpo' || unit==='round';
+  return `<div class="set ${on?'on':''}" data-key="${key}" data-i="${i}">
+    <div class="s">S${i+1}</div>
+    <div class="kg">${noInput ? `<span class="u">${unit==='corpo'?'peso do corpo':'round '+(i+1)}</span>` :
+      `<input inputmode="decimal" placeholder="${last??'–'}" value="${val}" aria-label="Carga série ${i+1}"><span class="u">${u}</span>${last?`<span class="last">últ. ${last}</span>`:''}`}</div>
+    <button class="chk" type="button" aria-pressed="${on}" aria-label="Série ${i+1} feita">${on?'✓':'○'}</button></div>`;
+}
+function media(yt, name, start){
+  const st = start ? `${Math.floor(start/60)}:${String(start%60).padStart(2,'0')}` : '';
+  return `<div class="media" data-yt="${yt}" data-start="${start||0}" role="button" tabindex="0" aria-label="Ver vídeo: ${name}">
+    <img src="https://i.ytimg.com/vi/${yt}/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()">
+    <span class="tag">Vídeo${st?' · '+st:''}</span><span class="play"></span><span class="name">${name}</span></div>`;
+}
+function howBlock(ex){
+  const vids = ex.parts ? ex.parts.map(p=>media(p.yt,p.name,p.start)).join('') : media(ex.yt,ex.name,ex.start);
+  return `<details class="how" ${document.body.classList.contains('study')?'open':''}><summary><span class="pl">▶</span>Como fazer<span class="chev">▾</span></summary>
+    <div class="howbody">${vids}
+      <ul class="cues">${ex.cues.map(c=>`<li>${c}</li>`).join('')}</ul>
+      ${ex.tech?`<div class="techbox"><b>Intensidade:</b> ${ex.tech}</div>`:''}
+      ${ex.care?`<div class="carebox"><b>Joelho:</b> ${ex.care}</div>`:''}
+      <p class="why">${ex.why}</p>
+    </div></details>`;
+}
+function renderTabs(){
+  tabsEl.innerHTML = Object.entries(FICHAS).map(([id,f])=>
+    `<button class="tab" role="tab" data-f="${id}" aria-selected="${id===current}"><b>${id.toUpperCase()}</b><small>${f.tab}</small></button>`).join('');
+  tabsEl.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{ current=t.dataset.f; save('active',current); render(); window.scrollTo({top:0}); });
+}
+function render(){
+  const f = FICHAS[current];
+  renderTabs();
+  const items = f.items.map((ex,idx)=>{
+    if(ex.block) return `<div class="block"><b>◆</b> ${ex.block}</div>`;
+    const key = current+'|'+idx;
+    const head = `<div class="exhead">
+      <div class="rail ${ex.warm?'warm':''}">${ex.warm?'AQ':ex.n}</div>
+      <div class="title"><h2>${ex.name}</h2><div class="sub">${ex.tags.map(t=>`<span class="chip">${t}</span>`).join('')}${ex.tech?`<span class="chip tech">${ex.tech}</span>`:''}${ex.care?`<span class="chip care">${ex.care}</span>`:''}</div></div>
+      <div class="rx"><b>${ex.sets} × ${ex.reps}</b><small>${ex.rest?`descanso <span>${ex.rest}s</span>`:'sem descanso'}</small></div>
+    </div>`;
+    const body = ex.parts
+      ? ex.parts.map((p,pi)=>`<div class="row"><div class="l">${p.l}</div><div class="n">${p.name}<small>${p.sub}</small></div></div>
+          <div class="sets">${Array.from({length:ex.sets},(_,i)=>setBox(key+'|'+pi,i,p.u)).join('')}</div>`).join('')
+      : `<div class="sets">${Array.from({length:ex.sets},(_,i)=>setBox(key,i,ex.u)).join('')}</div>`;
+    return `<article class="ex" data-rest="${ex.rest}" data-next="${ex.name}">${head}${body}${howBlock(ex)}</article>`;
+  }).join('');
+  main.innerHTML = `
+    <div class="fhead">
+      <h1>Ficha ${current.toUpperCase()} <span>·</span> ${f.title}</h1>
+      <div class="stats"><span><b>${f.sets}</b>séries</span><span><b>~${f.min}</b>min</span><span><b id="doneN">0</b>feitas</span><span>${f.sub} · ${f.cycle}</span></div>
+      <div class="brief ${f.warn?'warn':''}">${f.brief}</div>
+      ${RULES}
+    </div>
+    ${items}
+    <div class="sum"><h3>Volume da sessão</h3><table>${f.volume.map(([g,n])=>`<tr><td>${g==='Total'?'<strong>Total</strong>':g}</td><td>${n}</td></tr>`).join('')}</table><p class="note">${f.note}</p></div>
+    <div class="finish">
+      <button id="finish">Finalizar treino</button>
+      <p>Guarda as cargas de hoje como referência “últ.” e limpa os checks pra próxima sessão.</p>
+      <button class="clear" id="clearAll">Apagar todas as cargas salvas</button>
+    </div>`;
+  bind(); progress();
+}
+function bind(){
+  document.querySelectorAll('.set').forEach(s=>{
+    const inp = s.querySelector('input'), chk = s.querySelector('.chk');
+    const k = s.dataset.key+'|', i = s.dataset.i;
+    if(inp) inp.addEventListener('input',()=>save(k+'kg'+i, inp.value));
+    chk.addEventListener('click',()=>toggle(s));
+  });
+  document.querySelectorAll('.media[data-yt]').forEach(m=>{
+    const play=()=>{ const st=+m.dataset.start||0; m.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${m.dataset.yt}?autoplay=1&rel=0&playsinline=1&modestbranding=1${st?'&start='+st:''}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`; m.removeAttribute('data-yt'); };
+    m.addEventListener('click',play);
+    m.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); play(); } });
+  });
+  document.querySelectorAll('.ex').forEach(card=>{
+    const all=[...card.querySelectorAll('.set')];
+    card.classList.toggle('done', all.length>0 && all.every(x=>x.classList.contains('on')));
+  });
+  document.getElementById('finish').onclick=finish;
+  document.getElementById('clearAll').onclick=clearAll;
+}
+function toggle(s){
+  const on = !s.classList.contains('on');
+  s.classList.toggle('on', on);
+  const b=s.querySelector('.chk'); b.textContent=on?'✓':'○'; b.setAttribute('aria-pressed',on);
+  save(s.dataset.key+'|done'+s.dataset.i, on?'1':'0');
+  const card = s.closest('.ex');
+  const all = [...card.querySelectorAll('.set')];
+  card.classList.toggle('done', all.every(x=>x.classList.contains('on')));
+  progress();
+  if(on && +card.dataset.rest>0) startRest(+card.dataset.rest, card);
+}
+function progress(){
+  const all=[...document.querySelectorAll('.set')], done=all.filter(x=>x.classList.contains('on')).length;
+  document.getElementById('bar').style.width=(all.length?done/all.length*100:0)+'%';
+  const n=document.getElementById('doneN'); if(n) n.textContent=done;
+}
+function finish(){
+  if(!confirm('Finalizar a Ficha '+current.toUpperCase()+'? As cargas de hoje viram a referência da próxima sessão.')) return;
+  document.querySelectorAll('.set').forEach(s=>{
+    const k=s.dataset.key+'|', i=s.dataset.i;
+    const v=store(k+'kg'+i);
+    if(v) save(k+'prev'+i, v);
+    drop(k+'kg'+i); drop(k+'done'+i);
+  });
+  clearInterval(tick); rest.classList.remove('show');
+  render(); window.scrollTo({top:0});
+}
+function clearAll(){
+  if(!confirm('Apagar TODAS as cargas e referências salvas, de todas as fichas?')) return;
+  try { Object.keys(localStorage).filter(k=>k.startsWith('fb_')&&!['fb_active','fb_theme','fb_mode'].includes(k)).forEach(k=>localStorage.removeItem(k)); } catch(e){}
+  render();
+}
+
+/* ---------- rest timer ---------- */
+let tick=null;
+const rest=document.getElementById('rest'), restT=document.getElementById('restT'), restNext=document.getElementById('restNext');
+const fmt = s => Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
+function startRest(sec, card){
+  clearInterval(tick);
+  let left=sec;
+  const nxt = card.querySelector('.set:not(.on)') ? card.dataset.next : (card.nextElementSibling?.dataset.next ?? 'Fim da ficha');
+  restNext.textContent = nxt;
+  restT.textContent=fmt(left); rest.classList.add('show');
+  tick=setInterval(()=>{ left--; restT.textContent=fmt(left); if(left<=0){ clearInterval(tick); rest.classList.remove('show'); if(navigator.vibrate) navigator.vibrate([120,60,120]); } },1000);
+}
+document.getElementById('restSkip').onclick=()=>{ clearInterval(tick); rest.classList.remove('show'); };
+
+/* ---------- modes + theme ---------- */
+const mT=document.getElementById('mTreino'), mE=document.getElementById('mEstudo');
+function mode(study){
+  document.body.classList.toggle('study',study);
+  mT.setAttribute('aria-pressed',!study); mE.setAttribute('aria-pressed',study);
+  document.querySelectorAll('.how').forEach(d=>d.open=study);
+  const ru=document.getElementById('rules'); if(ru) ru.open=study;
+  save('mode', study?'study':'train');
+}
+mT.onclick=()=>mode(false); mE.onclick=()=>mode(true);
+document.getElementById('theme').onclick=()=>{
+  const r=document.documentElement, cur=r.getAttribute('data-theme');
+  const dark = cur ? cur==='dark' : matchMedia('(prefers-color-scheme:dark)').matches;
+  const next = dark?'light':'dark'; r.setAttribute('data-theme', next); save('theme', next);
+};
+const savedTheme = store('theme'); if(savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
+current = FICHAS[store('active')] ? store('active') : 'a';
+render();
+if(store('mode')==='study') mode(true);
+</script>
+</body>
+</html>
