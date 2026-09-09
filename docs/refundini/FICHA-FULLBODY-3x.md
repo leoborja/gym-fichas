@@ -1,8 +1,8 @@
-# Full Body 3x/semana — base Refundini (versão pro amigo do Leo)
+# Ficha Homero — Full Body 3x/semana, base Refundini
 
 Montada em 08/09/2026 a partir do método do Laércio Refundini (ver `METODO.md`). Perfil: **avançado**, hipertrofia geral, **3x/semana full body**, academia completa, **ombros já lesionados: nada de desenvolvimento nem carga acima da cabeça**.
 
-Página interativa: https://leoborja.github.io/gym-fichas/fullbody.html (cada exercício tem dois vídeos alternáveis: execução, de qualquer canal, e o Laércio comentando o exercício, já no segundo em que ele começa).
+Página interativa: https://leoborja.github.io/gym-fichas/homero.html (cada exercício tem dois vídeos alternáveis: execução, de qualquer canal, e o Laércio comentando o exercício, já no segundo em que ele começa).
 
 **Dias:** Seg (A) · Qua (B) · Sex (C). Cada músculo recebe 1 exercício por sessão e recupera em 24–48 h (regra dele: "dose baixa recupera em 24 h; o critério é a força na próxima sessão").
 
