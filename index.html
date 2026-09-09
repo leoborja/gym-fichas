@@ -1,336 +1,578 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="light">
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#e23c30">
-<title>Gym Builder — Fichas</title>
+<meta name="theme-color" content="#E23C30">
+<title>Gym Builder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&display=swap">
 <style>
 :root{
---red:#e23c30;--red-d:#c22a20;
---bg:#f4f5f7;--surface:#ffffff;--surface2:#f7f8fa;
---line:#e7e9ee;--txt:#1b1d21;--mut:#6b7078;--soft:#8b9098;
---pill:#eef0f4;--pilltx:#4a4f57;--tech:#fff2e6;--techtx:#b25a12;
---shadow:0 1px 2px rgba(20,22,28,.05),0 6px 18px rgba(20,22,28,.06);
---radius:18px;}
-html[data-theme="dark"]{
---bg:#0c0d0f;--surface:#17181c;--surface2:#1c1e23;
---line:#2a2d33;--txt:#eceef2;--mut:#9a9ea6;--soft:#7c828b;
---pill:#25272d;--pilltx:#c9ccd3;--tech:#2c2013;--techtx:#f0ad5e;
---shadow:0 1px 2px rgba(0,0,0,.4),0 8px 22px rgba(0,0,0,.35);}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-body{margin:0;background:var(--bg);color:var(--txt);
-font:16px/1.6 -apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',Roboto,Arial,sans-serif;
-padding-bottom:70px;-webkit-font-smoothing:antialiased;}
+  --accent:#E23C30; --accent-soft:#FBE7E4;
+  --ok:#1F9D6B; --ok-soft:#DFF3EA;
+  --warn:#B25A12; --warn-soft:#FFF2E6;
+  --bg:#EEF0F3; --surface:#FFFFFF; --surface-2:#F5F6F8; --line:#DFE3E9; --line-2:#EDF0F4;
+  --ink:#15181D; --ink-2:#4B535E; --mute:#7C8592;
+  --rail:#15181D; --rail-ink:#fff;
+  --shadow:0 1px 2px rgba(21,24,29,.05),0 10px 24px -12px rgba(21,24,29,.18);
+  --media:#1B1F26;
+  --display:'Barlow Condensed','Arial Narrow',Impact,sans-serif;
+  --body:'Barlow','Helvetica Neue',Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --accent:#F0483B; --accent-soft:#3A1C19;
+    --ok:#3BC48A; --ok-soft:#173026;
+    --warn:#F0AD5E; --warn-soft:#2C2013;
+    --bg:#0E1013; --surface:#171A1F; --surface-2:#1E2228; --line:#2A2F37; --line-2:#22262D;
+    --ink:#EDEFF3; --ink-2:#B6BCC6; --mute:#7F8794;
+    --rail:#EDEFF3; --rail-ink:#0E1013;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 12px 28px -12px rgba(0,0,0,.6);
+    --media:#0A0C0F;
+  }
+}
+:root[data-theme="dark"]{
+  --accent:#F0483B; --accent-soft:#3A1C19;
+  --ok:#3BC48A; --ok-soft:#173026;
+  --warn:#F0AD5E; --warn-soft:#2C2013;
+  --bg:#0E1013; --surface:#171A1F; --surface-2:#1E2228; --line:#2A2F37; --line-2:#22262D;
+  --ink:#EDEFF3; --ink-2:#B6BCC6; --mute:#7F8794;
+  --rail:#EDEFF3; --rail-ink:#0E1013;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 12px 28px -12px rgba(0,0,0,.6);
+  --media:#0A0C0F;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 var(--body);-webkit-font-smoothing:antialiased;padding-bottom:110px}
+button{font-family:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:560px;margin:0 auto;padding:0 14px}
 
-/* header + abas */
-header{position:sticky;top:0;z-index:50;background:var(--bg);
-backdrop-filter:saturate(1.4) blur(8px);border-bottom:1px solid var(--line);}
-.brandrow{display:flex;align-items:center;justify-content:space-between;
-padding:12px 16px 8px;max-width:820px;margin:0 auto;}
-.brand{font-weight:800;letter-spacing:-.2px;font-size:15px;color:var(--txt);}
-.brand span{color:var(--red);}
-.themebtn{background:var(--surface);border:1px solid var(--line);border-radius:50%;
-width:38px;height:38px;font-size:16px;cursor:pointer;line-height:1;box-shadow:var(--shadow);}
-.tabs{display:flex;gap:8px;overflow-x:auto;padding:4px 16px 12px;max-width:820px;
-margin:0 auto;scrollbar-width:none;}
-.tabs::-webkit-scrollbar{display:none;}
-.tab{flex:0 0 auto;min-width:66px;padding:9px 12px;border:1px solid var(--line);
-border-radius:14px;background:var(--surface);color:var(--mut);text-align:center;
-cursor:pointer;transition:.15s;box-shadow:var(--shadow);}
-.tab b{display:block;font-size:19px;line-height:1.1;color:var(--txt);font-weight:800;}
-.tab small{font-size:10.5px;font-weight:600;letter-spacing:.2px;}
-.tab.active{background:var(--red);border-color:var(--red);box-shadow:0 6px 16px rgba(226,60,48,.35);}
-.tab.active b,.tab.active small{color:#fff;}
+/* header */
+header{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px) saturate(1.3);border-bottom:1px solid var(--line)}
+.top{display:flex;align-items:center;justify-content:space-between;padding:12px 0 8px}
+.brand{font:800 18px/1 var(--display);letter-spacing:.04em;text-transform:uppercase}
+.brand em{font-style:normal;color:var(--accent)}
+.tools{display:flex;gap:6px}
+.iconbtn{width:34px;height:34px;border-radius:9px;border:1px solid var(--line);background:var(--surface);color:var(--ink);display:grid;place-items:center;font-size:14px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--surface)}
+.seg button{border:0;background:transparent;color:var(--mute);padding:0 12px;height:32px;font-weight:600;font-size:13px}
+.seg button[aria-pressed="true"]{background:var(--rail);color:var(--rail-ink)}
+.tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:2px 0 10px}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;border:1px solid var(--line);background:var(--surface);color:var(--mute);border-radius:10px;padding:6px 12px 6px 10px;display:flex;align-items:baseline;gap:8px}
+.tab b{font:800 20px/1 var(--display);color:var(--ink)}
+.tab small{font-size:12px;font-weight:600;letter-spacing:.02em}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.tab[aria-selected="true"] b{color:#fff}
+.progress{height:3px;background:var(--line-2)}
+.progress i{display:block;height:100%;background:var(--ok);width:0;transition:width .3s}
 
-main{max-width:820px;margin:0 auto;padding:16px;}
-.ficha{display:none;}
-.ficha.active{display:block;animation:f .22s ease;}
-@keyframes f{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+/* ficha head */
+.fhead{padding:18px 0 4px;display:grid;gap:6px}
+.fhead h1{margin:0;font:800 34px/1 var(--display);text-transform:uppercase;letter-spacing:.01em;text-wrap:balance}
+.fhead h1 span{color:var(--accent)}
+.stats{display:flex;flex-wrap:wrap;gap:6px 18px;color:var(--mute);font-size:13px;font-variant-numeric:tabular-nums}
+.stats b{color:var(--ink);font:700 18px/1 var(--display);margin-right:3px}
+.brief{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14px;color:var(--ink-2);margin-top:10px}
+.brief strong{color:var(--ink)}
+.brief.warn{border-color:var(--warn);background:var(--warn-soft);color:var(--ink)}
+.brief.warn strong{color:var(--warn)}
 
-.ficha-title{font-size:25px;font-weight:800;letter-spacing:-.4px;margin:6px 2px 6px;line-height:1.2;}
-p.meta{color:var(--mut);font-size:13.5px;margin:0 2px 4px;}
-p.meta strong{color:var(--soft);font-weight:600;}
+/* blocks */
+.block{margin:22px 0 10px;display:flex;align-items:center;gap:10px;font:700 13px/1 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.block:after{content:"";flex:1;height:1px;background:var(--line)}
+.block b{color:var(--accent)}
 
-.block-label{display:flex;align-items:center;gap:12px;margin:26px 2px 12px;
-color:var(--red);font-weight:800;font-size:13px;letter-spacing:.6px;text-transform:uppercase;}
-.block-label:before,.block-label:after{content:"";height:1px;background:var(--line);flex:1;}
-.block-label span{flex:0 0 auto;}
+/* exercise card */
+.ex{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);margin-bottom:10px;overflow:hidden;position:relative}
+.ex.done{border-color:var(--ok)}
+.ex.done .exhead{background:var(--ok-soft)}
+.exhead{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:10px;align-items:start;padding:12px 12px 10px}
+.rail{width:34px;height:34px;border-radius:9px;background:var(--rail);color:var(--rail-ink);display:grid;place-items:center;font:800 18px/1 var(--display)}
+.rail.warm{background:var(--surface-2);color:var(--mute);font-size:14px}
+.title{min-width:0}
+.title h2{margin:0;font:700 19px/1.15 var(--display);letter-spacing:.01em}
+.title .sub{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.chip{font-size:11.5px;font-weight:600;letter-spacing:.02em;padding:2px 7px;border-radius:6px;background:var(--surface-2);color:var(--ink-2);border:1px solid var(--line-2)}
+.chip.tech{background:var(--accent-soft);color:var(--accent);border-color:transparent}
+.chip.care{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+.rx{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;max-width:40%}
+.rx b{display:block;font:800 26px/1 var(--display);letter-spacing:-.01em}
+.rx small{display:block;color:var(--mute);font-size:12px;margin-top:3px}
+.rx small span{color:var(--ink);font-weight:600}
 
-/* cartão de exercício */
-.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
-box-shadow:var(--shadow);padding:16px 16px 4px;margin:0 0 14px;}
-.card-head{display:flex;align-items:center;gap:12px;}
-.card-head.nonum{gap:0;}
-.num{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:var(--red);
-color:#fff;font-weight:800;font-size:15px;display:grid;place-items:center;
-box-shadow:0 3px 8px rgba(226,60,48,.4);}
-.card-head h2{margin:0;font-size:17px;font-weight:700;letter-spacing:-.2px;line-height:1.3;}
-.pills{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 4px;}
-.pill{background:var(--pill);color:var(--pilltx);padding:5px 11px;border-radius:999px;
-font-size:12.5px;font-weight:600;white-space:nowrap;}
-.pill.primary{background:var(--red);color:#fff;box-shadow:0 3px 9px rgba(226,60,48,.3);}
-.pill.tech{background:var(--tech);color:var(--techtx);}
-.card-body{padding:4px 0 12px;}
-.card-body p{margin:9px 0;font-size:14.5px;color:var(--txt);}
-.card-body p:first-child{margin-top:6px;}
-strong{color:var(--txt);font-weight:700;}
-em{color:var(--mut);}
-code{background:var(--pill);padding:1px 6px;border-radius:6px;font-size:13px;color:var(--red);}
-h3{font-size:13px;color:var(--red);margin:16px 0 8px;text-transform:uppercase;letter-spacing:.4px;}
-p.note{color:var(--mut);font-style:italic;font-size:13px;}
+/* superset rows */
+.row{display:grid;grid-template-columns:22px 1fr;gap:8px;align-items:start;padding:10px 12px;border-top:1px solid var(--line-2)}
+.row .l{font:800 14px/22px var(--display);color:var(--accent);text-align:center}
+.row .n{font-weight:600;font-size:14.5px;line-height:1.3}
+.row .n small{display:block;color:var(--mute);font-weight:500;font-size:12.5px;margin-top:1px}
 
-.callout{background:var(--surface2);border:1px solid var(--line);border-left:3px solid var(--soft);
-padding:12px 14px;border-radius:12px;margin:12px 0;font-size:14px;color:var(--txt);}
-.callout.warn{border-left-color:var(--red);}
+/* set logger */
+.sets{display:grid;gap:6px;padding:0 12px 12px}
+.row + .sets{padding-top:0}
+.set{display:grid;grid-template-columns:38px minmax(0,1fr) 64px;align-items:stretch;border:1px solid var(--line);border-radius:12px;background:var(--surface-2);height:58px;overflow:hidden}
+.set .s{display:grid;place-items:center;font:800 15px/1 var(--display);color:var(--mute);border-right:1px solid var(--line-2)}
+.set .kg{display:flex;align-items:center;gap:6px;padding:0 6px 0 10px;min-width:0}
+.set .kg input{border:0;background:transparent;width:3.2em;flex:0 0 auto;min-width:0;font:800 26px/1 var(--display);color:var(--ink);padding:0;font-variant-numeric:tabular-nums}
+.set .kg input::placeholder{color:var(--mute);opacity:.55}
+.set .kg .u{font-size:12px;font-weight:600;color:var(--mute);letter-spacing:.04em}
+.set .kg .last{margin-left:auto;font-size:11.5px;color:var(--mute);white-space:nowrap;font-variant-numeric:tabular-nums}
+.set .chk{border:0;border-left:1px solid var(--line);background:var(--surface);color:var(--mute);font-size:22px;display:grid;place-items:center;cursor:pointer;transition:background .15s,color .15s}
+.set .chk:active{transform:scale(.96)}
+.set.on{border-color:var(--ok);background:var(--ok-soft)}
+.set.on .s{color:var(--ok)}
+.set.on .kg input{color:var(--ok)}
+.set.on .chk{background:var(--ok);color:#fff;border-left-color:var(--ok)}
 
-.tbl-wrap{overflow-x:auto;margin:10px 0;border:1px solid var(--line);border-radius:12px;}
-table{border-collapse:collapse;width:100%;font-size:14px;}
-th{background:var(--surface2);color:var(--soft);padding:9px 10px;text-align:left;
-font-weight:700;font-size:11.5px;text-transform:uppercase;letter-spacing:.4px;
-border-bottom:1px solid var(--line);}
-td{padding:9px 10px;border-bottom:1px solid var(--line);}
-tr:last-child td{border-bottom:none;}
-td.exname{font-weight:600;}
-input.load{width:100%;min-width:54px;background:var(--surface2);border:1px solid var(--line);
-border-radius:9px;color:var(--red);padding:9px 4px;text-align:center;font-size:15px;font-weight:800;}
-input.load:focus{outline:none;border-color:var(--red);background:var(--surface);}
+/* how-to */
+.how{border-top:1px solid var(--line-2)}
+.how > summary{list-style:none;display:flex;align-items:center;gap:8px;padding:9px 12px;font-size:13px;font-weight:600;color:var(--ink-2);cursor:pointer;user-select:none}
+.how > summary::-webkit-details-marker{display:none}
+.how > summary .pl{width:22px;height:22px;border-radius:6px;background:var(--rail);color:var(--rail-ink);display:grid;place-items:center;font-size:9px}
+.how > summary .chev{margin-left:auto;color:var(--mute);transition:transform .2s}
+.how[open] > summary .chev{transform:rotate(180deg)}
+.howbody{padding:0 12px 12px;display:grid;gap:10px}
+.media{aspect-ratio:16/9;border-radius:10px;background:var(--media);position:relative;overflow:hidden;display:grid;place-items:center;color:#fff;cursor:pointer}
+.media img,.media iframe{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0}
+.media img{opacity:.85}
+.media .tag{position:absolute;left:10px;top:9px;font:700 11px/1 var(--display);letter-spacing:.1em;text-transform:uppercase;background:rgba(0,0,0,.45);padding:5px 8px;border-radius:5px;backdrop-filter:blur(4px)}
+.media .play{width:48px;height:48px;border-radius:50%;background:var(--accent);display:grid;place-items:center;position:relative;box-shadow:0 6px 18px rgba(226,60,48,.45)}
+.media .play:after{content:"";border-left:14px solid #fff;border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:4px}
+.media .name{position:absolute;bottom:9px;left:10px;right:10px;font:700 13px/1.2 var(--display);letter-spacing:.02em;text-shadow:0 1px 6px rgba(0,0,0,.8)}
+.cues{margin:0;padding:0;list-style:none;display:grid;gap:5px}
+.cues li{display:grid;grid-template-columns:18px 1fr;gap:6px;font-size:14px;color:var(--ink-2)}
+.cues li:before{content:"→";color:var(--accent);font-weight:700}
+.why{font-size:13px;color:var(--mute);border-left:2px solid var(--line);padding-left:10px;margin:0}
+.techbox{background:var(--accent-soft);color:var(--ink);border-radius:8px;padding:8px 10px;font-size:13.5px}
+.techbox b{color:var(--accent)}
+.carebox{background:var(--warn-soft);color:var(--ink);border-radius:8px;padding:8px 10px;font-size:13.5px}
+.carebox b{color:var(--warn)}
+body.study .how > summary .chev{display:none}
 
-footer{text-align:center;color:var(--mut);font-size:12.5px;padding:26px 16px;max-width:820px;margin:0 auto;}
-footer button{background:var(--surface);color:var(--mut);border:1px solid var(--line);
-border-radius:10px;padding:9px 16px;font-size:13px;cursor:pointer;box-shadow:var(--shadow);margin-top:10px;}
+/* summary + finish */
+.sum{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-top:18px}
+.sum h3{margin:0 0 8px;font:700 15px/1 var(--display);letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.sum table{width:100%;border-collapse:collapse;font-size:13.5px;font-variant-numeric:tabular-nums}
+.sum td{padding:6px 0;border-top:1px solid var(--line-2)}
+.sum td:last-child{text-align:right;font:700 16px/1 var(--display)}
+.sum tr:first-child td{border-top:0}
+.sum .note{font-size:12.5px;color:var(--mute);margin:8px 0 0}
+.finish{margin:14px 0 0;display:grid;gap:8px}
+.finish button{border:0;border-radius:12px;padding:14px;font:700 17px/1 var(--display);letter-spacing:.06em;text-transform:uppercase;background:var(--rail);color:var(--rail-ink)}
+.finish p{margin:0;text-align:center;font-size:12.5px;color:var(--mute)}
+.finish .clear{background:transparent;border:1px solid var(--line);color:var(--mute);font:600 13px/1 var(--body);text-transform:none;letter-spacing:0;padding:10px}
+
+/* rest timer */
+.rest{position:fixed;left:0;right:0;bottom:0;z-index:40;transform:translateY(110%);transition:transform .25s;padding:0 14px}
+.rest.show{transform:none}
+.rest .in{max-width:532px;margin:0 auto 12px;padding:12px 14px;background:var(--rail);color:var(--rail-ink);border-radius:14px;display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:12px;box-shadow:0 18px 40px -10px rgba(0,0,0,.45)}
+.rest .lbl{font-size:12px;letter-spacing:.1em;text-transform:uppercase;opacity:.7;font-weight:600}
+.rest .next{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rest .t{font:800 38px/1 var(--display);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.rest button{border:1px solid color-mix(in srgb,var(--rail-ink) 30%,transparent);background:transparent;color:var(--rail-ink);border-radius:9px;padding:8px 12px;font-weight:600;font-size:13px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
 <header>
-  <div class="brandrow">
-    <div class="brand">GYM BUILDER <span>· ARNOLD</span></div>
-    <button class="themebtn" id="themebtn" onclick="toggleTheme()">🌙</button>
+  <div class="wrap">
+    <div class="top">
+      <div class="brand">Gym <em>Builder</em></div>
+      <div class="tools">
+        <div class="seg" role="group" aria-label="Modo">
+          <button id="mTreino" aria-pressed="true">Treino</button>
+          <button id="mEstudo" aria-pressed="false">Estudo</button>
+        </div>
+        <button class="iconbtn" id="theme" title="Tema">◐</button>
+      </div>
+    </div>
+    <div class="tabs" role="tablist" id="tabs"></div>
   </div>
-  <div class="tabs"><div class="tab" data-f="a"><b>A</b><small>Peito · Ombro</small></div><div class="tab" data-f="b"><b>B</b><small>Costas · Tríceps</small></div><div class="tab" data-f="c"><b>C</b><small>Perna · Bíceps</small></div><div class="tab" data-f="d"><b>D</b><small>Peito · Ombro</small></div><div class="tab" data-f="e"><b>E</b><small>Perna · Abs</small></div></div>
+  <div class="progress"><i id="bar"></i></div>
 </header>
-<main>
-<section class="ficha" id="ficha-a"><h1 class="ficha-title">Ficha A — Peito SUPERIOR + Ombro (Pesado)</h1>
-<p class="meta"><strong>Mesociclo:</strong> Acumulação | <strong>Semana:</strong> 1/5 | <strong>Gerada em:</strong> 2026-07-03<br><strong>Duração estimada:</strong> ~38 min | <strong>Princípios:</strong> Peito superior primeiro, pressão no SUPINO SENTADO NO CROSS (cabos, ajustável, sem forçar a lombar), tri-sets agonistas, composto principal standalone, lateral 3D.</p>
-<div class="callout">🔥 Novo ciclo, Leonardo! Peito superior é a moldura do peitoral — é o que faz o peito parecer uma armadura. Nada de barra nem máquina que machucam sua lombar: o <strong>supino sentado no cross</strong> é o seu press (tensão constante, ângulo ajustável, coluna protegida). <strong>Complete TODO o peito antes de tocar em ombro.</strong></div>
-<article class="card"><div class="card-head nonum"><h2>Aquecimento: Manguito rotador externo</h2></div><div class="pills"><span class="pill primary">3 × 15</span><span class="pill">Sem descanso entre lados</span></div><div class="card-body">
-<p>Obrigatório antes de peito/ombro. Cotovelo a 90° colado ao corpo, rotação externa com halter leve ou elástico. Isso é seguro pro ombro — não é treino, é seguro de vida. Pula e paga com lesão.</p>
-</div></article>
-<div class="block-label"><span>🎯 BLOCO PEITO (superior)</span></div>
-<article class="card"><div class="card-head"><span class="num">1</span><h2>Supino sentado no cross — INCLINADO</h2></div><div class="pills"><span class="pill primary">4 × 8-10</span><span class="pill">Descanso: 90s</span><span class="pill tech">SEM superset — foco TOTAL na carga</span></div><div class="card-body">
-<p>O composto principal do dia, no cross com os cabos e o banco INCLINADO (30-40°) — porção clavicular do peito. Tensão constante do início ao fim, coluna apoiada, zero dor na lombar. Empurrar os cabos pra frente/cima juntando na linha do peito alto, descer 3s controlando, explodir.</p>
-<p><strong>4ª série — REST-PAUSE:</strong> 8 reps → descansar 15&quot; → mais 5 reps com o mesmo peso.</p>
-<p>Bateu 10 reps limpas nas 4 séries → sobe a carga na próxima sessão. A última gota de força do peito superior.</p>
-<p>Bateu 10 reps limpas nas 4 séries? Sobe a carga na próxima sessão.</p>
-</div></article>
-<article class="card"><div class="card-head"><span class="num">2</span><h2>Crucifixo inclinado halteres (A) + Supino no cross RETO (B) — SUPERSET</h2></div><div class="pills"><span class="pill primary">3 × 10-12 + 10-12</span><span class="pill">Descanso: 75s após o par</span></div><div class="card-body">
-<p>Dois PADRÕES diferentes, não dois flys por fazer: um estica o peito, o outro empurra num ângulo novo. Isso é o que arredonda o peitoral inteiro com viés no superior.</p>
-<div class="tbl-wrap"><table><thead><tr><th>#</th><th>Exercício</th><th>Reps</th><th>Papel</th></tr></thead><tbody><tr><td>A</td><td>Crucifixo inclinado com halteres</td><td>10-12</td><td><strong>Estica</strong> o peito superior (fase alongada — onde mais cresce). Aqui 20kg sobra</td></tr><tr><td>B</td><td>Supino sentado no cross — RETO</td><td>10-12</td><td><strong>Empurra</strong> em ângulo reto — pega peito médio/inferior que o inclinado não pega</td></tr></tbody></table></div>
-<p><strong>Crucifixo inclinado</strong>: banco 30°, abertura ampla, cotovelos levemente flexionados, descer controlando o alongamento, squeeze 1-2s no topo.<br><strong>Supino no cross reto</strong>: mesmo cross do exercício 1, agora com o banco no ângulo reto/plano e cabos na altura do peito. Empurrar à frente, descer 2-3s, explodir. Coluna sempre apoiada.</p>
-</div></article>
-<article class="card"><div class="card-head"><span class="num">3</span><h2>TRI-SET: Pullover + Canivete + Desenvolvimento na máquina 🔥🔥🔥</h2></div><div class="pills"><span class="pill primary">3 × 12 + 15 + 8-10</span><span class="pill">Descanso: 75s após o trio</span><span class="pill">transição peito→ombro</span></div><div class="card-body">
-<p>Trio esperto pra adiantar o treino: cada exercício pega uma área diferente (peito/dorsal → abs → ombro), então <strong>nenhum fatiga o deltóide</strong> — o desenvolvimento chega FRESCO e você não perde carga no press. Fecha o peito e já abre o ombro na mesma corrida.</p>
-<div class="tbl-wrap"><table><thead><tr><th>#</th><th>Exercício</th><th>Reps</th><th>Área</th></tr></thead><tbody><tr><td>A</td><td>Pullover com halter</td><td>12</td><td>Peito superior / caixa torácica / dorsal</td></tr><tr><td>B</td><td>Canivete</td><td>15</td><td>Abdômen (reto)</td></tr><tr><td>C</td><td>Desenvolvimento na máquina</td><td>8-10</td><td>Ombro (anterior + medial) — <strong>pesado</strong></td></tr></tbody></table></div>
-<p><strong>Pullover</strong>: perpendicular no banco, quadril baixo, halter bem atrás da cabeça — alongamento máximo, voltar contraindo o peito.<br><strong>Canivete</strong>: pernas e tronco sobem juntos, sem impulso.<br><strong>Desenvolvimento</strong>: carrega pesado (nada de halter leve). Descer abaixo da linha do queixo pra ROM completo, subir sem travar o cotovelo. Mesmo dentro do tri-set, é o construtor pesado do ombro — não alivie a carga.</p>
-<p><strong>3ª série do desenvolvimento — DROP SET:</strong> 8-10 reps → reduzir 30% → falha.</p>
-</div></article>
-<div class="block-label"><span>🎯 BLOCO OMBRO (continuação)</span></div>
-<article class="card"><div class="card-head"><span class="num">4</span><h2>Elevação lateral halteres (A) + Face pull (B) — SUPERSET</h2></div><div class="pills"><span class="pill primary">3 × 15 + 15</span><span class="pill">Descanso: 60s após o par</span></div><div class="card-body">
-<p>🔥 <strong>MEDIAL + POSTERIOR</strong> — as duas cabeças que os pressings NÃO pegam. Seus 3 pressings (supino no cross, desenvolvimento, Arnold) já martelam o deltóide anterior; aqui a gente cobre o resto.</p>
-<p><strong>Elevação lateral</strong>: dedo mínimo levemente pra cima, &quot;derramar água da jarra&quot;, elevar até o paralelo/acima. Sem balançar o corpo — o deltóide é que trabalha. É a cabeça que dá o ombro &quot;3D&quot;.<br><strong>Face pull</strong>: corda na polia alta, puxar pra cara com os cotovelos ALTOS, squeeze 2s. Deltóide posterior + saúde da articulação.</p>
-<div class="tbl-wrap"><table><thead><tr><th>Exercício</th><th>Reps</th></tr></thead><tbody><tr><td>Elevação lateral com halteres</td><td>15</td></tr><tr><td>Face pull</td><td>15</td></tr></tbody></table></div>
-</div></article>
-<article class="card"><div class="card-head"><span class="num">5</span><h2>Elevação lateral inclinada (A) + Elevação posterior curvado (B) — SUPERSET</h2></div><div class="pills"><span class="pill primary">3 × 12 + 12</span><span class="pill">Descanso: 45s após o par</span></div><div class="card-body">
-<p>🔥 <strong>MEDIAL + POSTERIOR (2ª dose)</strong> — mesma lógica, ângulos novos. A lateral segue prioridade (é seu alvo 3D), mas quebrada por posterior no meio pra não virar monotonia.</p>
-<p><strong>Lateral inclinada (leaning)</strong>: apoiar num poste/máquina e inclinar o corpo, halter na mão de fora — isola o lateral PURO, sem trapaça, tensão desde o início do movimento.<br><strong>Posterior curvado</strong>: tronco inclinado à frente, abrir os halteres pros lados, squeeze 2s no topo. Fecha o deltóide posterior.</p>
-<div class="tbl-wrap"><table><thead><tr><th>Exercício</th><th>Reps</th></tr></thead><tbody><tr><td>Elevação lateral inclinada</td><td>12</td></tr><tr><td>Elevação posterior curvado</td><td>12</td></tr></tbody></table></div>
-</div></article>
-<article class="card"><div class="card-head nonum"><h2>Resumo</h2></div><div class="card-body">
-<div class="tbl-wrap"><table><thead><tr><th>Grupo</th><th>Séries</th><th>Exercícios</th></tr></thead><tbody><tr><td>Peito (completo, viés superior)</td><td>13</td><td>Supino no cross (inclinado + reto), crucifixo inclinado, pullover</td></tr><tr><td>Ombro</td><td>15</td><td>Desenvolvimento (no tri-set), 2× (lateral + posterior), face pull</td></tr><tr><td>Abs</td><td>3</td><td>Canivete</td></tr><tr><td><strong>Total</strong></td><td><strong>31 séries</strong> (+ aquecimento)</td><td><strong>~38 min</strong></td></tr></tbody></table></div>
-<p class="note"><em>Peito: 1 padrão de empurrar horizontal (press) + esticar (crucifixo) + empurrar vertical (mergulho) + caixa torácica (pullover) = peito inteiro, viés superior. Ombro: lateral direto = 6 séries aqui (+3 na Ficha D = ~9/semana, alvo 3D mantido), agora intercalado com posterior.</em></p>
-</div></article>
-<article class="card"><div class="card-head nonum"><h2>Registro de Cargas</h2></div><div class="card-body">
-<div class="tbl-wrap"><table><thead><tr><th>Exercício</th><th>S1</th><th>S2</th><th>S3</th><th>S4</th></tr></thead><tbody><tr><td class="exname">Supino no cross inclinado</td><td><input class="load" inputmode="decimal" data-key="a|Supino no cross inclinado|S1"></td><td><input class="load" inputmode="decimal" data-key="a|Supino no cross inclinado|S2"></td><td><input class="load" inputmode="decimal" data-key="a|Supino no cross inclinado|S3"></td><td><input class="load" inputmode="decimal" data-key="a|Supino no cross inclinado|S4"></td></tr><tr><td class="exname">Crucifixo inclinado halteres</td><td><input class="load" inputmode="decimal" data-key="a|Crucifixo inclinado halteres|S1"></td><td><input class="load" inputmode="decimal" data-key="a|Crucifixo inclinado halteres|S2"></td><td><input class="load" inputmode="decimal" data-key="a|Crucifixo inclinado halteres|S3"></td><td><input class="load" inputmode="decimal" data-key="a|Crucifixo inclinado halteres|S4"></td></tr><tr><td class="exname">Supino no cross reto</td><td><input class="load" inputmode="decimal" data-key="a|Supino no cross reto|S1"></td><td><input class="load" inputmode="decimal" data-key="a|Supino no cross reto|S2"></td><td><input class="load" inputmode="decimal" data-key="a|Supino no cross reto|S3"></td><td><input class="load" inputmode="decimal" data-key="a|Supino no cross reto|S4"></td></tr><tr><td class="exname">Pullover halter</td><td><input class="load" inputmode="decimal" data-key="a|Pullover halter|S1"></td><td><input class="load" inputmode="decimal" data-key="a|Pullover halter|S2"></td><td><input class="load" inputmode="decimal" data-key="a|Pullover halter|S3"></td><td><input class="load" inputmode="decimal" data-key="a|Pullover halter|S4"></td></tr><tr><td class="exname">Canivete</td><td><input class="load" inputmode="decimal" data-key="a|Canivete|S1"></td><td><input class="load" inputmode="decimal" data-key="a|Canivete|S2"></td><td><input class="load" inputmode="decimal" data-key="a|Canivete|S3"></td><td><input class="load" inputmode="decimal" data-key="a|Canivete|S4"></td></tr><tr><td class="exname">Desenvolvimento máquina</td><td><input class="load" inputmode="decimal" data-key="a|Desenvolvimento máquina|S1"></td><td><input class="load" inputmode="decimal" data-key="a|Desenvolvimento máquina|S2"></td><td><input class="load" inputmode="decimal" data-key="a|Desenvolvimento máquina|S3"></td><td><input class="load" inputmode="decimal" data-key="a|Desenvolvimento máquina|S4"></td></tr><tr><td class="exname">Elevação lateral halteres</td><td><input class="load" inputmode="decimal" data-key="a|Elevação lateral halteres|S1"></td><td><input class="load" inputmode="decimal" data-key="a|Elevação lateral halteres|S2"></td><td><input class="load" inputmode="decimal" data-key="a|Elevação lateral halteres|S3"></td><td><input class="load" inputmode="decimal" data-key="a|Elevação lateral halteres|S4"></td></tr><tr><td class="exname">Face pull</td><td><input class="load" inputmode="decimal" data-key="a|Face pull|S1"></td><td><input class="load" inputmode="decimal" data-key="a|Face pull|S2"></td><td><input class="load" inputmode="decimal" data-key="a|Face pull|S3"></td><td><input class="load" inputmode="decimal" data-key="a|Face pull|S4"></td></tr><tr><td class="exname">Elevação lateral inclinada</td><td><input class="load" inputmode="decimal" data-key="a|Elevação lateral inclinada|S1"></td><td><input class="load" inputmode="decimal" data-key="a|Elevação lateral inclinada|S2"></td><td><input class="load" inputmode="decimal" data-key="a|Elevação lateral inclinada|S3"></td><td><input class="load" inputmode="decimal" data-key="a|Elevação lateral inclinada|S4"></td></tr><tr><td class="exname">Elevação posterior curvado</td><td><input class="load" inputmode="decimal" data-key="a|Elevação posterior curvado|S1"></td><td><input class="load" inputmode="decimal" data-key="a|Elevação posterior curvado|S2"></td><td><input class="load" inputmode="decimal" data-key="a|Elevação posterior curvado|S3"></td><td><input class="load" inputmode="decimal" data-key="a|Elevação posterior curvado|S4"></td></tr></tbody></table></div>
-</div></article></section><section class="ficha" id="ficha-b"><h1 class="ficha-title">Ficha B — Costas + Tríceps</h1>
-<p class="meta"><strong>Mesociclo:</strong> Acumulação | <strong>Semana:</strong> 1/5 | <strong>Gerada em:</strong> 2026-07-03<br><strong>Duração estimada:</strong> ~40 min | <strong>Princípios:</strong> TODO o bloco de costas primeiro → TODO o bloco de tríceps depois (não alternar grupos). Supersets agonistas costas+costas e tríceps+tríceps, 1 tri-set de tríceps, técnicas intensificadoras.</p>
-<div class="callout">Costas e tríceps só treinam UMA vez na semana — sessão DENSA. Faz TODA a costas primeiro (com o dorsal fresco), depois ataca o tríceps. Bônus: as puxadas usam bíceps, não tríceps — então seu tríceps chega inteiro pro bloco dele.</div>
-<div class="block-label"><span>🎯 BLOCO COSTAS (tudo primeiro)</span></div>
-<article class="card"><div class="card-head"><span class="num">1</span><h2>Puxada frontal aberta (A) + Remada baixa triângulo (B) — SUPERSET</h2></div><div class="pills"><span class="pill primary">3 × 12 + 10</span><span class="pill">Descanso: 60s após o par</span></div><div class="card-body">
-<p>🔥 <strong>COSTAS+COSTAS</strong> — largura (puxada) + espessura (remada). Os dois pilares do dorsal.</p>
-<p><strong>Puxada aberta</strong>: puxar até a clavícula, retrair escápulas no fim, controlar a subida (2s excêntrico). Constrói LARGURA — o &quot;V&quot;.<br><strong>Remada baixa triângulo</strong>: puxar pro abdômen, peito estufado, NÃO usar o lombar. Cotovelos rentes ao corpo, apertar a escápula no fim. Constrói ESPESSURA.</p>
-<div class="tbl-wrap"><table><thead><tr><th>Exercício</th><th>Reps</th></tr></thead><tbody><tr><td>Puxada frontal aberta</td><td>12</td></tr><tr><td>Remada baixa triângulo</td><td>10</td></tr></tbody></table></div>
-</div></article>
-<article class="card"><div class="card-head"><span class="num">2</span><h2>Remada baixa com barra reta (A) + Puxada supinada (B) — SUPERSET</h2></div><div class="pills"><span class="pill primary">3 × 10 + 12</span><span class="pill">Descanso: 60s após o par</span></div><div class="card-body">
-<p>🔥 <strong>COSTAS+COSTAS</strong> — espessura PESADA (remada barra reta) + largura/dorsal inferior (puxada supinada).</p>
-<p><strong>Remada baixa barra reta</strong>: na polia baixa, pegada PRONADA e ABERTA (diferente da triângulo do ex. 1 — aqui pega mais costas alta, trapézio médio e posterior de ombro). Carrega DE VERDADE — costas aguentam muito peso, resolve o limite do halter de 20kg. Peito estufado, puxar pro abdômen/baixo do peito, apertar a escápula 1s, NÃO usar o lombar. A cada série aumentar o peso.<br><strong>Puxada supinada</strong>: pegada FECHADA e SUPINADA (mãos viradas pra você). Puxar a barra até o peito alto, cotovelos rentes ao corpo — ataca o dorsal INFERIOR e traz mais amplitude. Ângulo totalmente diferente da puxada aberta do ex. 1.</p>
-<div class="tbl-wrap"><table><thead><tr><th>Exercício</th><th>Reps</th></tr></thead><tbody><tr><td>Remada baixa barra reta (pegada aberta)</td><td>10</td></tr><tr><td>Puxada supinada (pegada fechada)</td><td>12</td></tr></tbody></table></div>
-</div></article>
-<article class="card"><div class="card-head"><span class="num">3</span><h2>Barra fixa pegada aberta — FINISHER COSTAS</h2></div><div class="pills"><span class="pill primary">2 × Máx</span><span class="pill">Descanso: 60s</span></div><div class="card-body">
-<p>Favorito #1 do Arnold pra largura. Fecha o bloco de costas com TUDO que sobrou. Pegada aberta, queixo passa a barra, descer com controle.<br>&quot;A última rep — essa é a que constrói campeões!&quot;</p>
-</div></article>
-<div class="block-label"><span>🎯 BLOCO TRÍCEPS (tudo depois)</span></div>
-<article class="card"><div class="card-head"><span class="num">4</span><h2>TRI-SET tríceps 🔥🔥🔥</h2></div><div class="pills"><span class="pill primary">3 × 10 + 15 + Máx</span><span class="pill">Descanso: 75s após o trio</span></div><div class="card-body">
-<p>As 3 cabeças do tríceps em sequência: composto pesado → isolador → peso corporal até a falha. Tríceps chega fresco aqui (as costas usaram bíceps, não ele).</p>
-<div class="tbl-wrap"><table><thead><tr><th>#</th><th>Exercício</th><th>Reps</th><th>Cabeça</th></tr></thead><tbody><tr><td>A</td><td>Tríceps testa barra EZ</td><td>10</td><td>Longa (descer atrás da cabeça)</td></tr><tr><td>B</td><td>Tríceps pulley corda</td><td>15</td><td>Lateral/medial (abrir as mãos embaixo)</td></tr><tr><td>C</td><td>Mergulho no banco</td><td>Máx</td><td>Todas (pés à frente pra dificultar)</td></tr></tbody></table></div>
-<p><strong>Testa EZ</strong>: descer ATRÁS da cabeça, não na testa — favorito do Arnold pra cabeça longa.<br><strong>Mergulho no banco</strong>: mãos no banco atrás, pés à frente, descer 90° no cotovelo. Até a falha — TUDO que sobrou.</p>
-</div></article>
-<article class="card"><div class="card-head"><span class="num">5</span><h2>Tríceps coice halter (A) + Prancha lateral (B) — SUPERSET</h2></div><div class="pills"><span class="pill primary">3 × 12 cada braço + 45-60s cada lado</span><span class="pill">Descanso: 45s após o par</span><span class="pill tech">Drop set no coice na última</span></div><div class="card-body">
-<p>🔥 <strong>TRÍCEPS + CORE</strong> — áreas diferentes, dá pra fazer junto sem interferência e ainda adianta o treino.</p>
-<p><strong>Coice halter</strong>: cotovelo alinhado ao corpo, estender pra trás, contração máxima no topo. Unilateral = foco total. O halter de 20kg dá conta — é isolador.<br><strong>Última série do coice — DROP SET:</strong> 12 reps → reduzir 30% → falha.<br><strong>Prancha lateral</strong>: segurar o MÁXIMO que aguentar (mais de 30s, até a falha de sustentação). Quadril ALTO, corpo em linha reta, oblíquos e core anti-rotação. Alterna os lados a cada série.</p>
-<div class="tbl-wrap"><table><thead><tr><th>Exercício</th><th>Reps</th></tr></thead><tbody><tr><td>Tríceps coice halter</td><td>12 cada braço</td></tr><tr><td>Prancha lateral</td><td>45-60s cada lado (ou até a falha)</td></tr></tbody></table></div>
-</div></article>
-<article class="card"><div class="card-head nonum"><h2>Resumo</h2></div><div class="card-body">
-<div class="tbl-wrap"><table><thead><tr><th>Grupo</th><th>Séries</th><th>Exercícios</th></tr></thead><tbody><tr><td>Costas</td><td>14</td><td>Puxada aberta, remada triângulo, remada barra reta, puxada supinada, barra fixa</td></tr><tr><td>Tríceps</td><td>12</td><td>Tri-set (testa/corda/mergulho), coice</td></tr><tr><td>Abs</td><td>3</td><td>Prancha lateral</td></tr><tr><td><strong>Total</strong></td><td><strong>29 séries</strong></td><td><strong>~40 min</strong></td></tr></tbody></table></div>
-<p class="note"><em>Ordem: todo o dorsal fresco primeiro (largura + espessura + isolador + finisher), depois todo o tríceps. Sem ping-pong entre estações.</em></p>
-</div></article>
-<article class="card"><div class="card-head nonum"><h2>Registro de Cargas</h2></div><div class="card-body">
-<div class="tbl-wrap"><table><thead><tr><th>Exercício</th><th>S1</th><th>S2</th><th>S3</th></tr></thead><tbody><tr><td class="exname">Puxada frontal aberta</td><td><input class="load" inputmode="decimal" data-key="b|Puxada frontal aberta|S1"></td><td><input class="load" inputmode="decimal" data-key="b|Puxada frontal aberta|S2"></td><td><input class="load" inputmode="decimal" data-key="b|Puxada frontal aberta|S3"></td></tr><tr><td class="exname">Remada baixa triângulo</td><td><input class="load" inputmode="decimal" data-key="b|Remada baixa triângulo|S1"></td><td><input class="load" inputmode="decimal" data-key="b|Remada baixa triângulo|S2"></td><td><input class="load" inputmode="decimal" data-key="b|Remada baixa triângulo|S3"></td></tr><tr><td class="exname">Remada baixa barra reta</td><td><input class="load" inputmode="decimal" data-key="b|Remada baixa barra reta|S1"></td><td><input class="load" inputmode="decimal" data-key="b|Remada baixa barra reta|S2"></td><td><input class="load" inputmode="decimal" data-key="b|Remada baixa barra reta|S3"></td></tr><tr><td class="exname">Puxada supinada</td><td><input class="load" inputmode="decimal" data-key="b|Puxada supinada|S1"></td><td><input class="load" inputmode="decimal" data-key="b|Puxada supinada|S2"></td><td><input class="load" inputmode="decimal" data-key="b|Puxada supinada|S3"></td></tr><tr><td class="exname">Barra fixa aberta</td><td><input class="load" inputmode="decimal" data-key="b|Barra fixa aberta|S1"></td><td><input class="load" inputmode="decimal" data-key="b|Barra fixa aberta|S2"></td><td><input class="load" inputmode="decimal" data-key="b|Barra fixa aberta|S3"></td></tr><tr><td class="exname">Tríceps testa EZ</td><td><input class="load" inputmode="decimal" data-key="b|Tríceps testa EZ|S1"></td><td><input class="load" inputmode="decimal" data-key="b|Tríceps testa EZ|S2"></td><td><input class="load" inputmode="decimal" data-key="b|Tríceps testa EZ|S3"></td></tr><tr><td class="exname">Tríceps pulley corda</td><td><input class="load" inputmode="decimal" data-key="b|Tríceps pulley corda|S1"></td><td><input class="load" inputmode="decimal" data-key="b|Tríceps pulley corda|S2"></td><td><input class="load" inputmode="decimal" data-key="b|Tríceps pulley corda|S3"></td></tr><tr><td class="exname">Mergulho banco</td><td><input class="load" inputmode="decimal" data-key="b|Mergulho banco|S1"></td><td><input class="load" inputmode="decimal" data-key="b|Mergulho banco|S2"></td><td><input class="load" inputmode="decimal" data-key="b|Mergulho banco|S3"></td></tr><tr><td class="exname">Tríceps coice halter</td><td><input class="load" inputmode="decimal" data-key="b|Tríceps coice halter|S1"></td><td><input class="load" inputmode="decimal" data-key="b|Tríceps coice halter|S2"></td><td><input class="load" inputmode="decimal" data-key="b|Tríceps coice halter|S3"></td></tr><tr><td class="exname">Prancha lateral</td><td><input class="load" inputmode="decimal" data-key="b|Prancha lateral|S1"></td><td><input class="load" inputmode="decimal" data-key="b|Prancha lateral|S2"></td><td><input class="load" inputmode="decimal" data-key="b|Prancha lateral|S3"></td></tr></tbody></table></div>
-</div></article></section><section class="ficha" id="ficha-c"><h1 class="ficha-title">Ficha C — Perna (retomada) + Bíceps</h1>
-<p class="meta"><strong>Mesociclo:</strong> Acumulação | <strong>Semana:</strong> 1/5 | <strong>Gerada em:</strong> 2026-07-03<br><strong>Duração estimada:</strong> ~38 min | <strong>Princípios:</strong> Perna 2x/semana com MESMOS exercícios (bloco de perna idêntico ao da Ficha E). Aqui a perna é cruzada com BÍCEPS em tri-sets (perna descansa enquanto 2 bíceps trabalham). Carga de perna conservadora, RPE ≤7, sem falha, sem técnica intensificadora na perna.</p>
-<div class="callout warn">⚠️ <strong>Retomada pós-op joelho (1 mês pós-liberação da fisio).</strong> Frequência subiu pra 2x/semana, mas a carga continua conservadora (40-50%). Sentiu QUALQUER desconforto no joelho → parar a série e reduzir. RPE máx: 7. As técnicas intensificadoras são só pro BÍCEPS, NUNCA pra perna.<br>🔁 <strong>O bloco de perna é idêntico na Ficha E.</strong> A única diferença: em C a perna casa com bíceps, em E casa com abs. Mesmos exercícios de perna, mesma execução — assim você progride a perna com consistência.</div>
-<article class="card"><div class="card-head nonum"><h2>Aquecimento: Elástico nas 3 direções (lado / frente / trás)</h2></div><div class="pills"><span class="pill primary">2 rounds × 10 reps cada direção</span><span class="pill">Sem descanso</span></div><div class="card-body">
-<p>Elástico no tornozelo, apoio firme, abdômen contraído. Lateral (glúteo médio) → frente (flexor de quadril) → atrás (glúteo + posterior). Prescrito pelo fisio — <strong>NÃO PULAR</strong>. É o que mantém o joelho seguro.</p>
-</div></article>
-<article class="card"><div class="card-head"><span class="num">1</span><h2>TRI-SET perna + bíceps + bíceps 🔥</h2></div><div class="pills"><span class="pill primary">3 × 12 + 10 + 12</span><span class="pill">Descanso: 75s após o trio</span></div><div class="card-body">
-<p>A perna descansa enquanto DOIS bíceps trabalham — fadiga local máxima no braço, zero fadiga cumulativa no joelho.</p>
-<div class="tbl-wrap"><table><thead><tr><th>#</th><th>Exercício</th><th>Reps</th><th>Grupo</th></tr></thead><tbody><tr><td>A</td><td>Agachamento (pouco peso, sem passar do paralelo)</td><td>12</td><td>Perna</td></tr><tr><td>B</td><td>Rosca direta barra EZ</td><td>10</td><td>Bíceps</td></tr><tr><td>C</td><td>Rosca martelo</td><td>12</td><td>Bíceps (braquial/espessura)</td></tr></tbody></table></div>
-<p><strong>Agachamento</strong>: 40-50% do pré-cirurgia, SEM passar do paralelo, descer 2s, subir controlado. Joelho alinhado à ponta do pé — NÃO valgizar. Sem falha, RPE ≤7.<br><strong>Rosca EZ</strong>: cotovelos colados, sem balançar. <strong>Martelo</strong>: pegada neutra — &quot;braço GROSSO é rosca martelo&quot;.</p>
-</div></article>
-<article class="card"><div class="card-head"><span class="num">2</span><h2>TRI-SET perna + bíceps + bíceps 🔥</h2></div><div class="pills"><span class="pill primary">3 × 15 + 12 + 10</span><span class="pill">Descanso: 75s após o trio</span></div><div class="card-body">
-<div class="tbl-wrap"><table><thead><tr><th>#</th><th>Exercício</th><th>Reps</th><th>Grupo</th></tr></thead><tbody><tr><td>A</td><td>Elevação pélvica na máquina</td><td>15</td><td>Glúteo (seguro pro joelho)</td></tr><tr><td>B</td><td>Rosca alternada com halteres</td><td>12 (6 c/ braço)</td><td>Bíceps</td></tr><tr><td>C</td><td>Rosca scott barra EZ</td><td>10</td><td>Bíceps (pico)</td></tr></tbody></table></div>
-<p><strong>Elevação pélvica</strong>: exercício REI do glúteo, mínimo estresse no joelho. Empurrar com os calcanhares, contrair o glúteo 2s no topo.<br><strong>Alternada</strong>: supinar no topo (girar o mindinho pra fora). <strong>Scott</strong>: cotovelo apoiado, descer com controle — sem trapaça, pico puro.</p>
-</div></article>
-<article class="card"><div class="card-head"><span class="num">3</span><h2>Cadeira extensora UNILATERAL (A) + Panturrilha em pé (B) — SUPERSET</h2></div><div class="pills"><span class="pill primary">3 × 12 cada perna + 15</span><span class="pill">Descanso: 45s após o par</span></div><div class="card-body">
-<p>🔥 Quadríceps (extensora) + panturrilha (gastrocnêmio). A panturrilha NÃO estressa o joelho — então ela serve de &quot;descanso&quot; pro joelho entre as séries de extensora. Cross-superset seguro, e ainda adianta o treino.</p>
-<p><strong>Extensora unilateral</strong>: prescrito pelo fisio, uma perna de cada vez — corrige assimetria e controla a carga individual. Subir 2s, segurar 1s no topo, descer 2s. NÃO travar o joelho.<br><strong>Panturrilha em pé</strong>: gastrocnêmio (joelho estendido). Alongamento máximo embaixo, contração 1s no topo. Reps lentas, ROM completo.</p>
-<div class="tbl-wrap"><table><thead><tr><th>Exercício</th><th>Reps</th></tr></thead><tbody><tr><td>Cadeira extensora unilateral</td><td>12 cada perna</td></tr><tr><td>Panturrilha em pé</td><td>15</td></tr></tbody></table></div>
-<p class="note"><em>Sem máquina de panturrilha sentada — aqui treina só o gastrocnêmio. Se um dia quiser pegar o sólio, dá pra improvisar sentado com um halter apoiado sobre os joelhos.</em></p>
-</div></article>
-<article class="card"><div class="card-head"><span class="num">4</span><h2>Cadeira flexora UNILATERAL (A) + Cadeira abdutora (B) — SUPERSET</h2></div><div class="pills"><span class="pill primary">3 × 12 cada perna + 15</span><span class="pill">Descanso: 45s após o par</span></div><div class="card-body">
-<p>🔥 Posterior de coxa (flexora) + glúteo médio (abdutora). A abdutora é movimento de quadril — não estressa o joelho, então serve de &quot;descanso&quot; pro joelho entre as séries de flexora.</p>
-<div class="callout warn">⚠️ <strong>Cadeira abdutora = progressão PENDENTE de OK do fisio</strong> (não estava na lista original). Carrega mais que o elástico = mais força de glúteo médio. <strong>Enquanto o fisio não liberar, usar o elástico abertura lateral no lugar</strong> (mesmo movimento, mais leve).</div>
-<p><strong>Flexora unilateral</strong>: uma perna por vez, subir 2s, segurar 1s contraído, descer 2s. NÃO travar o joelho na extensão.<br><strong>Cadeira abdutora</strong>: sentado, abrir os joelhos contra a resistência, contrair o glúteo médio no fim. Tronco levemente à frente pega mais glúteo. Carga progressiva, RPE ≤7.</p>
-<div class="tbl-wrap"><table><thead><tr><th>Exercício</th><th>Reps</th></tr></thead><tbody><tr><td>Cadeira flexora unilateral</td><td>12 cada perna</td></tr><tr><td>Cadeira abdutora</td><td>15</td></tr></tbody></table></div>
-<p class="note"><em>O elástico abertura lateral (glúteo médio) agora fica só no aquecimento das 3 direções — não repete aqui.</em></p>
-</div></article>
-<article class="card"><div class="card-head nonum"><h2>Resumo</h2></div><div class="card-body">
-<div class="tbl-wrap"><table><thead><tr><th>Grupo</th><th>Séries</th><th>Exercícios</th></tr></thead><tbody><tr><td>Perna</td><td>18</td><td>Agachamento, pélvica, extensora uni (3x), flexora uni (3x), panturrilha em pé, abdutora</td></tr><tr><td>Bíceps</td><td>12</td><td>Rosca EZ, martelo, alternada, scott</td></tr><tr><td><strong>Total</strong></td><td><strong>30 séries</strong></td><td><strong>~37 min</strong></td></tr></tbody></table></div>
-<p class="note"><em>Perna: agach/extensora/flexora = ~9 séries de carga direta no joelho — o resto é glúteo/panturrilha/abdutora (movimentos de quadril/tornozelo, seguros pro joelho). Progredir só quando bater todas as reps com RPE ≤7 e zero desconforto.</em></p>
-</div></article>
-<article class="card"><div class="card-head nonum"><h2>Registro de Cargas</h2></div><div class="card-body">
-<div class="tbl-wrap"><table><thead><tr><th>Exercício</th><th>S1</th><th>S2</th><th>S3</th></tr></thead><tbody><tr><td class="exname">Agachamento (pouco peso)</td><td><input class="load" inputmode="decimal" data-key="c|Agachamento (pouco peso)|S1"></td><td><input class="load" inputmode="decimal" data-key="c|Agachamento (pouco peso)|S2"></td><td><input class="load" inputmode="decimal" data-key="c|Agachamento (pouco peso)|S3"></td></tr><tr><td class="exname">Rosca direta EZ</td><td><input class="load" inputmode="decimal" data-key="c|Rosca direta EZ|S1"></td><td><input class="load" inputmode="decimal" data-key="c|Rosca direta EZ|S2"></td><td><input class="load" inputmode="decimal" data-key="c|Rosca direta EZ|S3"></td></tr><tr><td class="exname">Rosca martelo</td><td><input class="load" inputmode="decimal" data-key="c|Rosca martelo|S1"></td><td><input class="load" inputmode="decimal" data-key="c|Rosca martelo|S2"></td><td><input class="load" inputmode="decimal" data-key="c|Rosca martelo|S3"></td></tr><tr><td class="exname">Elevação pélvica máquina</td><td><input class="load" inputmode="decimal" data-key="c|Elevação pélvica máquina|S1"></td><td><input class="load" inputmode="decimal" data-key="c|Elevação pélvica máquina|S2"></td><td><input class="load" inputmode="decimal" data-key="c|Elevação pélvica máquina|S3"></td></tr><tr><td class="exname">Rosca alternada halteres</td><td><input class="load" inputmode="decimal" data-key="c|Rosca alternada halteres|S1"></td><td><input class="load" inputmode="decimal" data-key="c|Rosca alternada halteres|S2"></td><td><input class="load" inputmode="decimal" data-key="c|Rosca alternada halteres|S3"></td></tr><tr><td class="exname">Rosca scott EZ</td><td><input class="load" inputmode="decimal" data-key="c|Rosca scott EZ|S1"></td><td><input class="load" inputmode="decimal" data-key="c|Rosca scott EZ|S2"></td><td><input class="load" inputmode="decimal" data-key="c|Rosca scott EZ|S3"></td></tr><tr><td class="exname">Cadeira extensora unilateral</td><td><input class="load" inputmode="decimal" data-key="c|Cadeira extensora unilateral|S1"></td><td><input class="load" inputmode="decimal" data-key="c|Cadeira extensora unilateral|S2"></td><td><input class="load" inputmode="decimal" data-key="c|Cadeira extensora unilateral|S3"></td></tr><tr><td class="exname">Panturrilha em pé</td><td><input class="load" inputmode="decimal" data-key="c|Panturrilha em pé|S1"></td><td><input class="load" inputmode="decimal" data-key="c|Panturrilha em pé|S2"></td><td><input class="load" inputmode="decimal" data-key="c|Panturrilha em pé|S3"></td></tr><tr><td class="exname">Cadeira flexora unilateral</td><td><input class="load" inputmode="decimal" data-key="c|Cadeira flexora unilateral|S1"></td><td><input class="load" inputmode="decimal" data-key="c|Cadeira flexora unilateral|S2"></td><td><input class="load" inputmode="decimal" data-key="c|Cadeira flexora unilateral|S3"></td></tr><tr><td class="exname">Cadeira abdutora</td><td><input class="load" inputmode="decimal" data-key="c|Cadeira abdutora|S1"></td><td><input class="load" inputmode="decimal" data-key="c|Cadeira abdutora|S2"></td><td><input class="load" inputmode="decimal" data-key="c|Cadeira abdutora|S3"></td></tr></tbody></table></div>
-<p><strong>Notas pós-treino:</strong> _registrar dor/desconforto no joelho, RPE de cada exercício de perna, observações da fisio._</p>
-</div></article></section><section class="ficha" id="ficha-d"><h1 class="ficha-title">Ficha D — Peito SUPERIOR + Ombro (2º dia FORTE)</h1>
-<p class="meta"><strong>Mesociclo:</strong> Acumulação | <strong>Semana:</strong> 1/5 | <strong>Gerada em:</strong> 2026-07-14<br><strong>Duração estimada:</strong> ~40 min | <strong>Princípios:</strong> 2ª frequência de peito/ombro, agora com CARGA REAL e técnicas intensificadoras. Ângulos diferentes da Ficha A pra variar o estímulo. Peito completo → ombro completo.</p>
-<div class="callout">🔥 Esse NÃO é mais o dia leve. É o 2º ataque pesado da semana nos seus grupos prioritários (peito P0, ombro P1). Mesma pegada da A — carga de verdade, ir perto da falha, técnicas nos principais — só que com ângulos e variações diferentes pra bater o músculo de outro jeito.</div>
-<article class="card"><div class="card-head nonum"><h2>Aquecimento: Manguito rotador externo</h2></div><div class="pills"><span class="pill primary">3 × 15</span><span class="pill">Sem descanso entre lados</span></div><div class="card-body">
-<p>Cotovelo a 90°, rotação externa leve. Obrigatório antes de peito/ombro.</p>
-</div></article>
-<div class="block-label"><span>🎯 BLOCO PEITO (superior)</span></div>
-<article class="card"><div class="card-head"><span class="num">1</span><h2>Supino sentado no cross — INCLINADO</h2></div><div class="pills"><span class="pill primary">4 × 8-10</span><span class="pill">Descanso: 90s</span><span class="pill tech">SEM superset — carga real</span></div><div class="card-body">
-<p>Mesmo press da Ficha A, aqui como 2ª dose pesada da semana. Banco inclinado (30-40°), cabos na altura do peito alto, empurrar à frente/cima, descer 3s, explodir. Coluna apoiada.</p>
-<p><strong>4ª série — REST-PAUSE:</strong> 8 reps → descansar 15&quot; → mais 5 reps com o mesmo peso.</p>
-</div></article>
-<article class="card"><div class="card-head"><span class="num">2</span><h2>Supino no cross RETO (A) + Crossover polia baixa (B) — SUPERSET</h2></div><div class="pills"><span class="pill primary">3 × 10 + 15</span><span class="pill">Descanso: 75s após o par</span></div><div class="card-body">
-<p>🔥 <strong>PRESS + CABO</strong> — empurrar (ângulo reto, peito médio/inferior) + apertar (cabo de baixo, peito superior contraído). Padrões diferentes, curvas de resistência opostas.</p>
-<p><strong>Supino no cross reto</strong>: banco no ângulo reto/plano, empurrar à frente pesado. Descer 2-3s, explodir.<br><strong>Crossover baixo</strong>: cabos na polia baixa, subir cruzando na frente até a altura do queixo, squeeze 2s. Peito superior na contração.</p>
-<div class="tbl-wrap"><table><thead><tr><th>Exercício</th><th>Reps</th></tr></thead><tbody><tr><td>Supino no cross reto</td><td>10</td></tr><tr><td>Crossover polia baixa</td><td>15</td></tr></tbody></table></div>
-</div></article>
-<article class="card"><div class="card-head"><span class="num">3</span><h2>Pullover com halter (A) + Canivete (B) — FINISHER PEITO + ABS</h2></div><div class="pills"><span class="pill primary">3 × 12 + 15</span><span class="pill">Descanso: 45s após o par</span></div><div class="card-body">
-<p><strong>Pullover</strong>: o Arnold sagrado — caixa torácica + peito superior + serrátil. Perpendicular no banco, quadril baixo, halter bem atrás da cabeça, alongamento máximo. Voltar contraindo o peito.<br><strong>Canivete</strong>: pernas e tronco sobem juntos, reto abdominal completo.</p>
-<div class="tbl-wrap"><table><thead><tr><th>Exercício</th><th>Reps</th></tr></thead><tbody><tr><td>Pullover com halter</td><td>12</td></tr><tr><td>Canivete</td><td>15</td></tr></tbody></table></div>
-</div></article>
-<div class="block-label"><span>🎯 BLOCO OMBRO</span></div>
-<article class="card"><div class="card-head"><span class="num">4</span><h2>Arnold Press sentado</h2></div><div class="pills"><span class="pill primary">4 × 8-10</span><span class="pill">Descanso: 90s</span><span class="pill tech">SEM superset — carga real</span></div><div class="card-body">
-<p>O ÚNICO exercício que leva seu nome. Palmas começam viradas pra você, rotacionar durante a subida — as 3 cabeças do deltóide de uma vez. Aqui carga pesada, indo perto da falha.</p>
-<p><strong>4ª série — DROP SET:</strong> 8-10 reps → reduzir 30% → falha.</p>
-</div></article>
-<article class="card"><div class="card-head"><span class="num">5</span><h2>Elevação lateral sentado (A) + Elevação posterior no cabo (B) — SUPERSET</h2></div><div class="pills"><span class="pill primary">3 × 12 + 15</span><span class="pill">Descanso: 60s após o par</span></div><div class="card-body">
-<p>🔥 <strong>MEDIAL + POSTERIOR</strong> — ângulos diferentes da Ficha A.</p>
-<p><strong>Lateral sentado</strong>: elimina o impulso do corpo — isolamento puro do deltóide medial. Dedo mínimo levemente pra cima.<br><strong>Posterior no cabo (reverse)</strong>: cabo cruzado na altura do ombro, abrir pra trás, squeeze 2s.</p>
-<div class="tbl-wrap"><table><thead><tr><th>Exercício</th><th>Reps</th></tr></thead><tbody><tr><td>Elevação lateral sentado</td><td>12</td></tr><tr><td>Elevação posterior no cabo</td><td>15</td></tr></tbody></table></div>
-</div></article>
-<article class="card"><div class="card-head"><span class="num">6</span><h2>Elevação lateral cruzada no cabo</h2></div><div class="pills"><span class="pill primary">3 × 12</span><span class="pill">Descanso: 45s</span><span class="pill tech">SEM superset</span><span class="pill tech">Drop set na última</span></div><div class="card-body">
-<p>🔥 Lateral no cabo (tensão constante do início ao fim) — reforça o volume direto de lateral (alvo 3D). Cabo baixo cruzando na frente do corpo, elevar até o paralelo.</p>
-<p><strong>Última série — DROP SET:</strong> 12 reps → reduzir 30% → falha. Bombeamento final no ombro.</p>
-</div></article>
-<article class="card"><div class="card-head nonum"><h2>Resumo</h2></div><div class="card-body">
-<div class="tbl-wrap"><table><thead><tr><th>Grupo</th><th>Séries</th><th>Exercícios</th></tr></thead><tbody><tr><td>Peito (viés superior)</td><td>13</td><td>Supino no cross (inclinado + reto), crossover baixo, pullover</td></tr><tr><td>Ombro</td><td>13</td><td>Arnold press, lateral sentado, posterior cabo, lateral cruzada</td></tr><tr><td>Abs</td><td>3</td><td>Canivete</td></tr><tr><td><strong>Total</strong></td><td><strong>29 séries</strong></td><td><strong>~40 min</strong></td></tr></tbody></table></div>
-<p class="note"><em>2º dia FORTE — carga real + rest-pause (cross incl.), drop set (Arnold, lateral cruzada). Ângulos diferentes da A. Lateral direto = 6 séries aqui (+6 na A = ~12/semana, ombro em prioridade máxima).</em></p>
-</div></article>
-<article class="card"><div class="card-head nonum"><h2>Registro de Cargas</h2></div><div class="card-body">
-<div class="tbl-wrap"><table><thead><tr><th>Exercício</th><th>S1</th><th>S2</th><th>S3</th><th>S4</th></tr></thead><tbody><tr><td class="exname">Supino no cross inclinado</td><td><input class="load" inputmode="decimal" data-key="d|Supino no cross inclinado|S1"></td><td><input class="load" inputmode="decimal" data-key="d|Supino no cross inclinado|S2"></td><td><input class="load" inputmode="decimal" data-key="d|Supino no cross inclinado|S3"></td><td><input class="load" inputmode="decimal" data-key="d|Supino no cross inclinado|S4"></td></tr><tr><td class="exname">Supino no cross reto</td><td><input class="load" inputmode="decimal" data-key="d|Supino no cross reto|S1"></td><td><input class="load" inputmode="decimal" data-key="d|Supino no cross reto|S2"></td><td><input class="load" inputmode="decimal" data-key="d|Supino no cross reto|S3"></td><td><input class="load" inputmode="decimal" data-key="d|Supino no cross reto|S4"></td></tr><tr><td class="exname">Crossover polia baixa</td><td><input class="load" inputmode="decimal" data-key="d|Crossover polia baixa|S1"></td><td><input class="load" inputmode="decimal" data-key="d|Crossover polia baixa|S2"></td><td><input class="load" inputmode="decimal" data-key="d|Crossover polia baixa|S3"></td><td><input class="load" inputmode="decimal" data-key="d|Crossover polia baixa|S4"></td></tr><tr><td class="exname">Pullover halter</td><td><input class="load" inputmode="decimal" data-key="d|Pullover halter|S1"></td><td><input class="load" inputmode="decimal" data-key="d|Pullover halter|S2"></td><td><input class="load" inputmode="decimal" data-key="d|Pullover halter|S3"></td><td><input class="load" inputmode="decimal" data-key="d|Pullover halter|S4"></td></tr><tr><td class="exname">Canivete</td><td><input class="load" inputmode="decimal" data-key="d|Canivete|S1"></td><td><input class="load" inputmode="decimal" data-key="d|Canivete|S2"></td><td><input class="load" inputmode="decimal" data-key="d|Canivete|S3"></td><td><input class="load" inputmode="decimal" data-key="d|Canivete|S4"></td></tr><tr><td class="exname">Arnold Press sentado</td><td><input class="load" inputmode="decimal" data-key="d|Arnold Press sentado|S1"></td><td><input class="load" inputmode="decimal" data-key="d|Arnold Press sentado|S2"></td><td><input class="load" inputmode="decimal" data-key="d|Arnold Press sentado|S3"></td><td><input class="load" inputmode="decimal" data-key="d|Arnold Press sentado|S4"></td></tr><tr><td class="exname">Elevação lateral sentado</td><td><input class="load" inputmode="decimal" data-key="d|Elevação lateral sentado|S1"></td><td><input class="load" inputmode="decimal" data-key="d|Elevação lateral sentado|S2"></td><td><input class="load" inputmode="decimal" data-key="d|Elevação lateral sentado|S3"></td><td><input class="load" inputmode="decimal" data-key="d|Elevação lateral sentado|S4"></td></tr><tr><td class="exname">Elevação posterior cabo</td><td><input class="load" inputmode="decimal" data-key="d|Elevação posterior cabo|S1"></td><td><input class="load" inputmode="decimal" data-key="d|Elevação posterior cabo|S2"></td><td><input class="load" inputmode="decimal" data-key="d|Elevação posterior cabo|S3"></td><td><input class="load" inputmode="decimal" data-key="d|Elevação posterior cabo|S4"></td></tr><tr><td class="exname">Elevação lateral cruzada cabo</td><td><input class="load" inputmode="decimal" data-key="d|Elevação lateral cruzada cabo|S1"></td><td><input class="load" inputmode="decimal" data-key="d|Elevação lateral cruzada cabo|S2"></td><td><input class="load" inputmode="decimal" data-key="d|Elevação lateral cruzada cabo|S3"></td><td><input class="load" inputmode="decimal" data-key="d|Elevação lateral cruzada cabo|S4"></td></tr></tbody></table></div>
-</div></article></section><section class="ficha" id="ficha-e"><h1 class="ficha-title">Ficha E — Perna (retomada) + Abdômen</h1>
-<p class="meta"><strong>Mesociclo:</strong> Acumulação | <strong>Semana:</strong> 1/5 | <strong>Gerada em:</strong> 2026-07-03<br><strong>Duração estimada:</strong> ~36 min | <strong>Princípios:</strong> MESMO bloco de perna da Ficha C (exercícios idênticos, mesma execução). Aqui a perna é cruzada com ABS em tri-sets, abs intercalado ao longo da sessão. Carga conservadora, RPE ≤7, sem falha, sem técnica intensificadora na perna.</p>
-<div class="callout warn">⚠️ <strong>Retomada pós-op joelho.</strong> Mesma carga conservadora da Ficha C. RPE máx: 7, sem falha.<br>🔁 <strong>Bloco de perna IDÊNTICO ao da Ficha C</strong> — mesmos exercícios, mesmas séries/reps, mesma carga. A diferença é só o parceiro: em C a perna casa com bíceps, aqui casa com abs. É essa repetição que faz a perna progredir com segurança.</div>
-<article class="card"><div class="card-head nonum"><h2>Aquecimento: Elástico nas 3 direções (lado / frente / trás)</h2></div><div class="pills"><span class="pill primary">2 rounds × 10 reps cada direção</span><span class="pill">Sem descanso</span></div><div class="card-body">
-<p>Lateral (glúteo médio) → frente (flexor de quadril) → atrás (glúteo + posterior). Prescrito pelo fisio — <strong>NÃO PULAR</strong>.</p>
-</div></article>
-<article class="card"><div class="card-head"><span class="num">1</span><h2>TRI-SET perna + abs + abs 🔥</h2></div><div class="pills"><span class="pill primary">3 × 12 + 20 + 15</span><span class="pill">Descanso: 75s após o trio</span></div><div class="card-body">
-<p>A perna descansa enquanto DOIS abs trabalham — abs intercalado desde o começo, não só no fim.</p>
-<div class="tbl-wrap"><table><thead><tr><th>#</th><th>Exercício</th><th>Reps</th><th>Grupo</th></tr></thead><tbody><tr><td>A</td><td>Agachamento (pouco peso, sem passar do paralelo)</td><td>12</td><td>Perna</td></tr><tr><td>B</td><td>Abdominal supra corda polia</td><td>20</td><td>Abs (reto superior)</td></tr><tr><td>C</td><td>Canivete</td><td>15</td><td>Abs (reto completo)</td></tr></tbody></table></div>
-<p><strong>Agachamento</strong>: idêntico à Ficha C — 40-50% do pré-cirurgia, sem passar do paralelo, joelho alinhado, RPE ≤7, sem falha.<br><strong>Supra corda</strong>: ajoelhado, flexionar o tronco, expirar forte na contração. <strong>Canivete</strong>: pernas e tronco sobem juntos, sem impulso.</p>
-</div></article>
-<article class="card"><div class="card-head"><span class="num">2</span><h2>TRI-SET perna + abs + abs 🔥</h2></div><div class="pills"><span class="pill primary">3 × 15 + 20 + 30s</span><span class="pill">Descanso: 75s após o trio</span></div><div class="card-body">
-<div class="tbl-wrap"><table><thead><tr><th>#</th><th>Exercício</th><th>Reps</th><th>Grupo</th></tr></thead><tbody><tr><td>A</td><td>Elevação pélvica na máquina</td><td>15</td><td>Glúteo (seguro pro joelho)</td></tr><tr><td>B</td><td>Russian twist</td><td>20 (10 c/ lado)</td><td>Abs (oblíquos)</td></tr><tr><td>C</td><td>Prancha frontal</td><td>30s</td><td>Abs (core/estabilidade)</td></tr></tbody></table></div>
-<p><strong>Elevação pélvica</strong>: idêntica à Ficha C — empurrar com os calcanhares, contrair o glúteo 2s no topo.<br><strong>Russian twist</strong>: tronco 45°, pés no ar, rotacionar com halter/anilha. <strong>Prancha</strong>: corpo em linha reta, abdômen e glúteo contraídos.</p>
-</div></article>
-<article class="card"><div class="card-head"><span class="num">3</span><h2>Cadeira extensora UNILATERAL (A) + Panturrilha em pé (B) — SUPERSET</h2></div><div class="pills"><span class="pill primary">3 × 12 cada perna + 15</span><span class="pill">Descanso: 45s após o par</span></div><div class="card-body">
-<p>🔥 Idêntico à Ficha C. Quadríceps (extensora) + panturrilha (gastrocnêmio) — a panturrilha não estressa o joelho, então serve de &quot;descanso&quot; pro joelho entre as séries de extensora.</p>
-<p><strong>Extensora unilateral</strong>: uma perna por vez, subir 2s, segurar 1s, descer 2s. NÃO travar o joelho.<br><strong>Panturrilha em pé</strong>: gastrocnêmio, alongamento máximo embaixo, contração 1s no topo.</p>
-<div class="tbl-wrap"><table><thead><tr><th>Exercício</th><th>Reps</th></tr></thead><tbody><tr><td>Cadeira extensora unilateral</td><td>12 cada perna</td></tr><tr><td>Panturrilha em pé</td><td>15</td></tr></tbody></table></div>
-<p class="note"><em>Sem máquina de panturrilha sentada — só gastrocnêmio (em pé).</em></p>
-</div></article>
-<article class="card"><div class="card-head"><span class="num">4</span><h2>Cadeira flexora UNILATERAL (A) + Cadeira abdutora (B) — SUPERSET</h2></div><div class="pills"><span class="pill primary">3 × 12 cada perna + 15</span><span class="pill">Descanso: 45s após o par</span></div><div class="card-body">
-<p>🔥 Idêntico à Ficha C. Posterior de coxa (flexora) + glúteo médio (abdutora) — a abdutora é movimento de quadril, não estressa o joelho.</p>
-<div class="callout warn">⚠️ <strong>Cadeira abdutora = progressão PENDENTE de OK do fisio.</strong> Enquanto não liberar, usar o elástico abertura lateral no lugar (mais leve).</div>
-<p><strong>Flexora unilateral</strong>: uma perna por vez, subir 2s, segurar 1s, descer 2s. NÃO travar o joelho.<br><strong>Cadeira abdutora</strong>: sentado, abrir os joelhos contra a resistência, contrair o glúteo médio. Carga progressiva, RPE ≤7.</p>
-<div class="tbl-wrap"><table><thead><tr><th>Exercício</th><th>Reps</th></tr></thead><tbody><tr><td>Cadeira flexora unilateral</td><td>12 cada perna</td></tr><tr><td>Cadeira abdutora</td><td>15</td></tr></tbody></table></div>
-<p class="note"><em>O elástico abertura lateral fica só no aquecimento das 3 direções.</em></p>
-</div></article>
-<article class="card"><div class="card-head nonum"><h2>Resumo</h2></div><div class="card-body">
-<div class="tbl-wrap"><table><thead><tr><th>Grupo</th><th>Séries</th><th>Exercícios</th></tr></thead><tbody><tr><td>Perna</td><td>18</td><td>Agachamento, pélvica, extensora uni (3x), flexora uni (3x), panturrilha em pé, abdutora</td></tr><tr><td>Abs</td><td>12</td><td>Supra corda, canivete, russian twist, prancha</td></tr><tr><td><strong>Total</strong></td><td><strong>30 séries</strong></td><td><strong>~37 min</strong></td></tr></tbody></table></div>
-<p class="note"><em>Bloco de perna idêntico à Ficha C — mesma carga, mesma progressão. Abs intercalado ao longo da sessão. Perna 2x/semana total.</em></p>
-</div></article>
-<article class="card"><div class="card-head nonum"><h2>Registro de Cargas</h2></div><div class="card-body">
-<div class="tbl-wrap"><table><thead><tr><th>Exercício</th><th>S1</th><th>S2</th><th>S3</th></tr></thead><tbody><tr><td class="exname">Agachamento (pouco peso)</td><td><input class="load" inputmode="decimal" data-key="e|Agachamento (pouco peso)|S1"></td><td><input class="load" inputmode="decimal" data-key="e|Agachamento (pouco peso)|S2"></td><td><input class="load" inputmode="decimal" data-key="e|Agachamento (pouco peso)|S3"></td></tr><tr><td class="exname">Supra corda polia</td><td><input class="load" inputmode="decimal" data-key="e|Supra corda polia|S1"></td><td><input class="load" inputmode="decimal" data-key="e|Supra corda polia|S2"></td><td><input class="load" inputmode="decimal" data-key="e|Supra corda polia|S3"></td></tr><tr><td class="exname">Canivete</td><td><input class="load" inputmode="decimal" data-key="e|Canivete|S1"></td><td><input class="load" inputmode="decimal" data-key="e|Canivete|S2"></td><td><input class="load" inputmode="decimal" data-key="e|Canivete|S3"></td></tr><tr><td class="exname">Elevação pélvica máquina</td><td><input class="load" inputmode="decimal" data-key="e|Elevação pélvica máquina|S1"></td><td><input class="load" inputmode="decimal" data-key="e|Elevação pélvica máquina|S2"></td><td><input class="load" inputmode="decimal" data-key="e|Elevação pélvica máquina|S3"></td></tr><tr><td class="exname">Russian twist</td><td><input class="load" inputmode="decimal" data-key="e|Russian twist|S1"></td><td><input class="load" inputmode="decimal" data-key="e|Russian twist|S2"></td><td><input class="load" inputmode="decimal" data-key="e|Russian twist|S3"></td></tr><tr><td class="exname">Prancha frontal</td><td><input class="load" inputmode="decimal" data-key="e|Prancha frontal|S1"></td><td><input class="load" inputmode="decimal" data-key="e|Prancha frontal|S2"></td><td><input class="load" inputmode="decimal" data-key="e|Prancha frontal|S3"></td></tr><tr><td class="exname">Cadeira extensora unilateral</td><td><input class="load" inputmode="decimal" data-key="e|Cadeira extensora unilateral|S1"></td><td><input class="load" inputmode="decimal" data-key="e|Cadeira extensora unilateral|S2"></td><td><input class="load" inputmode="decimal" data-key="e|Cadeira extensora unilateral|S3"></td></tr><tr><td class="exname">Panturrilha em pé</td><td><input class="load" inputmode="decimal" data-key="e|Panturrilha em pé|S1"></td><td><input class="load" inputmode="decimal" data-key="e|Panturrilha em pé|S2"></td><td><input class="load" inputmode="decimal" data-key="e|Panturrilha em pé|S3"></td></tr><tr><td class="exname">Cadeira flexora unilateral</td><td><input class="load" inputmode="decimal" data-key="e|Cadeira flexora unilateral|S1"></td><td><input class="load" inputmode="decimal" data-key="e|Cadeira flexora unilateral|S2"></td><td><input class="load" inputmode="decimal" data-key="e|Cadeira flexora unilateral|S3"></td></tr><tr><td class="exname">Cadeira abdutora</td><td><input class="load" inputmode="decimal" data-key="e|Cadeira abdutora|S1"></td><td><input class="load" inputmode="decimal" data-key="e|Cadeira abdutora|S2"></td><td><input class="load" inputmode="decimal" data-key="e|Cadeira abdutora|S3"></td></tr></tbody></table></div>
-<p><strong>Notas pós-treino:</strong> _registrar dor/desconforto no joelho, RPE de cada exercício de perna, observações da fisio._</p>
-</div></article></section>
-<footer>
-  As cargas que você digita ficam salvas neste aparelho.
-  <br><button onclick="limpar()">Limpar cargas salvas</button>
-</footer>
-</main>
+
+<main class="wrap" id="main"></main>
+
+<div class="rest" id="rest">
+  <div class="in">
+    <div><div class="lbl">Descanso · próximo</div><div class="next" id="restNext">—</div></div>
+    <div class="t" id="restT">1:30</div>
+    <button id="restSkip">Pular</button>
+  </div>
+</div>
+
 <script>
-const tabs=[...document.querySelectorAll('.tab')];
-const fichas=[...document.querySelectorAll('.ficha')];
-function show(id){
-  fichas.forEach(f=>f.classList.toggle('active',f.id==='ficha-'+id));
-  tabs.forEach(t=>t.classList.toggle('active',t.dataset.f===id));
-  localStorage.setItem('gb_active',id);window.scrollTo({top:0});
+/* ---------- dados das fichas ---------- */
+const YT = {
+  manguito:"EcWRUlH63eg", crossIncl:"G20cqd_4goE", crucIncl:"RIfdP8Jfc-Q", crossReto:"nybEfmrz1Ro", pullover:"UicU0kXYKTI",
+  canivete:"yFKPFCnpFJs", desenv:"aTnjvuuf_yo", lateral:"W5hRdgwEoEA", facepull:"On1ysBmSWrA", latIncl:"Qc3v4fAdv9c", posterior:"HrL-KPhJ9r0",
+  puxadaAberta:"mPmfwbc_svw", remadaTri:"2YebbYuuBJQ", remadaBarra:"pfgEEiouvAs", puxadaSup:"IFDUGxHRIKA", barraFixa:"NTn_iTC8d_Q",
+  testaEZ:"_sX2nTDhE1s", pulleyCorda:"KhK5HWJfsrQ", mergulho:"8eFABDEBH-Y", coice:"cVvnXnyZ5eU", pranchaLat:"2NjO5KrlVEM",
+  elastico:"A5G5ddF9gCg", agacho:"DOU7aDli5a4", roscaEZ:"0R7V2FXfFyQ", martelo:"YrZ0qzBi-kk", pelvica:"DnHjZpt76NU", alternada:"AuBN9_8Iihc",
+  scott:"Kh4G5N48EO8", extensora:"pL0DNBb_HlE", panturrilha:"of5Z7yj-HqY", flexora:"jQszh3iuu3g", abdutora:"e2gmqTG1OgQ",
+  crossoverBaixo:"QUcXXwxa6hE", arnold:"f-nxx3-xEE8", lateralSentado:"YsfdRrrKKcc", posteriorCabo:"IzPMAqlrjkA", lateralCabo:"XZim1yp53kY",
+  supraCorda:"7mUeDtB7nvM", russian:"QxF3kDO74AA", prancha:"ty4jM83jKyE"
+};
+
+/* bloco de perna compartilhado por C e E */
+const PERNA_AQ = {warm:true, name:"Elástico nas 3 direções", tags:["aquecimento","fisio"], sets:2, reps:"10 cada direção", rest:0, yt:YT.elastico, u:"round",
+  cues:["Elástico no tornozelo, apoio firme, abdômen contraído","Lado (glúteo médio) → frente (flexor) → trás (glúteo + posterior)","Sem descanso entre as direções"],
+  why:"Prescrito pelo fisio. É o que mantém o joelho seguro. Não pular."};
+const PERNA_3 = {n:3, name:"Superset · Extensora unilateral + Panturrilha em pé", tags:["quadríceps","panturrilha"], sets:3, reps:"12 + 15", rest:45,
+  parts:[
+    {l:"A", name:"Cadeira extensora unilateral", sub:"12 cada perna · fisio", yt:YT.extensora},
+    {l:"B", name:"Panturrilha em pé", sub:"Gastrocnêmio · 15", yt:YT.panturrilha}
+  ],
+  cues:["Extensora: uma perna por vez, subir 2s, segurar 1s, descer 2s. NÃO travar o joelho","Panturrilha: alongamento máximo embaixo, contração 1s no topo, ROM completo"],
+  why:"A panturrilha não estressa o joelho, então serve de descanso pro joelho entre as séries de extensora."};
+const PERNA_4 = {n:4, name:"Superset · Flexora unilateral + Abdutora", tags:["posterior de coxa","glúteo médio"], care:"Abdutora pendente de OK do fisio", sets:3, reps:"12 + 15", rest:45,
+  parts:[
+    {l:"A", name:"Cadeira flexora unilateral", sub:"12 cada perna · fisio", yt:YT.flexora},
+    {l:"B", name:"Cadeira abdutora", sub:"15 · ou elástico lateral", yt:YT.abdutora}
+  ],
+  cues:["Flexora: uma perna por vez, subir 2s, segurar 1s, descer 2s. NÃO travar o joelho","Abdutora: tronco levemente à frente, abrir contra a resistência, contrair o glúteo médio no fim"],
+  why:"Abdutora é movimento de quadril, não estressa o joelho. Enquanto o fisio não liberar, usar o elástico de abertura lateral no lugar."};
+
+const FICHAS = {
+  a:{tab:"Peito · Ombro", title:"Peito superior + Ombro", sub:"Pesado", sets:31, min:38, cycle:"Acumulação · sem 1/5",
+    brief:"<strong>Regra do dia:</strong> completar TODO o peito antes de tocar em ombro. Press no supino sentado no cross (coluna apoiada, zero lombar). Lateral é o alvo 3D da semana.",
+    items:[
+      {warm:true, name:"Manguito rotador externo", tags:["aquecimento","ombro"], sets:3, reps:"15", rest:0, yt:YT.manguito,
+       cues:["Cotovelo a 90° colado ao corpo","Halter leve ou elástico, rotação externa","Sem descanso entre lados"],
+       why:"Não é treino, é seguro de vida do ombro. Pula e paga com lesão."},
+      {block:"Bloco peito · superior"},
+      {n:1, name:"Supino sentado no cross · inclinado", tags:["peito superior"], tech:"Rest-pause na 4ª", sets:4, reps:"8–10", rest:90, yt:YT.crossIncl,
+       cues:["Banco a 30–40°, cabos na altura do peito alto","Empurrar à frente/cima juntando na linha do peito","Descer em 3s, explodir na subida","4ª série: 8 reps → 15s → +5 reps mesmo peso"],
+       why:"Composto principal do dia, sem superset. Tensão constante, coluna apoiada, zero lombar. Bateu 10 limpas nas 4 séries → sobe a carga."},
+      {n:2, name:"Superset · Crucifixo inclinado + Supino cross reto", tags:["peito superior","peito médio"], sets:3, reps:"10–12", rest:75,
+       parts:[
+         {l:"A", name:"Crucifixo inclinado com halteres", sub:"Estica · fase alongada", yt:YT.crucIncl},
+         {l:"B", name:"Supino sentado no cross · reto", sub:"Empurra · ângulo reto", yt:YT.crossReto}
+       ],
+       cues:["Crucifixo: banco 30°, abertura ampla, cotovelos levemente flexionados, squeeze 1–2s no topo","Cross reto: banco plano, cabos na altura do peito, descer 2–3s, explodir"],
+       why:"Dois padrões diferentes, não dois flys: um estica, o outro empurra num ângulo novo. Isso arredonda o peitoral inteiro."},
+      {n:3, name:"Tri-set · Pullover + Canivete + Desenvolvimento", tags:["peito","abs","ombro"], tech:"Drop set no desenvolvimento (3ª)", sets:3, reps:"12 · 15 · 8–10", rest:75,
+       parts:[
+         {l:"A", name:"Pullover com halter", sub:"Caixa torácica · 12", yt:YT.pullover},
+         {l:"B", name:"Canivete", sub:"Abs · 15", yt:YT.canivete, u:"corpo"},
+         {l:"C", name:"Desenvolvimento na máquina", sub:"Ombro pesado · 8–10", yt:YT.desenv}
+       ],
+       cues:["Pullover: perpendicular no banco, quadril baixo, halter bem atrás da cabeça","Canivete: pernas e tronco sobem juntos, sem impulso","Desenvolvimento: descer abaixo do queixo, subir sem travar o cotovelo","3ª série do desenvolvimento: 8–10 → −30% → falha"],
+       why:"Cada um pega uma área diferente, nenhum fatiga o deltóide. O desenvolvimento chega fresco: é o construtor pesado do ombro."},
+      {block:"Bloco ombro · medial + posterior"},
+      {n:4, name:"Superset · Elevação lateral + Face pull", tags:["deltóide medial","posterior"], sets:3, reps:"15 + 15", rest:60,
+       parts:[
+         {l:"A", name:"Elevação lateral com halteres", sub:"Medial · o 3D", yt:YT.lateral},
+         {l:"B", name:"Face pull na corda", sub:"Posterior + saúde articular", yt:YT.facepull}
+       ],
+       cues:["Lateral: mindinho levemente pra cima, “derramar a jarra”, sem balançar o corpo","Face pull: cotovelos ALTOS, puxar pra cara, squeeze 2s"],
+       why:"As duas cabeças que os pressings não pegam. Anterior já foi martelado pelos 3 presses."},
+      {n:5, name:"Superset · Lateral inclinada + Posterior curvado", tags:["deltóide medial","posterior"], sets:3, reps:"12 + 12", rest:45,
+       parts:[
+         {l:"A", name:"Elevação lateral inclinada (leaning)", sub:"Isola o lateral puro", yt:YT.latIncl},
+         {l:"B", name:"Elevação posterior curvado", sub:"Fecha o posterior", yt:YT.posterior}
+       ],
+       cues:["Apoiar num poste, inclinar o corpo, halter na mão de fora, tensão desde o início","Curvado: tronco à frente, abrir pros lados, squeeze 2s no topo"],
+       why:"2ª dose de medial + posterior, ângulos novos. Lateral segue prioridade."}
+    ],
+    volume:[["Peito (viés superior)",13],["Ombro",15],["Abs",3],["Total",31]],
+    note:"Lateral direto: 6 séries aqui + 3 na D. Peito: press + estica + pullover = peito inteiro, viés superior."},
+
+  b:{tab:"Costas · Tríceps", title:"Costas + Tríceps", sub:"Denso", sets:29, min:40, cycle:"Acumulação · sem 1/5",
+    brief:"<strong>Regra do dia:</strong> TODA a costas primeiro (dorsal fresco), depois TODO o tríceps. As puxadas usam bíceps, então o tríceps chega inteiro pro bloco dele. Sem ping-pong entre estações.",
+    items:[
+      {block:"Bloco costas · tudo primeiro"},
+      {n:1, name:"Superset · Puxada aberta + Remada triângulo", tags:["largura","espessura"], sets:3, reps:"12 + 10", rest:60,
+       parts:[
+         {l:"A", name:"Puxada frontal pegada aberta", sub:"Largura · o “V” · 12", yt:YT.puxadaAberta},
+         {l:"B", name:"Remada baixa com triângulo", sub:"Espessura · 10", yt:YT.remadaTri}
+       ],
+       cues:["Puxada: puxar até a clavícula, retrair escápulas no fim, subir em 2s","Remada: puxar pro abdômen, peito estufado, cotovelos rentes, apertar a escápula. NÃO usar a lombar"],
+       why:"Largura + espessura: os dois pilares do dorsal."},
+      {n:2, name:"Superset · Remada barra reta + Puxada supinada", tags:["costas alta","dorsal inferior"], sets:3, reps:"10 + 12", rest:60,
+       parts:[
+         {l:"A", name:"Remada baixa barra reta · pegada aberta", sub:"Pronada, pesada · 10", yt:YT.remadaBarra},
+         {l:"B", name:"Puxada supinada · pegada fechada", sub:"Dorsal inferior · 12", yt:YT.puxadaSup}
+       ],
+       cues:["Remada: pegada pronada e aberta, puxar pro baixo do peito, apertar a escápula 1s. Carrega de verdade, subindo a cada série","Supinada: mãos viradas pra você, puxar até o peito alto, cotovelos rentes ao corpo"],
+       why:"Costas aguentam muito peso: aqui resolve o limite do halter de 20kg. Ângulos totalmente diferentes do exercício 1."},
+      {n:3, name:"Barra fixa pegada aberta", tags:["largura","finisher"], sets:2, reps:"máx", rest:60, yt:YT.barraFixa, u:"reps",
+       cues:["Pegada aberta, queixo passa a barra","Descer com controle","Registrar quantas reps saíram"],
+       why:"Favorito do Arnold pra largura. Fecha o bloco de costas com tudo que sobrou. “A última rep é a que constrói campeões.”"},
+      {block:"Bloco tríceps · tudo depois"},
+      {n:4, name:"Tri-set · Testa EZ + Corda + Mergulho", tags:["cabeça longa","lateral","todas"], sets:3, reps:"10 · 15 · máx", rest:75,
+       parts:[
+         {l:"A", name:"Tríceps testa barra EZ", sub:"Cabeça longa · 10", yt:YT.testaEZ},
+         {l:"B", name:"Tríceps pulley corda", sub:"Lateral/medial · 15", yt:YT.pulleyCorda},
+         {l:"C", name:"Mergulho no banco", sub:"Todas · até a falha", yt:YT.mergulho, u:"reps"}
+       ],
+       cues:["Testa: descer ATRÁS da cabeça, não na testa","Corda: abrir as mãos embaixo","Mergulho: mãos no banco atrás, pés à frente, cotovelo a 90°, até a falha"],
+       why:"As 3 cabeças em sequência: composto pesado → isolador → peso corporal até a falha."},
+      {n:5, name:"Superset · Coice + Prancha lateral", tags:["tríceps","core"], tech:"Drop set no coice (3ª)", sets:3, reps:"12 + 45–60s", rest:45,
+       parts:[
+         {l:"A", name:"Tríceps coice com halter", sub:"12 cada braço", yt:YT.coice},
+         {l:"B", name:"Prancha lateral", sub:"45–60s cada lado, ou até a falha", yt:YT.pranchaLat, u:"seg"}
+       ],
+       cues:["Coice: cotovelo alinhado ao corpo, estender pra trás, contração máxima no topo","3ª série do coice: 12 → −30% → falha","Prancha: quadril ALTO, corpo em linha, alternar os lados a cada série"],
+       why:"Áreas diferentes, dá pra fazer junto sem interferência e ainda adianta o treino."}
+    ],
+    volume:[["Costas",14],["Tríceps",12],["Abs",3],["Total",29]],
+    note:"Ordem: dorsal fresco primeiro (largura + espessura + finisher), depois todo o tríceps."},
+
+  c:{tab:"Perna · Bíceps", title:"Perna + Bíceps", sub:"Retomada", sets:30, min:37, cycle:"Acumulação · sem 1/5",
+    brief:"<strong>Retomada pós-op joelho.</strong> Carga conservadora (40–50%), RPE máximo 7, sem falha e sem técnica intensificadora na perna. Qualquer desconforto no joelho → parar a série e reduzir. O bloco de perna é idêntico ao da Ficha E.", warn:true,
+    items:[
+      PERNA_AQ,
+      {n:1, name:"Tri-set · Agachamento + Rosca EZ + Martelo", tags:["perna","bíceps"], care:"Perna: RPE ≤7, sem falha", sets:3, reps:"12 · 10 · 12", rest:75,
+       parts:[
+         {l:"A", name:"Agachamento (pouco peso)", sub:"Sem passar do paralelo · 12", yt:YT.agacho},
+         {l:"B", name:"Rosca direta barra EZ", sub:"Bíceps · 10", yt:YT.roscaEZ},
+         {l:"C", name:"Rosca martelo", sub:"Braquial, espessura · 12", yt:YT.martelo}
+       ],
+       cues:["Agachamento: 40–50% do pré-cirurgia, descer 2s, joelho alinhado à ponta do pé, NÃO valgizar","Rosca EZ: cotovelos colados, sem balançar","Martelo: pegada neutra. “Braço grosso é rosca martelo”"],
+       why:"A perna descansa enquanto DOIS bíceps trabalham: fadiga máxima no braço, zero fadiga cumulativa no joelho."},
+      {n:2, name:"Tri-set · Pélvica + Alternada + Scott", tags:["glúteo","bíceps"], sets:3, reps:"15 · 12 · 10", rest:75,
+       parts:[
+         {l:"A", name:"Elevação pélvica na máquina", sub:"Glúteo, seguro pro joelho · 15", yt:YT.pelvica},
+         {l:"B", name:"Rosca alternada com halteres", sub:"12 (6 por braço)", yt:YT.alternada},
+         {l:"C", name:"Rosca scott barra EZ", sub:"Pico · 10", yt:YT.scott}
+       ],
+       cues:["Pélvica: empurrar com os calcanhares, contrair o glúteo 2s no topo","Alternada: supinar no topo (girar o mindinho pra fora)","Scott: cotovelo apoiado, descer com controle, sem trapaça"],
+       why:"Pélvica é o rei do glúteo com mínimo estresse no joelho."},
+      PERNA_3,
+      PERNA_4
+    ],
+    volume:[["Perna",18],["Bíceps",12],["Total",30]],
+    note:"~9 séries de carga direta no joelho (agachamento, extensora, flexora). O resto é quadril/tornozelo. Progredir só com todas as reps em RPE ≤7 e zero desconforto."},
+
+  d:{tab:"Peito · Ombro", title:"Peito superior + Ombro", sub:"2º dia forte", sets:29, min:40, cycle:"Acumulação · sem 1/5",
+    brief:"<strong>Não é o dia leve.</strong> É o 2º ataque pesado da semana em peito (P0) e ombro (P1): carga de verdade, perto da falha, técnicas nos principais. Ângulos diferentes da Ficha A pra bater o músculo de outro jeito.",
+    items:[
+      {warm:true, name:"Manguito rotador externo", tags:["aquecimento","ombro"], sets:3, reps:"15", rest:0, yt:YT.manguito,
+       cues:["Cotovelo a 90° colado ao corpo","Rotação externa leve","Sem descanso entre lados"],
+       why:"Obrigatório antes de peito/ombro."},
+      {block:"Bloco peito · superior"},
+      {n:1, name:"Supino sentado no cross · inclinado", tags:["peito superior"], tech:"Rest-pause na 4ª", sets:4, reps:"8–10", rest:90, yt:YT.crossIncl,
+       cues:["Banco a 30–40°, cabos na altura do peito alto","Empurrar à frente/cima, descer 3s, explodir","4ª série: 8 reps → 15s → +5 reps mesmo peso"],
+       why:"Mesmo press da Ficha A, aqui como 2ª dose pesada da semana. Coluna apoiada."},
+      {n:2, name:"Superset · Cross reto + Crossover polia baixa", tags:["peito médio","peito superior"], sets:3, reps:"10 + 15", rest:75,
+       parts:[
+         {l:"A", name:"Supino sentado no cross · reto", sub:"Empurra pesado · 10", yt:YT.crossReto},
+         {l:"B", name:"Crossover polia baixa", sub:"Aperta, superior contraído · 15", yt:YT.crossoverBaixo}
+       ],
+       cues:["Cross reto: banco plano, descer 2–3s, explodir","Crossover baixo: subir cruzando na frente até a altura do queixo, squeeze 2s"],
+       why:"Press + cabo: padrões diferentes, curvas de resistência opostas."},
+      {n:3, name:"Superset · Pullover + Canivete", tags:["peito","abs","finisher"], sets:3, reps:"12 + 15", rest:45,
+       parts:[
+         {l:"A", name:"Pullover com halter", sub:"Caixa torácica + serrátil · 12", yt:YT.pullover},
+         {l:"B", name:"Canivete", sub:"Reto abdominal · 15", yt:YT.canivete, u:"corpo"}
+       ],
+       cues:["Pullover: perpendicular no banco, quadril baixo, halter bem atrás da cabeça, voltar contraindo o peito","Canivete: pernas e tronco sobem juntos"],
+       why:"O Arnold sagrado fecha o peito e já adianta o abs."},
+      {block:"Bloco ombro"},
+      {n:4, name:"Arnold press sentado", tags:["deltóide · 3 cabeças"], tech:"Drop set na 4ª", sets:4, reps:"8–10", rest:90, yt:YT.arnold,
+       cues:["Palmas começam viradas pra você, rotacionar durante a subida","Carga pesada, perto da falha","4ª série: 8–10 → −30% → falha"],
+       why:"O único exercício que leva o nome dele. As 3 cabeças do deltóide de uma vez."},
+      {n:5, name:"Superset · Lateral sentado + Posterior no cabo", tags:["deltóide medial","posterior"], sets:3, reps:"12 + 15", rest:60,
+       parts:[
+         {l:"A", name:"Elevação lateral sentado", sub:"Sem impulso do corpo · 12", yt:YT.lateralSentado},
+         {l:"B", name:"Elevação posterior no cabo (reverse)", sub:"Cabo cruzado · 15", yt:YT.posteriorCabo}
+       ],
+       cues:["Sentado elimina o impulso: isolamento puro do medial. Mindinho levemente pra cima","Cabo na altura do ombro, abrir pra trás, squeeze 2s"],
+       why:"Medial + posterior, ângulos diferentes da Ficha A."},
+      {n:6, name:"Elevação lateral cruzada no cabo", tags:["deltóide medial"], tech:"Drop set na 3ª", sets:3, reps:"12", rest:45, yt:YT.lateralCabo,
+       cues:["Cabo baixo cruzando na frente do corpo","Elevar até o paralelo, tensão constante","3ª série: 12 → −30% → falha"],
+       why:"Bombeamento final no ombro. Lateral direto: 6 séries aqui + 6 na A = ~12/semana."}
+    ],
+    volume:[["Peito (viés superior)",13],["Ombro",13],["Abs",3],["Total",29]],
+    note:"2º dia forte: rest-pause no cross inclinado, drop set no Arnold e na lateral cruzada."},
+
+  e:{tab:"Perna · Abs", title:"Perna + Abdômen", sub:"Retomada", sets:30, min:37, cycle:"Acumulação · sem 1/5",
+    brief:"<strong>Retomada pós-op joelho.</strong> Bloco de perna IDÊNTICO ao da Ficha C: mesmos exercícios, séries, reps e carga. A diferença é só o parceiro: aqui a perna casa com abs. RPE máximo 7, sem falha.", warn:true,
+    items:[
+      PERNA_AQ,
+      {n:1, name:"Tri-set · Agachamento + Supra corda + Canivete", tags:["perna","abs"], care:"Perna: RPE ≤7, sem falha", sets:3, reps:"12 · 20 · 15", rest:75,
+       parts:[
+         {l:"A", name:"Agachamento (pouco peso)", sub:"Sem passar do paralelo · 12", yt:YT.agacho},
+         {l:"B", name:"Abdominal supra na corda (polia)", sub:"Reto superior · 20", yt:YT.supraCorda},
+         {l:"C", name:"Canivete", sub:"Reto completo · 15", yt:YT.canivete, u:"corpo"}
+       ],
+       cues:["Agachamento: idêntico à Ficha C. 40–50%, joelho alinhado, sem falha","Supra corda: ajoelhado, flexionar o tronco, expirar forte na contração","Canivete: pernas e tronco sobem juntos, sem impulso"],
+       why:"A perna descansa enquanto DOIS abs trabalham. Abs intercalado desde o começo."},
+      {n:2, name:"Tri-set · Pélvica + Russian twist + Prancha", tags:["glúteo","abs"], sets:3, reps:"15 · 20 · 30s", rest:75,
+       parts:[
+         {l:"A", name:"Elevação pélvica na máquina", sub:"Glúteo · 15", yt:YT.pelvica},
+         {l:"B", name:"Russian twist", sub:"Oblíquos · 20 (10 por lado)", yt:YT.russian},
+         {l:"C", name:"Prancha frontal", sub:"Core · 30s", yt:YT.prancha, u:"seg"}
+       ],
+       cues:["Pélvica: empurrar com os calcanhares, contrair o glúteo 2s no topo","Twist: tronco a 45°, pés no ar, rotacionar com halter ou anilha","Prancha: corpo em linha reta, abdômen e glúteo contraídos"],
+       why:"Mesma pélvica da Ficha C, mesma carga."},
+      PERNA_3,
+      PERNA_4
+    ],
+    volume:[["Perna",18],["Abs",12],["Total",30]],
+    note:"Bloco de perna idêntico à Ficha C: mesma carga, mesma progressão. Perna 2x/semana no total."}
+};
+
+/* ---------- storage ---------- */
+const store = k => { try { return localStorage.getItem('gb2_'+k); } catch(e){ return null; } };
+const save = (k,v) => { try { localStorage.setItem('gb2_'+k, v); } catch(e){} };
+const drop = k => { try { localStorage.removeItem('gb2_'+k); } catch(e){} };
+const UNITS = {kg:"kg", reps:"reps", seg:"seg", corpo:"corpo", round:"round"};
+
+/* ---------- render ---------- */
+let current = 'a';
+const main = document.getElementById('main'), tabsEl = document.getElementById('tabs');
+
+function setBox(key, i, unit){
+  const on = store(key+'|done'+i)==='1';
+  const val = store(key+'|kg'+i) ?? '';
+  const last = store(key+'|prev'+i);
+  const u = UNITS[unit||'kg'];
+  const noInput = unit==='corpo' || unit==='round';
+  return `<div class="set ${on?'on':''}" data-key="${key}" data-i="${i}">
+    <div class="s">S${i+1}</div>
+    <div class="kg">${noInput ? `<span class="u">${unit==='corpo'?'peso do corpo':'round '+(i+1)}</span>` :
+      `<input inputmode="decimal" placeholder="${last??'–'}" value="${val}" aria-label="Carga série ${i+1}"><span class="u">${u}</span>${last?`<span class="last">últ. ${last}</span>`:''}`}</div>
+    <button class="chk" type="button" aria-pressed="${on}" aria-label="Série ${i+1} feita">${on?'✓':'○'}</button></div>`;
 }
-tabs.forEach(t=>t.addEventListener('click',()=>show(t.dataset.f)));
-document.querySelectorAll('input.load').forEach(inp=>{
-  const k='gb_'+inp.dataset.key;const v=localStorage.getItem(k);
-  if(v!==null) inp.value=v;
-  inp.addEventListener('input',()=>localStorage.setItem(k,inp.value));
-});
-function limpar(){
-  if(!confirm('Apagar TODAS as cargas salvas?'))return;
-  Object.keys(localStorage).filter(k=>k.startsWith('gb_')&&k!=='gb_active'&&k!=='gb_theme')
-    .forEach(k=>localStorage.removeItem(k));
-  document.querySelectorAll('input.load').forEach(i=>i.value='');
+function media(yt, name){
+  return `<div class="media" data-yt="${yt}" role="button" tabindex="0" aria-label="Ver vídeo: ${name}">
+    <img src="https://i.ytimg.com/vi/${yt}/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()">
+    <span class="tag">Vídeo</span><span class="play"></span><span class="name">${name}</span></div>`;
 }
-function applyTheme(t){
-  document.documentElement.setAttribute('data-theme',t);
-  document.getElementById('themebtn').textContent=t==='light'?'🌙':'☀️';
-  localStorage.setItem('gb_theme',t);
+function howBlock(ex){
+  const vids = ex.parts ? ex.parts.map(p=>media(p.yt,p.name)).join('') : media(ex.yt,ex.name);
+  return `<details class="how" ${document.body.classList.contains('study')?'open':''}><summary><span class="pl">▶</span>Como fazer<span class="chev">▾</span></summary>
+    <div class="howbody">${vids}
+      <ul class="cues">${ex.cues.map(c=>`<li>${c}</li>`).join('')}</ul>
+      ${ex.tech?`<div class="techbox"><b>Técnica:</b> ${ex.tech}</div>`:''}
+      ${ex.care?`<div class="carebox"><b>Cuidado:</b> ${ex.care}</div>`:''}
+      <p class="why">${ex.why}</p>
+    </div></details>`;
 }
-function toggleTheme(){
-  applyTheme(document.documentElement.getAttribute('data-theme')==='light'?'dark':'light');
+function renderTabs(){
+  tabsEl.innerHTML = Object.entries(FICHAS).map(([id,f])=>
+    `<button class="tab" role="tab" data-f="${id}" aria-selected="${id===current}"><b>${id.toUpperCase()}</b><small>${f.tab}</small></button>`).join('');
+  tabsEl.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{ current=t.dataset.f; save('active',current); render(); window.scrollTo({top:0}); });
 }
-applyTheme(localStorage.getItem('gb_theme')||'light');
-show(localStorage.getItem('gb_active')||'a');
+function render(){
+  const f = FICHAS[current];
+  renderTabs();
+  const items = f.items.map((ex,idx)=>{
+    if(ex.block) return `<div class="block"><b>◆</b> ${ex.block}</div>`;
+    const key = current+'|'+idx;
+    const head = `<div class="exhead">
+      <div class="rail ${ex.warm?'warm':''}">${ex.warm?'AQ':ex.n}</div>
+      <div class="title"><h2>${ex.name}</h2><div class="sub">${ex.tags.map(t=>`<span class="chip">${t}</span>`).join('')}${ex.tech?`<span class="chip tech">${ex.tech}</span>`:''}${ex.care?`<span class="chip care">${ex.care}</span>`:''}</div></div>
+      <div class="rx"><b>${ex.sets} × ${ex.reps}</b><small>${ex.rest?`descanso <span>${ex.rest}s</span>`:'sem descanso'}</small></div>
+    </div>`;
+    const body = ex.parts
+      ? ex.parts.map((p,pi)=>`<div class="row"><div class="l">${p.l}</div><div class="n">${p.name}<small>${p.sub}</small></div></div>
+          <div class="sets">${Array.from({length:ex.sets},(_,i)=>setBox(key+'|'+pi,i,p.u)).join('')}</div>`).join('')
+      : `<div class="sets">${Array.from({length:ex.sets},(_,i)=>setBox(key,i,ex.u)).join('')}</div>`;
+    return `<article class="ex" data-rest="${ex.rest}" data-next="${ex.name}">${head}${body}${howBlock(ex)}</article>`;
+  }).join('');
+  main.innerHTML = `
+    <div class="fhead">
+      <h1>Ficha ${current.toUpperCase()} <span>·</span> ${f.title}</h1>
+      <div class="stats"><span><b>${f.sets}</b>séries</span><span><b>~${f.min}</b>min</span><span><b id="doneN">0</b>feitas</span><span>${f.sub} · ${f.cycle}</span></div>
+      <div class="brief ${f.warn?'warn':''}">${f.brief}</div>
+    </div>
+    ${items}
+    <div class="sum"><h3>Volume da sessão</h3><table>${f.volume.map(([g,n])=>`<tr><td>${g==='Total'?'<strong>Total</strong>':g}</td><td>${n}</td></tr>`).join('')}</table><p class="note">${f.note}</p></div>
+    <div class="finish">
+      <button id="finish">Finalizar treino</button>
+      <p>Guarda as cargas de hoje como referência “últ.” e limpa os checks pra próxima sessão.</p>
+      <button class="clear" id="clearAll">Apagar todas as cargas salvas</button>
+    </div>`;
+  bind(); progress();
+}
+function bind(){
+  document.querySelectorAll('.set').forEach(s=>{
+    const inp = s.querySelector('input'), chk = s.querySelector('.chk');
+    const k = s.dataset.key+'|', i = s.dataset.i;
+    if(inp) inp.addEventListener('input',()=>save(k+'kg'+i, inp.value));
+    chk.addEventListener('click',()=>toggle(s));
+  });
+  document.querySelectorAll('.media[data-yt]').forEach(m=>{
+    const play=()=>{ m.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${m.dataset.yt}?autoplay=1&rel=0&playsinline=1&modestbranding=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`; m.removeAttribute('data-yt'); };
+    m.addEventListener('click',play);
+    m.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); play(); } });
+  });
+  document.querySelectorAll('.ex').forEach(card=>{
+    const all=[...card.querySelectorAll('.set')];
+    card.classList.toggle('done', all.length>0 && all.every(x=>x.classList.contains('on')));
+  });
+  document.getElementById('finish').onclick=finish;
+  document.getElementById('clearAll').onclick=clearAll;
+}
+function toggle(s){
+  const on = !s.classList.contains('on');
+  s.classList.toggle('on', on);
+  const b=s.querySelector('.chk'); b.textContent=on?'✓':'○'; b.setAttribute('aria-pressed',on);
+  save(s.dataset.key+'|done'+s.dataset.i, on?'1':'0');
+  const card = s.closest('.ex');
+  const all = [...card.querySelectorAll('.set')];
+  card.classList.toggle('done', all.every(x=>x.classList.contains('on')));
+  progress();
+  if(on && +card.dataset.rest>0) startRest(+card.dataset.rest, card);
+}
+function progress(){
+  const all=[...document.querySelectorAll('.set')], done=all.filter(x=>x.classList.contains('on')).length;
+  document.getElementById('bar').style.width=(all.length?done/all.length*100:0)+'%';
+  const n=document.getElementById('doneN'); if(n) n.textContent=done;
+}
+function finish(){
+  if(!confirm('Finalizar a Ficha '+current.toUpperCase()+'? As cargas de hoje viram a referência da próxima sessão.')) return;
+  document.querySelectorAll('.set').forEach(s=>{
+    const k=s.dataset.key+'|', i=s.dataset.i;
+    const v=store(k+'kg'+i);
+    if(v) save(k+'prev'+i, v);
+    drop(k+'kg'+i); drop(k+'done'+i);
+  });
+  clearInterval(tick); rest.classList.remove('show');
+  render(); window.scrollTo({top:0});
+}
+function clearAll(){
+  if(!confirm('Apagar TODAS as cargas e referências salvas, de todas as fichas?')) return;
+  try { Object.keys(localStorage).filter(k=>k.startsWith('gb2_')&&!['gb2_active','gb2_theme','gb2_mode'].includes(k)).forEach(k=>localStorage.removeItem(k)); } catch(e){}
+  render();
+}
+
+/* ---------- rest timer ---------- */
+let tick=null;
+const rest=document.getElementById('rest'), restT=document.getElementById('restT'), restNext=document.getElementById('restNext');
+const fmt = s => Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
+function startRest(sec, card){
+  clearInterval(tick);
+  let left=sec;
+  const nxt = card.querySelector('.set:not(.on)') ? card.dataset.next : (card.nextElementSibling?.dataset.next ?? 'Fim da ficha');
+  restNext.textContent = nxt;
+  restT.textContent=fmt(left); rest.classList.add('show');
+  tick=setInterval(()=>{ left--; restT.textContent=fmt(left); if(left<=0){ clearInterval(tick); rest.classList.remove('show'); if(navigator.vibrate) navigator.vibrate([120,60,120]); } },1000);
+}
+document.getElementById('restSkip').onclick=()=>{ clearInterval(tick); rest.classList.remove('show'); };
+
+/* ---------- modes + theme ---------- */
+const mT=document.getElementById('mTreino'), mE=document.getElementById('mEstudo');
+function mode(study){
+  document.body.classList.toggle('study',study);
+  mT.setAttribute('aria-pressed',!study); mE.setAttribute('aria-pressed',study);
+  document.querySelectorAll('.how').forEach(d=>d.open=study);
+  save('mode', study?'study':'train');
+}
+mT.onclick=()=>mode(false); mE.onclick=()=>mode(true);
+document.getElementById('theme').onclick=()=>{
+  const r=document.documentElement, cur=r.getAttribute('data-theme');
+  const dark = cur ? cur==='dark' : matchMedia('(prefers-color-scheme:dark)').matches;
+  const next = dark?'light':'dark'; r.setAttribute('data-theme', next); save('theme', next);
+};
+const savedTheme = store('theme'); if(savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
+current = FICHAS[store('active')] ? store('active') : 'a';
+render();
+if(store('mode')==='study') mode(true);
 </script>
 </body>
 </html>
