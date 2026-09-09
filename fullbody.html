@@ -173,7 +173,7 @@ body.study .how > summary .chev{display:none}
 .rest button{border:1px solid color-mix(in srgb,var(--rail-ink) 30%,transparent);background:transparent;color:var(--rail-ink);border-radius:9px;padding:8px 12px;font-weight:600;font-size:13px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 
-/* rules card (full body) */
+/* full body: rules card + video toggle */
 .rules{background:var(--surface);border:1px solid var(--line);border-radius:12px;margin-top:10px;overflow:hidden}
 .rules > summary{list-style:none;display:flex;align-items:center;gap:8px;padding:10px 14px;font-size:13px;font-weight:600;color:var(--ink-2);cursor:pointer;user-select:none}
 .rules > summary::-webkit-details-marker{display:none}
@@ -185,6 +185,9 @@ body.study .how > summary .chev{display:none}
 .rules td b{color:var(--ink)}
 .rules .foot{padding:10px 14px;font-size:12.5px;color:var(--mute);border-top:1px solid var(--line-2)}
 .rules .foot a{color:var(--accent)}
+.vtog{align-self:start}
+.vtog button{height:30px;font-size:12.5px}
+.vpane{display:grid;gap:10px}
 </style>
 </head>
 <body>
@@ -217,146 +220,146 @@ body.study .how > summary .chev{display:none}
 
 <script>
 /* ---------- dados das fichas ---------- */
-/* Full Body 3x/semana · base Laércio Refundini · ver docs/refundini/ */
-const YT = {
-  manguito:"EcWRUlH63eg", elastico:"A5G5ddF9gCg",
-  // vídeos do Refundini (start = segundo em que ele fala do exercício)
-  peito:"QAEr4jvDFD4", puxar:"Fj5tD6qgNDo", ombro:"Xq7SgSwiYeI", melhores:"yLTyV6NGrrU", bicepsLargo:"zRBWM0MsViA",
-  posterior:"9DK3AyZWllg", agacho:"vPCsDfkMa3o", gluteo:"DfoqpAwabWY",
-  extensoraLR:"I_uBK4DDflU", legpressLR:"adPY6cd4h58", panturrilhaLR:"emujvqD_Pq8", lateralCaboLR:"wGsKrK0bhps", marteloCordaLR:"S0FvPUzOceY", francesLR:"zjbKswHOH_I",
-  // demos curtas (exercícios que ele não cobre)
-  remadaPronada:"pfgEEiouvAs", flexoraPe:"T--10UN1jKs", mesaFlexora:"dMYsB4Eb2BY", pranchaLat:"2NjO5KrlVEM", canivete:"yFKPFCnpFJs"
-};
+/* Full Body 3x/semana · avançado · base Laércio Refundini · ver docs/refundini/ */
+/* yt = vídeo de EXECUÇÃO (qualquer canal) · lr = Laércio COMENTANDO o exercício, com o segundo em que ele começa */
+const LR = { peito:"QAEr4jvDFD4", melhores7:"O-lc14USdHg", puxar:"Fj5tD6qgNDo", ombro:"Xq7SgSwiYeI", melhores3:"yLTyV6NGrrU", bicepsLargo:"zRBWM0MsViA",
+  posterior:"9DK3AyZWllg", agacho:"vPCsDfkMa3o", gluteo:"DfoqpAwabWY", extensora:"I_uBK4DDflU", legpress:"adPY6cd4h58", panturrilha:"emujvqD_Pq8",
+  lateralCabo:"wGsKrK0bhps", marteloCorda:"S0FvPUzOceY" };
+const EX = { manguito:"EcWRUlH63eg", supinoHalter:"tDxKGeY-hjQ", supinoHalterIncl:"F4Q1g2z8MWM", agacho:"DOU7aDli5a4", stiff:"4_O6alBQ4wY", legpress:"waAxlYvtCcI",
+  extensora:"el3oHblB5DM", cadFlexora:"Zss6E3VU6X0", flexoraPe:"asgd2_1k7Yw", hipThrust:"6sTO9ejM-Ew", stepDown:"3sRrVvxwaUw", remadaMaq:"QyvIEdEHzHc",
+  puxadaAlta:"mPmfwbc_svw", remadaUni:"xgYWtfMBRbc", lateralHalter:"W5hRdgwEoEA", lateralCabo:"sKPJdvVvHuI", lateralMaq:"E9nwq___qow", crucInverso:"5HDkxzxe400",
+  peckDeck:"FzCnfD0gOXo", rosca45:"ioML_NZH16M", testaPolia:"RE-MNWQOcSY", tricepsCorda:"KhK5HWJfsrQ", marteloCorda:"pHfjOl6JUSg", pantPe:"of5Z7yj-HqY",
+  pantSentada:"1NBoneuGtQo", pranchaLat:"2NjO5KrlVEM" };
 
-const AQ_MANGUITO = {warm:true, name:"Manguito rotador externo", tags:["aquecimento","ombro"], sets:2, reps:"15–20", rest:0, yt:YT.manguito,
-  cues:["Cotovelo a 90° colado ao corpo, halter leve ou elástico","Só acordar o manguito: longe da fadiga","Sem descanso entre lados"],
-  why:"Refundini: aquecer o manguito sem fatigar, senão o deltoide anterior rouba o trabalho do peito."};
-const AQ_ELASTICO = {warm:true, name:"Elástico nas 3 direções + 5 min elíptico", tags:["aquecimento","fisio"], sets:2, reps:"10 cada direção", rest:0, yt:YT.elastico, u:"round",
-  cues:["Antes: 5 min de elíptico com braços","Elástico no tornozelo: lado (glúteo médio) → frente → trás","Depois, no 1º exercício: 30% da carga × 15 e 50% × 10, longe da falha"],
-  why:"Elástico é do fisio e mantém o joelho seguro. As séries a 30% e 50% são o aquecimento específico que ele prescreve."};
+const AQ_MANGUITO = {warm:true, name:"Manguito rotador externo", tags:["aquecimento","ombro"], sets:2, reps:"15–20", rest:0, yt:EX.manguito,
+  cues:["Cotovelo a 90° colado ao corpo, elástico ou halter leve","Só acordar o manguito: longe da fadiga","Sem descanso entre lados"],
+  why:"Obrigatório com histórico de lesão no ombro. Refundini: aquecer o manguito sem fatigar, senão o deltoide anterior rouba o peito."};
+const AQ_GERAL = {warm:true, name:"5 min de cardio leve + aproximação", tags:["aquecimento"], sets:2, reps:"30% × 15 · 50% × 10", rest:0, u:"round",
+  cues:["5 min de elíptico ou bike com braços","No 1º exercício do dia: 30% da carga × 15 reps, depois 50% × 10","Longe da falha, é só acordar o padrão"],
+  why:"Aquecimento específico que ele prescreve antes de todo exercício pesado."};
 
 const RULES = `<details class="rules" id="rules">
-  <summary>Regras da ficha · Refundini + joelho/lombar<span class="chev">▾</span></summary>
+  <summary>Regras da ficha · Refundini + ombro<span class="chev">▾</span></summary>
   <table>
-    <tr><td>Superiores</td><td>Séries 1 e 2 param a 1–2 reps da falha. <b>Só a 3ª série vai até a falha</b>, com técnica limpa. Nunca falha em todas.</td></tr>
-    <tr><td>Perna</td><td><b>Nenhuma série na falha</b> (RIR 2–3, RPE ≤ 8). Agachamento e leg press só até o paralelo. Desconforto no joelho → encerra a série e reduz.</td></tr>
-    <tr><td>Reps</td><td>Faixa é guia, não meta. Pesado 6–10 · isoladores 10–15 · panturrilha 10–20. Fechou o topo nas 3 séries → sobe carga na próxima.</td></tr>
-    <tr><td>Descanso</td><td>Pesado 2–3 min · intermediário 1m30 · isolador 1 min. FC ainda alta? Espera mais.</td></tr>
+    <tr><td>Intensidade</td><td>Séries iniciais param a 1–2 reps da falha. <b>A última série de cada exercício vai até a falha</b>, técnica limpa. Em agachamento e stiff, falha é “técnica quebrou”, não desabar. Forçadas: só na última série do último exercício do dia, se quiser.</td></tr>
+    <tr><td>Ombro</td><td><b>Nada acima da cabeça com carga</b> (sem desenvolvimento). Halteres no lugar de barra nos presses. Descer só até o ombro permitir. Doeu → encurta amplitude ou troca pra máquina/cross. Anterior fica com o trabalho indireto dos presses (regra dele: anterior já trabalha em peito).</td></tr>
+    <tr><td>Reps</td><td>Faixa é guia. Pesado 6–10 · intermediário 8–12 · isoladores 10–15 · panturrilha 10–20. Fechou o topo em todas as séries → sobe carga na próxima.</td></tr>
+    <tr><td>Descanso</td><td>Pesado 2–3 min · perna com carga 2 min · intermediário 1m30 · isolador 1 min. FC ainda alta? Espera mais.</td></tr>
     <tr><td>Cadência</td><td>1:1 controlada, “conduza o peso”. Nunca deixa o peso encaixar: não fecha até relaxar, não desce a lateral até a coxa, não trava o cotovelo.</td></tr>
-    <tr><td>Ordem</td><td>Pesado do dia primeiro. Posterior de coxa antes do quadríceps. Isoladores no fim.</td></tr>
-    <tr><td>Ciclo</td><td>Sem 1–2: RIR 2 em tudo. Sem 3–4: falha na 3ª (superiores). Sem 5–7: +1 série em peito, costas, lateral e posterior. Sem 8: regenerativa (2 séries, −10% carga).</td></tr>
+    <tr><td>Ordem</td><td>Pesado do dia primeiro. Posterior de coxa antes do quadríceps (exceto na B, onde quadríceps é o pesado). Isoladores no fim.</td></tr>
+    <tr><td>Ciclo</td><td>Sem 1–2: RIR 1–2 em tudo, aprender cargas. Sem 3–4: falha na última série. Sem 5–7: +1 série em lateral, bíceps, tríceps e deltoide posterior. Sem 8: regenerativa (metade das séries, −10% carga).</td></tr>
   </table>
-  <div class="foot">Volume semanal inicial: 9 séries em peito, costas, deltoide lateral, quadríceps e posterior · 6 em bíceps e tríceps · 8 panturrilha. Método e fontes: <a href="https://github.com/leoborja/gym-fichas/blob/main/docs/refundini/METODO.md">METODO.md</a> · <a href="https://github.com/leoborja/gym-fichas/blob/main/docs/refundini/FICHA-FULLBODY-3x.md">FICHA-FULLBODY-3x.md</a> · <a href="index.html">fichas A–E</a></div>
+  <div class="foot">Volume semanal: peito 12 · quadríceps 11 · posterior 11 · costas 10 · lateral 9 · glúteo 7 · bíceps 6 · tríceps 6 · panturrilha 8. Método e fontes: <a href="https://github.com/leoborja/gym-fichas/blob/main/docs/refundini/METODO.md">METODO.md</a> · <a href="https://github.com/leoborja/gym-fichas/blob/main/docs/refundini/FICHA-FULLBODY-3x.md">FICHA-FULLBODY-3x.md</a></div>
 </details>`;
 
 const FICHAS = {
-  a:{tab:"Peito pesado", title:"Full Body · peito pesado", sub:"Segunda", sets:25, min:58, cycle:"Ciclo 1 · sem 1/8",
-    brief:"<strong>Pesado do dia: supino no cross reto.</strong> Posterior antes do quadríceps. Superiores: 3ª série na falha. Perna: nada de falha, RPE ≤ 8.",
+  a:{tab:"Peito pesado", title:"Full Body · peito pesado", sub:"Segunda", sets:28, min:62, cycle:"Ciclo 1 · sem 1/8",
+    brief:"<strong>Pesado do dia: supino reto com halteres.</strong> Posterior antes do quadríceps. Última série de cada exercício na falha. Manguito antes de tudo.",
     items:[
-      AQ_MANGUITO, AQ_ELASTICO,
+      AQ_MANGUITO, AQ_GERAL,
       {block:"Pesado do dia"},
-      {n:1, name:"Supino sentado no cross · reto", tags:["peito","médio"], tech:"3ª série na falha", sets:3, reps:"6–10", rest:150, yt:YT.peito, start:108,
-       cues:["Escápulas fechadas, coluna apoiada no banco","Cabos na altura do peito, empurrar à frente sem travar o cotovelo","Descer até o ombro “avisar”, nunca além","Séries 1–2 a 1–2 reps da falha; a 3ª até a falha"],
-       why:"Refundini abre o treino de peito com press pesado em máquina (6–10 reps) por segurança e carga. Aqui o cross sentado faz esse papel: resistência constante e lombar protegida, o que barra e máquina não te dão."},
+      {n:1, name:"Supino reto com halteres", tags:["peito","médio"], tech:"Última série na falha", care:"Ombro: descer só até onde permitir", sets:4, reps:"6–10", rest:150, yt:EX.supinoHalter, lr:{yt:LR.melhores7, start:47},
+       cues:["Escápulas fechadas, pés firmes, halteres na linha do peito","Descer até o ombro “avisar”, nunca além; cotovelo um pouco mais perto do corpo se incomodar","Subir sem bater os halteres no topo: o peito não relaxa","Séries 1–3 a 1–2 reps da falha; a 4ª até a falha"],
+       why:"Nº 1 da lista dele de peito e o substituto declarado do supino com barra: mais amplitude, encurta mais, conforto articular. Com ombro lesionado, o halter deixa você ajustar o ângulo do cotovelo."},
       {block:"Perna · posterior primeiro"},
-      {n:2, name:"Cadeira flexora bilateral", tags:["posterior","alongado"], care:"Sem falha · RIR 2–3", sets:3, reps:"10–12", rest:90, yt:YT.posterior, start:115,
-       cues:["Ponta do pé puxada pra cima","Alongar bem no topo, controlar a volta em 1:1","Parar a 2–3 reps da falha"],
+      {n:2, name:"Cadeira flexora bilateral", tags:["posterior","alongado"], tech:"Última série na falha", sets:4, reps:"10–12", rest:90, yt:EX.cadFlexora, lr:{yt:LR.posterior, start:115},
+       cues:["Ponta do pé puxada pra cima","Alongar bem no topo, controlar a volta em 1:1","Não deixar o quadril sair do banco"],
        why:"Pra ele a cadeira flexora ganha da mesa flexora em hipertrofia porque trabalha o posterior alongado. Posterior vem antes do quadríceps e com o mesmo volume."},
-      {n:3, name:"Cadeira extensora unilateral", tags:["quadríceps","encurtado"], care:"Sem falha · RPE ≤ 7–8", sets:3, reps:"12 cada", rest:90, yt:YT.extensoraLR,
-       cues:["Subir 2s, segurar 1s no topo, descer 2s","Não travar o joelho na extensão","Uma perna por vez: corrige assimetria e controla a carga"],
-       why:"Do fisio. Refundini não condena a extensora; entra como o exercício de quadríceps em posição encurtada da semana."},
+      {n:3, name:"Agachamento livre com barra", tags:["quadríceps","glúteo","médio · profundo"], tech:"Última série na falha técnica", sets:4, reps:"6–10", rest:150, yt:EX.agacho, lr:{yt:LR.agacho, start:15},
+       cues:["Pés na posição natural do salto, joelho apontando pro pé","Barra nos trapézios, cotovelos pro chão, peso na sola inteira","Descer o máximo sem arredondar a lombar; joelho pode passar a ponta do pé","Subir quadril e tronco juntos, leve flexão no topo"],
+       why:"O exercício de quadríceps que ele mais defende. Tronco estável → mais carga → mais hipertrofia. Amplitude máxima sem comprometer a lombar."},
       {block:"Superiores"},
-      {n:4, name:"Remada baixa pronada aberta", tags:["costas","meio · romboide"], tech:"3ª série na falha", sets:3, reps:"8–10", rest:90, yt:YT.remadaPronada,
-       cues:["Pegada pronada e aberta na polia baixa","Peito pra fora, cotovelo pra trás, apertar a escápula 1s","Sem usar a lombar. Se houver remada máquina com apoio de peito, pode trocar"],
-       why:"É o exercício de “profundidade” das costas que ele coloca no treino de puxar: meio das costas, senão fica largo sem espessura."},
-      {n:5, name:"Elevação lateral com halteres", tags:["deltoide lateral","torque no topo"], tech:"3ª série na falha", sets:3, reps:"10–15", rest:60, yt:YT.ombro, start:127,
-       cues:["Subir até a linha do ombro, sem balançar o corpo","Não descer até a coxa: mantém tensão embaixo","Mindinho levemente pra cima"],
-       why:"Lateral é a prioridade nº 1 de ombro pra ele, porque não trabalha em peito nem em costas. Halter cobre o torque no topo."},
-      {n:6, name:"Rosca 45° em banco inclinado", tags:["bíceps","alongado"], tech:"3ª série na falha", sets:3, reps:"10–12", rest:60, yt:YT.melhores, start:236,
+      {n:4, name:"Remada máquina com apoio de peito · pegada aberta", tags:["costas","meio · romboide"], tech:"Última série na falha", sets:3, reps:"8–10", rest:90, yt:EX.remadaMaq, lr:{yt:LR.puxar, start:257},
+       cues:["Peito apoiado, pegada pronada e aberta","Cotovelo pra trás e pra fora, apertar a escápula 1s","Subir o peito no fim da remada"],
+       why:"O exercício de “profundidade” das costas no treino de puxar dele: meio das costas, senão fica largo sem espessura. Com apoio, a lombar sai da equação."},
+      {n:5, name:"Elevação lateral com halteres", tags:["deltoide lateral","torque no topo"], tech:"Última série na falha", sets:3, reps:"10–15", rest:60, yt:EX.lateralHalter, lr:{yt:LR.ombro, start:127},
+       cues:["Subir até a linha do ombro, sem balançar o corpo","Não descer até a coxa: mantém tensão embaixo","Mindinho levemente pra cima; se o ombro reclamar, tronco um pouco à frente"],
+       why:"Lateral é a prioridade nº 1 de ombro pra ele, porque não trabalha em peito nem em costas. Sem desenvolvimento na ficha, é aqui que o ombro cresce."},
+      {n:6, name:"Rosca 45° em banco inclinado", tags:["bíceps","alongado"], tech:"Última série na falha", sets:3, reps:"10–12", rest:60, yt:EX.rosca45, lr:{yt:LR.melhores3, start:236},
        cues:["Banco a 45°, braço bem pra trás pra alongar","Cotovelo parado, não vem à frente","Se o ombro reclamar, sobe um pouco o banco"],
-       why:"A rosca que ele mais elogia: “melhor segundo a ciência”, pelo alongamento. Único estudo que ele cita nesse lote: 45° > Scott."},
-      {n:7, name:"Crucifixo inverso na máquina", tags:["deltoide posterior"], tech:"3ª série na falha", sets:3, reps:"12–15", rest:60, yt:YT.ombro, start:71,
+       why:"A rosca que ele mais elogia: “melhor segundo a ciência”, pelo alongamento. Único estudo que ele cita no lote: 45° > Scott."},
+      {n:7, name:"Crucifixo inverso na máquina", tags:["deltoide posterior"], tech:"Última série na falha", sets:3, reps:"12–15", rest:60, yt:EX.crucInverso, lr:{yt:LR.ombro, start:71},
        cues:["Apoiar só o abdômen, não o peito","Não arquear as costas, senão o dorsal entra","Abrir até a linha do ombro, controlar a volta"],
-       why:"Ele fecha o dia de ombro e o de costas com posterior em máquina: alavanca constante, isola sem o dorsal roubar."},
-      {n:8, name:"Panturrilha em pé", tags:["panturrilha","gastrocnêmio"], sets:4, reps:"10–20", rest:60, yt:YT.panturrilhaLR,
+       why:"Ele fecha o dia de ombro e o de costas com posterior em máquina: alavanca constante, isola sem o dorsal roubar. Posterior forte também estabiliza o ombro."},
+      {n:8, name:"Panturrilha em pé", tags:["panturrilha","gastrocnêmio"], sets:4, reps:"10–20", rest:60, yt:EX.pantPe, lr:{yt:LR.panturrilha},
        cues:["Alongar bem embaixo, 1s de contração no topo","Controlada, sem quicar","Unilateral quando ficar fácil"],
-       why:"Refundini: 4 séries de 10–20 controladas, não precisa de reps altíssimas. Sem máquina sentada aqui, então só gastrocnêmio."}
+       why:"Refundini: 4 séries de 10–20 controladas, não precisa de reps altíssimas."}
     ],
-    volume:[["Peito",3],["Posterior de coxa",3],["Quadríceps",3],["Costas (meio)",3],["Deltoide lateral",3],["Bíceps",3],["Deltoide posterior",3],["Panturrilha",4],["Total",25]],
-    note:"Cada músculo recebe 1 exercício por sessão: dose baixa recupera em 24–48 h (regra dele). Na semana 5 a 4ª série entra em peito, costas, lateral e posterior."},
+    volume:[["Peito",4],["Posterior de coxa",4],["Quadríceps",4],["Costas (meio)",3],["Deltoide lateral",3],["Bíceps",3],["Deltoide posterior",3],["Panturrilha",4],["Total",28]],
+    note:"Cada músculo recebe 1 exercício por sessão: dose baixa recupera em 24–48 h (regra dele). Os pesados do dia levam 4 séries porque o nível é avançado."},
 
-  b:{tab:"Costas pesada", title:"Full Body · costas pesada", sub:"Quarta", sets:25, min:58, cycle:"Ciclo 1 · sem 1/8",
-    brief:"<strong>Pesado do dia: puxada alta.</strong> Agachamento só até o paralelo, RPE ≤ 7. Peito hoje é pico de contração no crucifixo máquina.",
+  b:{tab:"Costas pesada", title:"Full Body · costas pesada", sub:"Quarta", sets:29, min:62, cycle:"Ciclo 1 · sem 1/8",
+    brief:"<strong>Pesado do dia: puxada alta.</strong> Stiff antes do leg press. Peito hoje é pico de contração no crucifixo máquina. Tríceps na polia deitado, nada acima da cabeça.",
     items:[
-      AQ_MANGUITO, AQ_ELASTICO,
+      AQ_MANGUITO, AQ_GERAL,
       {block:"Pesado do dia"},
-      {n:1, name:"Puxada alta pronada", tags:["costas","médio · pesado"], tech:"3ª série na falha", sets:3, reps:"6–10", rest:150, yt:YT.puxar,
+      {n:1, name:"Puxada alta pronada", tags:["costas","médio · pesado"], tech:"Última série na falha", sets:4, reps:"6–10", rest:150, yt:EX.puxadaAlta, lr:{yt:LR.puxar, start:41},
        cues:["Cotovelos pra baixo, subir o peito no fim da puxada","Controlar a subida, não soltar","Pegada um pouco mais aberta que o ombro"],
        why:"Ele abre o treino de puxar com puxada alta pesada em 6–10 reps: tensão mecânica no dorsal em comprimento médio."},
-      {block:"Perna · quadríceps pesado hoje"},
-      {n:2, name:"Agachamento até o paralelo", tags:["quadríceps","glúteo","médio"], care:"Sem falha · RPE ≤ 7 · paralelo", sets:3, reps:"8–12", rest:120, yt:YT.agacho, start:15,
-       cues:["Pés na posição natural do salto, joelho apontando pro pé","Barra leve ou goblet com halter; peso na sola inteira","Descer 2s até o paralelo, subir quadril e tronco juntos","Desconforto no joelho → mudar a posição dos pés antes de pôr carga"],
-       why:"O único exercício de quadríceps que Refundini detalha. A técnica é dele; o limite no paralelo e o RPE ≤ 7 são do seu joelho."},
-      {n:3, name:"Flexora em pé unilateral", tags:["posterior","médio"], care:"Sem falha · RIR 2–3", sets:3, reps:"10–12 cada", rest:90, yt:YT.posterior, start:560,
-       cues:["Quadril encaixado, tronco parado","Subir 1s, descer 2s controlando","Se a academia não tiver: cadeira flexora unilateral"],
-       why:"Segundo exercício de posterior da semana, em comprimento médio. Ele: posterior é “delicado”, técnica antes de carga."},
+      {block:"Perna · posterior primeiro"},
+      {n:2, name:"Stiff com barra", tags:["posterior","glúteo","alongado máximo"], tech:"Última série na falha técnica", sets:4, reps:"8–10", rest:120, yt:EX.stiff, lr:{yt:LR.posterior, start:118},
+       cues:["Joelho quase estendido, quadril vai pra trás","Descer até sentir o posterior alongar, lombar neutra o tempo todo","Barra rente às pernas, subir contraindo glúteo"],
+       why:"Stiff é o exercício de posterior alongado que ele cita ao lado da cadeira flexora. “Quanto mais alonga, mais hipertrofia.”"},
+      {n:3, name:"Leg press 45°", tags:["quadríceps","alongado"], tech:"Última série na falha", sets:4, reps:"8–12", rest:120, yt:EX.legpress, lr:{yt:LR.legpress},
+       cues:["Pés na largura do agachamento, apoiados por inteiro","Descer o máximo sem o quadril sair do banco","Não travar o joelho no topo"],
+       why:"Segundo estímulo pesado de quadríceps da semana, em alongamento e com o tronco estável. Ele tem vídeo só sobre a execução."},
       {block:"Superiores"},
-      {n:4, name:"Crucifixo na máquina (peck deck)", tags:["peito","encurtado · pico"], tech:"3ª série na falha", sets:3, reps:"10–12", rest:90, yt:YT.peito, start:83,
+      {n:4, name:"Crucifixo na máquina (peck deck)", tags:["peito","encurtado · pico"], tech:"Última série na falha", sets:4, reps:"10–12", rest:90, yt:EX.peckDeck, lr:{yt:LR.peito, start:83},
        cues:["Apertar mão contra mão no fim, 1s","Não relaxar no topo: o peso nunca “encaixa”","Abrir só até onde o ombro permitir"],
-       why:"“O melhor exercício de peito” pra ele: alavanca constante, alonga e encurta muito, impossível perder tensão."},
-      {n:5, name:"Elevação lateral no cabo baixo · diagonal", tags:["deltoide lateral","torque no início"], tech:"3ª série na falha", sets:3, reps:"12–15", rest:60, yt:YT.lateralCaboLR,
+       why:"“O melhor exercício de peito” pra ele: alavanca constante, alonga e encurta muito, impossível perder tensão. Amplitude de abertura é você quem manda."},
+      {n:5, name:"Elevação lateral no cabo baixo · diagonal", tags:["deltoide lateral","torque no início"], tech:"Última série na falha", sets:3, reps:"12–15", rest:60, yt:EX.lateralCabo, lr:{yt:LR.lateralCabo},
        cues:["Cabo passando por trás do corpo, subir em diagonal","Tensão desde o início do movimento","Não descer até relaxar"],
        why:"Segunda faixa de torque do lateral (início do movimento), que o halter não cobre. Ele monta lateral em 3 exercícios por isso."},
-      {n:6, name:"Tríceps francês unilateral", tags:["tríceps","alongado · cabeça longa"], tech:"3ª série na falha", sets:3, reps:"10–12 cada", rest:60, yt:YT.francesLR,
-       cues:["Halter ou polia acima da cabeça","Cotovelo apontando pra frente, descer bem atrás da cabeça","Estender sem travar"],
-       why:"“Top dos tops” pra ele: o que mais gera hipertrofia no tríceps, pelo alongamento da cabeça longa."},
-      {n:7, name:"Panturrilha em pé", tags:["panturrilha","gastrocnêmio"], sets:4, reps:"10–20", rest:60, yt:YT.panturrilhaLR,
-       cues:["Alongar bem embaixo, 1s de contração no topo","Controlada, sem quicar"],
-       why:"Igual à Ficha A. 8 séries por semana."},
-      {n:8, name:"Core · Canivete ou prancha lateral", tags:["core"], sets:3, reps:"15 ou 45s", rest:45, yt:YT.pranchaLat, u:"corpo",
-       cues:["Canivete: pernas e tronco sobem juntos, sem impulso","Prancha lateral: quadril alto, corpo em linha, alternar os lados"],
-       why:"Não vem do Refundini (ele quase não fala de abdômen). Mantido da sua ficha atual, opcional."}
+      {n:6, name:"Tríceps testa na polia · deitado", tags:["tríceps","cabeça longa"], tech:"Última série na falha", care:"Ombro: no lugar do francês acima da cabeça", sets:3, reps:"10–12", rest:60, yt:EX.testaPolia, lr:{yt:LR.melhores3, start:364},
+       cues:["Deitado no banco, polia baixa atrás da cabeça, barra ou corda","Cotovelo apontando pro teto, descer atrás da testa","Estender sem travar"],
+       why:"Ele troca o testa com barra livre pela polia (“barra livre machuca o cotovelo”). Aqui também substitui o francês, que exigiria o braço acima da cabeça."},
+      {n:7, name:"Panturrilha sentada", tags:["panturrilha","sóleo"], sets:4, reps:"10–15", rest:60, yt:EX.pantSentada, lr:{yt:LR.panturrilha},
+       cues:["Alongar bem embaixo, 1s no topo","Controlada"],
+       why:"Sentada pega o sóleo, que a em pé não pega. Fecha 8 séries de panturrilha na semana."},
+      {n:8, name:"Core · Prancha lateral ou canivete", tags:["core"], sets:3, reps:"45s ou 15", rest:45, yt:EX.pranchaLat, u:"corpo",
+       cues:["Prancha lateral: quadril alto, corpo em linha, alternar os lados","Canivete: pernas e tronco sobem juntos, sem impulso"],
+       why:"Não vem do Refundini (ele quase não fala de abdômen). Opcional."}
     ],
-    volume:[["Costas",3],["Quadríceps",3],["Posterior de coxa",3],["Peito",3],["Deltoide lateral",3],["Tríceps",3],["Panturrilha",4],["Core",3],["Total",25]],
-    note:"Quadríceps vem antes do posterior só hoje, porque é o exercício pesado de perna da semana. Perna não sobe de volume enquanto o joelho estiver em retomada."},
+    volume:[["Costas",4],["Posterior de coxa",4],["Quadríceps",4],["Peito",4],["Deltoide lateral",3],["Tríceps",3],["Panturrilha",4],["Core",3],["Total",29]],
+    note:"Stiff e leg press em sequência: posterior alongado antes, quadríceps alongado depois. Sem nada acima da cabeça nesta sessão."},
 
-  c:{tab:"Perna pesada", title:"Full Body · perna pesada", sub:"Sexta", sets:27, min:60, cycle:"Ciclo 1 · sem 1/8",
-    brief:"<strong>Pesado do dia: perna.</strong> Glúteo e posterior antes do leg press. Peito superior a 30°, remada “do Lalá”, lateral na máquina fecha 9 séries na semana.",
+  c:{tab:"Perna pesada", title:"Full Body · perna pesada", sub:"Sexta", sets:29, min:62, cycle:"Ciclo 1 · sem 1/8",
+    brief:"<strong>Pesado do dia: glúteo e posterior.</strong> Hip thrust e step-down, os 2 exercícios de glúteo que ele endossa. Peito superior a 30° com halteres, remada “do Lalá”, lateral na máquina fecha 9 séries na semana.",
     items:[
-      AQ_MANGUITO, AQ_ELASTICO,
-      {block:"Pesado do dia · perna"},
-      {n:1, name:"Elevação pélvica na máquina (hip thrust)", tags:["glúteo","encurtado"], care:"Sem falha · RIR 2", sets:3, reps:"8–12", rest:120, yt:YT.gluteo, start:39,
-       cues:["Empurrar com o calcanhar, contrair o glúteo 2s no topo","Queixo recolhido, costela pra baixo","Não hiperestender a lombar no topo"],
-       why:"Um dos 2 exercícios de glúteo que ele endossa (o outro, step-down, carrega o joelho: fica pro ciclo 2 com OK do fisio). Glúteo sem força de extensão final vira dor lombar."},
-      {n:2, name:"Mesa flexora", tags:["posterior","encurtado"], care:"Sem falha · RIR 2–3", sets:3, reps:"10–12", rest:90, yt:YT.mesaFlexora,
-       cues:["Quadril colado no banco, não levantar","Subir 1s, descer 2s","Se não houver mesa: cadeira flexora bilateral com carga diferente da A"],
-       why:"Fecha os 3 comprimentos do posterior na semana (alongado A, médio B, encurtado C). Volume igual ao de quadríceps, regra dele."},
-      {n:3, name:"Leg press até o paralelo", tags:["quadríceps","alongado controlado"], care:"Sem falha · RPE ≤ 7 · joelho 90°", sets:3, reps:"10–12", rest:120, yt:YT.legpressLR,
-       cues:["Pés na largura do agachamento, apoiados por inteiro","Descer só até o joelho a 90°","Não travar o joelho no topo","Se não houver: extensora bilateral"],
-       why:"Terceiro estímulo de quadríceps, com mais alongamento que a extensora e mais estabilidade que o agachamento. Amplitude limitada pelo joelho, não pela regra dele."},
+      AQ_MANGUITO, AQ_GERAL,
+      {block:"Pesado do dia · glúteo e posterior"},
+      {n:1, name:"Elevação pélvica com barra (hip thrust)", tags:["glúteo","encurtado"], tech:"Última série na falha", sets:4, reps:"8–12", rest:120, yt:EX.hipThrust, lr:{yt:LR.gluteo, start:39},
+       cues:["Costas apoiadas no banco na altura da escápula","Empurrar com o calcanhar, contrair o glúteo 2s no topo","Queixo recolhido, costela pra baixo, sem hiperestender a lombar"],
+       why:"Um dos 2 exercícios de glúteo que ele endossa (react ao Bret Contreras): o de posição encurtada. Hip thrust convencional antes de variar."},
+      {n:2, name:"Step-down no caixote", tags:["glúteo","alongado"], tech:"Última série na falha", sets:3, reps:"10–12 cada", rest:90, yt:EX.stepDown, lr:{yt:LR.gluteo, start:271},
+       cues:["Em pé no caixote, uma perna no ar, descer o pé livre até quase tocar o chão","Tronco inclinado à frente, joelho da perna de apoio segue o pé","Halter na mão oposta à perna de apoio"],
+       why:"O outro exercício de glúteo endossado: o de posição alongada, glúteo inferior. Ele condena agachamento e terra como exercício PRINCIPAL de glúteo."},
+      {n:3, name:"Flexora em pé unilateral", tags:["posterior","médio"], tech:"Última série na falha", sets:3, reps:"10–12 cada", rest:90, yt:EX.flexoraPe, lr:{yt:LR.posterior, start:560},
+       cues:["Quadril encaixado, tronco parado","Subir 1s, descer 2s controlando"],
+       why:"Fecha os 3 comprimentos do posterior na semana: alongado (cadeira, stiff) e médio (em pé). Ele: posterior é “delicado”, técnica antes de carga."},
+      {n:4, name:"Cadeira extensora", tags:["quadríceps","encurtado"], tech:"Última série na falha", sets:3, reps:"12–15", rest:60, yt:EX.extensora, lr:{yt:LR.extensora},
+       cues:["Subir 1s, segurar 1s no topo, descer 2s","Costas apoiadas, quadril fixo","Não travar com impulso"],
+       why:"Terceiro estímulo de quadríceps, em posição encurtada (pico). Ele tem vídeo só sobre a extensora."},
       {block:"Superiores"},
-      {n:4, name:"Supino sentado no cross · inclinado 30°", tags:["peito superior","médio"], tech:"3ª série na falha", sets:3, reps:"8–10", rest:120, yt:YT.peito, start:381,
-       cues:["Banco a 30°, não 45°","Empurrar pra frente e pra cima, sem travar o cotovelo","Coluna apoiada, escápulas fechadas"],
-       why:"Único exercício de peitoral superior que ele prescreve: “30° > 45°”. Aqui no cross pela lombar e pelos 20 kg de halter."},
-      {n:5, name:"Remada unilateral na polia baixa · “do Lalá”", tags:["costas","dorsal · encurtado"], tech:"3ª série na falha", sets:3, reps:"10–12 cada", rest:90, yt:YT.puxar, start:121,
+      {n:5, name:"Supino inclinado 30° com halteres", tags:["peito superior","médio"], tech:"Última série na falha", care:"Ombro: descer só até onde permitir", sets:4, reps:"8–10", rest:120, yt:EX.supinoHalterIncl, lr:{yt:LR.peito, start:381},
+       cues:["Banco a 30°, não 45°","Halteres na linha do peito alto, cotovelo um pouco fechado","Descer até o ombro permitir, subir sem bater os halteres"],
+       why:"Único exercício de peitoral superior que ele prescreve: “30° > 45°”. Halteres pra poder ajustar o ângulo do cotovelo ao ombro."},
+      {n:6, name:"Remada unilateral na polia baixa · “do Lalá”", tags:["costas","dorsal · encurtado"], tech:"Última série na falha", sets:3, reps:"10–12 cada", rest:90, yt:EX.remadaUni, lr:{yt:LR.puxar, start:121},
        cues:["Puxar a mão em direção ao quadril, não ao peito","Cotovelo perto do corpo, tronco parado","Alongar bem no início, sem girar o tronco"],
        why:"A remada que ele chama de “do Lalá”: a mão indo ao quadril encurta a dorsal e tira bíceps e trapézio da jogada."},
-      {n:6, name:"Elevação lateral na máquina", tags:["deltoide lateral","torque constante"], tech:"3ª série na falha", sets:3, reps:"12–15", rest:60, yt:YT.ombro, start:84,
+      {n:7, name:"Elevação lateral na máquina", tags:["deltoide lateral","torque constante"], tech:"Última série na falha", sets:3, reps:"12–15", rest:60, yt:EX.lateralMaq, lr:{yt:LR.ombro, start:84},
        cues:["Cotovelo na almofada, subir até a linha do ombro","Não deixar o braço cair até relaxar","Postura encaixada"],
        why:"“A melhor de todas” pra ele: vetor circular, torque constante. Fecha 9 séries de lateral na semana em 3 faixas."},
-      {n:7, name:"Desenvolvimento na máquina", tags:["deltoide anterior"], tech:"3ª série na falha", sets:3, reps:"8–10", rest:90, yt:YT.peito, start:416,
-       cues:["Descer até o queixo, subir sem travar","Costas apoiadas, sem arquear"],
-       why:"Único trabalho direto de anterior da semana. Ele: anterior já trabalha em peito, então pouco volume dedicado, e o desenvolvimento entra no fim."},
-      {n:8, name:"Superset · Tríceps corda + Rosca martelo corda", tags:["tríceps","braquiorradial"], tech:"3ª série na falha", sets:3, reps:"12–15 + 10–12", rest:60,
+      {n:8, name:"Superset · Tríceps corda + Rosca martelo corda", tags:["tríceps","braquiorradial"], tech:"Última série na falha", sets:3, reps:"12–15 + 10–12", rest:60,
        parts:[
-         {l:"A", name:"Tríceps corda na polia alta", sub:"Encurtado · abrir as mãos embaixo", yt:YT.melhores, start:348},
-         {l:"B", name:"Rosca martelo com corda na polia baixa", sub:"Braquiorradial · mão “pra fora” no fim", yt:YT.marteloCordaLR}
+         {l:"A", name:"Tríceps corda na polia alta", sub:"Encurtado · abrir as mãos embaixo", yt:EX.tricepsCorda, lr:{yt:LR.melhores3, start:348}},
+         {l:"B", name:"Rosca martelo com corda na polia baixa", sub:"Braquiorradial · mão “pra fora” no fim", yt:EX.marteloCorda, lr:{yt:LR.marteloCorda}}
        ],
        cues:["Corda no lugar da barra nos dois (troca explícita dele)","Tríceps: cotovelo parado, abrir as mãos no fim","Martelo: cotovelo colado, girar a mão pra fora no topo"],
        why:"Corda em vez de barra no pulley é troca dele. Martelo com corda ataca o braquiorradial, o “bíceps largo”."}
     ],
-    volume:[["Glúteo",3],["Posterior de coxa",3],["Quadríceps",3],["Peito superior",3],["Costas (dorsal)",3],["Deltoide lateral",3],["Deltoide anterior",3],["Tríceps + bíceps",6],["Total",27]],
-    note:"Semana fecha com 9 séries em peito, costas, lateral, quadríceps e posterior. Ciclo 2: trocar variantes (“o melhor treino é o que você ainda não fez”)."}
+    volume:[["Glúteo",7],["Posterior de coxa",3],["Quadríceps",3],["Peito superior",4],["Costas (dorsal)",3],["Deltoide lateral",3],["Tríceps + bíceps",6],["Total",29]],
+    note:"Semana fecha com peito 12, quadríceps 11, posterior 11, costas 10, lateral 9. Ciclo 2: trocar variantes (“o melhor treino é o que você ainda não fez”)."}
 };
 
 /* ---------- storage ---------- */
@@ -381,19 +384,28 @@ function setBox(key, i, unit){
       `<input inputmode="decimal" placeholder="${last??'–'}" value="${val}" aria-label="Carga série ${i+1}"><span class="u">${u}</span>${last?`<span class="last">últ. ${last}</span>`:''}`}</div>
     <button class="chk" type="button" aria-pressed="${on}" aria-label="Série ${i+1} feita">${on?'✓':'○'}</button></div>`;
 }
-function media(yt, name, start){
+function media(yt, name, start, label){
   const st = start ? `${Math.floor(start/60)}:${String(start%60).padStart(2,'0')}` : '';
   return `<div class="media" data-yt="${yt}" data-start="${start||0}" role="button" tabindex="0" aria-label="Ver vídeo: ${name}">
     <img src="https://i.ytimg.com/vi/${yt}/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()">
-    <span class="tag">Vídeo${st?' · '+st:''}</span><span class="play"></span><span class="name">${name}</span></div>`;
+    <span class="tag">${label||'Vídeo'}${st?' · '+st:''}</span><span class="play"></span><span class="name">${name}</span></div>`;
+}
+function videos(ex){
+  const items = ex.parts || [ex];
+  const exec = items.map(p=>p.yt?media(p.yt,p.name,0,'Execução'):'').join('');
+  const hasLR = items.some(p=>p.lr);
+  if(!hasLR) return exec;
+  const lr = items.map(p=>p.lr?media(p.lr.yt,'Laércio sobre: '+p.name,p.lr.start,'Laércio'):'').join('');
+  return `<div class="seg vtog" role="group" aria-label="Vídeo"><button type="button" aria-pressed="true" data-v="0">Execução</button><button type="button" aria-pressed="false" data-v="1">Laércio explica</button></div>
+    <div class="vpane" data-v="0">${exec}</div><div class="vpane" data-v="1" hidden>${lr}</div>`;
 }
 function howBlock(ex){
-  const vids = ex.parts ? ex.parts.map(p=>media(p.yt,p.name,p.start)).join('') : media(ex.yt,ex.name,ex.start);
+  const vids = videos(ex);
   return `<details class="how" ${document.body.classList.contains('study')?'open':''}><summary><span class="pl">▶</span>Como fazer<span class="chev">▾</span></summary>
     <div class="howbody">${vids}
       <ul class="cues">${ex.cues.map(c=>`<li>${c}</li>`).join('')}</ul>
       ${ex.tech?`<div class="techbox"><b>Intensidade:</b> ${ex.tech}</div>`:''}
-      ${ex.care?`<div class="carebox"><b>Joelho:</b> ${ex.care}</div>`:''}
+      ${ex.care?`<div class="carebox"><b>Ombro:</b> ${ex.care}</div>`:''}
       <p class="why">${ex.why}</p>
     </div></details>`;
 }
@@ -450,6 +462,11 @@ function bind(){
   document.querySelectorAll('.ex').forEach(card=>{
     const all=[...card.querySelectorAll('.set')];
     card.classList.toggle('done', all.length>0 && all.every(x=>x.classList.contains('on')));
+  });
+  document.querySelectorAll('.vtog button').forEach(b=>b.onclick=()=>{
+    const box=b.closest('.howbody'), v=b.dataset.v;
+    box.querySelectorAll('.vtog button').forEach(x=>x.setAttribute('aria-pressed', x.dataset.v===v));
+    box.querySelectorAll('.vpane').forEach(p=>p.hidden = p.dataset.v!==v);
   });
   document.getElementById('finish').onclick=finish;
   document.getElementById('clearAll').onclick=clearAll;

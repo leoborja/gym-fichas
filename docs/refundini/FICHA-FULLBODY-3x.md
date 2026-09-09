@@ -1,125 +1,103 @@
-# Full Body 3x/semana — base Refundini
+# Full Body 3x/semana — base Refundini (versão pro amigo do Leo)
 
-Sugestão montada em 08/09/2026 a partir do método do Laércio Refundini (ver `METODO.md`), adaptada às suas restrições: joelho em retomada pós-op, lombar protegida (press no cross sentado, nada de barra nas costas), halteres até 20 kg, sem panturrilha sentada.
+Montada em 08/09/2026 a partir do método do Laércio Refundini (ver `METODO.md`). Perfil: **avançado**, hipertrofia geral, **3x/semana full body**, academia completa, **ombros já lesionados: nada de desenvolvimento nem carga acima da cabeça**.
 
-**Dias:** Seg (A) · Qua (B) · Sex (C). 48 h entre sessões. Cada músculo recebe 1 exercício por sessão, então recupera em 24–48 h (regra dele: "dose baixa recupera em 24 h; o critério é a força na próxima sessão, não a dor").
+Página interativa: https://leoborja.github.io/gym-fichas/fullbody.html (cada exercício tem dois vídeos alternáveis: execução, de qualquer canal, e o Laércio comentando o exercício, já no segundo em que ele começa).
 
-**Duração alvo:** 55–60 min. 24–25 séries por sessão + aquecimento.
+**Dias:** Seg (A) · Qua (B) · Sex (C). Cada músculo recebe 1 exercício por sessão e recupera em 24–48 h (regra dele: "dose baixa recupera em 24 h; o critério é a força na próxima sessão").
+
+**Duração alvo:** ~60 min. 28–29 séries + aquecimento.
 
 ---
 
-## Regras da ficha (as dele, com a sua adaptação)
+## Regras
 
-| Regra | Como aplicar |
+| Regra | Aplicação |
 |---|---|
-| **Intensidade** (superiores) | Séries 1 e 2 param a 1–2 reps da falha. **Só a 3ª série vai até a falha**, com técnica limpa. Nunca falha em todas. |
-| **Intensidade** (perna) | **Nenhuma série na falha.** Parar a 2–3 reps da falha (RPE ≤ 8). Qualquer desconforto no joelho → encerra a série e reduz carga. Ele: "dor articular nunca é normal". |
-| **Reps** | Faixa é guia, não meta. Pesado 6–10 · isoladores 10–15 · panturrilha 10–20. Se passou do topo da faixa nas 3 séries com o RIR certo → sobe a carga na próxima sessão. |
-| **Descanso** | Pesado 2–3 min · intermediário 1m30 · isolador 1 min. Se a FC ainda está alta, espera mais. |
-| **Cadência** | 1:1 controlada, "conduza o peso". Nunca deixa o peso "encaixar": não fecha os cabos até relaxar no crucifixo, não desce a elevação lateral até a coxa, não trava o cotovelo no press. |
-| **Amplitude** | Máxima que a articulação permite, nunca além. No joelho: agachamento e leg press até o paralelo. |
-| **Ordem** | Exercício pesado do dia primeiro. Posterior de coxa antes do quadríceps sempre que estiverem na mesma sessão (regra dele: posterior "no início ou em dia próprio"). Isoladores no fim. |
-| **3 comprimentos** | Ao longo da semana cada músculo passa por posição média (pesado), encurtada (pico) e alongada. Está marcado em cada exercício. |
-| **Aquecimento** (todo dia) | 5 min elíptico com braços · manguito rotador externo 2×15–20 leve, sem fadigar · elástico 3 direções do fisio, 2 rounds × 10 · no 1º exercício: 30% da carga × 15 reps, depois 50% × 10, longe da falha. |
-| **Cardio** (opcional) | 20 min bike/elíptico após o treino em 1–2 sessões, ou HIIT 3 × (20 s forte / 1 min leve) 2x/sem. Joelho manda: sem corrida por enquanto. |
-
----
+| **Intensidade** | Séries iniciais a 1–2 reps da falha. **A última série de cada exercício vai até a falha**, técnica limpa. Em agachamento e stiff, "falha" é a técnica quebrar, não desabar. Forçadas só na última série do último exercício do dia, opcional. |
+| **Ombro** | Sem desenvolvimento e sem carga acima da cabeça. Halteres no lugar de barra nos presses (ele já prefere assim). Descer só até o ombro permitir. Doeu → encurta amplitude ou troca por máquina/cross. Anterior fica com o trabalho indireto dos presses (ele: anterior já trabalha em peito). Manguito leve antes de toda sessão. |
+| **Reps** | Guia, não meta. Pesado 6–10 · intermediário 8–12 · isoladores 10–15 · panturrilha 10–20. Fechou o topo em todas as séries → sobe carga. |
+| **Descanso** | Pesado 2–3 min (150 s) · perna com carga 2 min · intermediário 1m30 · isolador 1 min. |
+| **Cadência** | 1:1 controlada. Nunca deixa o peso "encaixar". |
+| **Ordem** | Pesado do dia primeiro. Posterior antes do quadríceps. Isoladores no fim. |
+| **Aquecimento** | 5 min cardio leve · manguito 2×15–20 leve · 1º exercício: 30%×15, 50%×10. |
 
 ## Sessão A — Segunda · pesado = PEITO
 
-| # | Exercício | Séries × reps | Descanso | Comprimento | Notas |
-|---|---|---|---|---|---|
-| 1 | **Supino sentado no cross — reto** | 3 × 6–10 | 2–3 min | Peito · médio (pesado) | Composto do dia. Escápulas fechadas, coluna apoiada. Descer até o ombro "avisar", não além. Só a 3ª série na falha. |
-| 2 | **Cadeira flexora bilateral** | 3 × 10–12 | 1m30 | Posterior · alongado | Ele: cadeira flexora > mesa flexora. Ponta do pé puxada pra cima, alongar bem no topo. RIR 2–3, sem falha. |
-| 3 | **Cadeira extensora unilateral** | 3 × 12 cada | 1m30 | Quadríceps · encurtado | Do fisio. Subir 2 s, segurar 1 s, descer 2 s. Não travar o joelho. RPE ≤ 7–8. |
-| 4 | **Remada baixa pronada aberta** (ou remada máquina com apoio de peito) | 3 × 8–10 | 1m30–2 min | Costas · meio (romboide/trapézio médio) | "Profundidade" das costas. Peito pra fora, cotovelo atrás, apertar escápula 1 s. Sem lombar. |
-| 5 | **Elevação lateral com halteres** | 3 × 10–15 | 1 min | Deltoide lateral · torque no topo | Prioridade do ombro. Não descer até a coxa. 3ª série na falha. |
-| 6 | **Rosca 45° em banco inclinado (halteres)** | 3 × 10–12 | 1 min | Bíceps · alongado | A mais elogiada por ele. Braço bem pra trás. Se o ombro reclamar, sobe o banco. |
-| 7 | **Crucifixo inverso na máquina** | 3 × 12–15 | 1 min | Deltoide posterior | Apoiar só o abdômen, não arquear (senão o dorsal entra). |
-| 8 | **Panturrilha em pé** | 4 × 10–20 | 1 min | Gastrocnêmio | Controlada, alongar embaixo, 1 s no topo. Unilateral quando ficar fácil. |
+| # | Exercício | Séries × reps | Descanso | Comprimento |
+|---|---|---|---|---|
+| 1 | Supino reto com halteres | 4 × 6–10 | 150 s | Peito · médio |
+| 2 | Cadeira flexora | 4 × 10–12 | 90 s | Posterior · alongado |
+| 3 | Agachamento livre com barra | 4 × 6–10 | 150 s | Quadríceps · médio, profundo |
+| 4 | Remada máquina com apoio de peito, pegada aberta | 3 × 8–10 | 90 s | Costas · meio |
+| 5 | Elevação lateral com halteres | 3 × 10–15 | 60 s | Lateral · topo |
+| 6 | Rosca 45° | 3 × 10–12 | 60 s | Bíceps · alongado |
+| 7 | Crucifixo inverso máquina | 3 × 12–15 | 60 s | Deltoide posterior |
+| 8 | Panturrilha em pé | 4 × 10–20 | 60 s | Gastrocnêmio |
 
-**Total:** 25 séries · ~58 min
-
----
+28 séries.
 
 ## Sessão B — Quarta · pesado = COSTAS
 
-| # | Exercício | Séries × reps | Descanso | Comprimento | Notas |
-|---|---|---|---|---|---|
-| 1 | **Puxada alta pronada** | 3 × 6–10 | 2–3 min | Costas · médio (pesado) | Cotovelos pra baixo, subir o peito no fim. Controlar a subida. Só a 3ª série na falha. |
-| 2 | **Agachamento até o paralelo** (barra leve ou goblet com halter) | 3 × 8–12 | 2 min | Quadríceps + glúteo · médio | O único de quadríceps que ele detalha. Pés na posição natural do salto, joelho apontando pro pé, subir quadril e tronco juntos. **RPE ≤ 7, sem falha, sem passar do paralelo.** Desconforto → mudar posição dos pés antes de pôr carga. |
-| 3 | **Flexora em pé unilateral** (se não houver: cadeira flexora unilateral) | 3 × 10–12 cada | 1m30 | Posterior · médio | Posterior é "delicado": técnica antes de carga. RIR 2–3. |
-| 4 | **Crucifixo na máquina (peck deck)** | 3 × 10–12 | 1m30 | Peito · encurtado (pico) | "O melhor de peito" segundo ele: alavanca constante. Apertar mão contra mão no fim, não relaxar no topo. |
-| 5 | **Elevação lateral no cabo baixo (diagonal)** | 3 × 12–15 | 1 min | Deltoide lateral · torque no início | Cabo atrás do corpo, subir em diagonal. Cobre a faixa que o halter não cobre. |
-| 6 | **Tríceps francês unilateral** (halter ou polia acima da cabeça) | 3 × 10–12 | 1 min | Tríceps · alongado (cabeça longa) | "Top dos tops" pra ele. Cotovelo apontando pra frente, descer bem atrás da cabeça. |
-| 7 | **Panturrilha em pé** | 4 × 10–20 | 1 min | Gastrocnêmio | Igual à A. |
-| 8 | **Canivete ou prancha lateral** | 3 × 15 / 45 s | 45 s | Core | Não vem do Refundini (ele quase não fala de abdômen); mantido da sua ficha atual. |
+| # | Exercício | Séries × reps | Descanso | Comprimento |
+|---|---|---|---|---|
+| 1 | Puxada alta pronada | 4 × 6–10 | 150 s | Costas · médio |
+| 2 | Stiff com barra | 4 × 8–10 | 120 s | Posterior · alongado máximo |
+| 3 | Leg press 45° | 4 × 8–12 | 120 s | Quadríceps · alongado |
+| 4 | Crucifixo máquina (peck deck) | 4 × 10–12 | 90 s | Peito · encurtado |
+| 5 | Elevação lateral cabo baixo diagonal | 3 × 12–15 | 60 s | Lateral · início |
+| 6 | Tríceps testa na polia, deitado | 3 × 10–12 | 60 s | Tríceps · cabeça longa (substitui o francês acima da cabeça) |
+| 7 | Panturrilha sentada | 4 × 10–15 | 60 s | Sóleo |
+| 8 | Core: prancha lateral ou canivete | 3 | 45 s | Opcional, não é dele |
 
-**Total:** 25 séries · ~58 min
+29 séries.
 
----
+## Sessão C — Sexta · pesado = GLÚTEO/POSTERIOR
 
-## Sessão C — Sexta · pesado = PERNA
+| # | Exercício | Séries × reps | Descanso | Comprimento |
+|---|---|---|---|---|
+| 1 | Hip thrust com barra | 4 × 8–12 | 120 s | Glúteo · encurtado |
+| 2 | Step-down no caixote | 3 × 10–12 cada | 90 s | Glúteo · alongado |
+| 3 | Flexora em pé unilateral | 3 × 10–12 cada | 90 s | Posterior · médio |
+| 4 | Cadeira extensora | 3 × 12–15 | 60 s | Quadríceps · encurtado |
+| 5 | Supino inclinado 30° com halteres | 4 × 8–10 | 120 s | Peito superior |
+| 6 | Remada unilateral polia baixa "do Lalá" | 3 × 10–12 cada | 90 s | Dorsal · encurtado |
+| 7 | Elevação lateral máquina | 3 × 12–15 | 60 s | Lateral · constante |
+| 8 | Superset tríceps corda + rosca martelo corda | 3 + 3 | 60 s | Tríceps encurtado · braquiorradial |
 
-| # | Exercício | Séries × reps | Descanso | Comprimento | Notas |
-|---|---|---|---|---|---|
-| 1 | **Elevação pélvica na máquina (hip thrust)** | 3 × 8–12 | 2 min | Glúteo · encurtado | Ele endossa hip thrust como 1 dos 2 exercícios de glúteo. Empurrar com calcanhar, contrair 2 s no topo, queixo recolhido. Sem falha. |
-| 2 | **Mesa flexora** (se não houver: cadeira flexora bilateral com carga diferente da A) | 3 × 10–12 | 1m30 | Posterior · encurtado | Fecha os 3 comprimentos do posterior na semana. RIR 2–3. |
-| 3 | **Leg press até o paralelo** (se não houver: extensora bilateral) | 3 × 10–12 | 2 min | Quadríceps · alongado controlado | Amplitude só até o joelho a 90°. Pés na largura do agachamento. **RPE ≤ 7, sem falha.** |
-| 4 | **Supino sentado no cross — inclinado 30°** | 3 × 8–10 | 2 min | Peito superior · médio | Ele: 30° > 45°. Empurrar pra frente e pra cima, sem travar cotovelo. 3ª série na falha. |
-| 5 | **Remada unilateral na polia baixa "do Lalá"** | 3 × 10–12 cada | 1m30 | Costas · dorsal, encurtamento | Puxar a mão em direção ao quadril, não ao peito: mais dorsal, menos bíceps e trapézio. |
-| 6 | **Elevação lateral na máquina** | 3 × 12–15 | 1 min | Deltoide lateral · torque constante | "A melhor de todas" pra ele. Fecha 9 séries de lateral na semana. |
-| 7 | **Desenvolvimento na máquina** | 3 × 8–10 | 1m30 | Deltoide anterior | Único trabalho direto de anterior: ele diz que peito já cobre. Descer até o queixo, não travar. |
-| 8 | **Tríceps corda na polia** + **Rosca martelo com corda na polia baixa** (superset) | 3 × 12–15 + 3 × 10–12 | 1 min após o par | Tríceps encurtado · braquiorradial | Corda no lugar da barra (ele). Martelo com a mão "pra fora" no fim: bíceps "largo". |
+29 séries.
 
-**Total:** 27 séries · ~60 min
+## Volume semanal (séries diretas)
 
----
-
-## Volume semanal resultante (séries diretas)
-
-| Músculo | Sem 1–4 | Sem 5–7 | Comprimentos cobertos |
+| Músculo | Sem 1–4 | Sem 5–7 | Comprimentos |
 |---|---|---|---|
-| Peito | 9 | 12 | médio (A), encurtado (B), superior (C) |
-| Costas | 9 | 12 | meio (A), médio pesado (B), dorsal encurtado (C) + deltoide posterior |
-| Deltoide lateral | 9 | 12 | halter · cabo · máquina = 3 faixas de torque (regra dele) |
-| Deltoide posterior | 3 (+ remadas) | 3 | máquina |
-| Deltoide anterior | 3 (+ presses) | 3 | desenvolvimento |
-| Bíceps | 6 (+ puxadas) | 6 | alongado (45°), braquiorradial (martelo corda) |
-| Tríceps | 6 (+ presses) | 6 | alongado (francês), encurtado (corda) |
-| Quadríceps | 9 | 9 (não sobe) | encurtado (extensora), médio (agachamento), alongado controlado (leg press) |
-| Posterior | 9 | 12 | alongado (cadeira), médio (em pé), encurtado (mesa) — **igual ao quadríceps, regra dele** |
-| Glúteo | 3 (+ agacho/leg press) | 3 | hip thrust |
-| Panturrilha | 8 | 8 | em pé |
-
-Bate com a progressão que ele descreve: começa em ~9 séries por músculo e sobe pra 12, depois 15 no ciclo seguinte. Perna não sobe enquanto o joelho estiver em retomada.
-
----
+| Peito | 12 | 12 | médio (A), encurtado (B), superior (C) |
+| Quadríceps | 11 | 11 | profundo (A), alongado (B), encurtado (C) |
+| Posterior | 11 | 11 | alongado (A, B), médio (C) |
+| Costas | 10 | 10 | meio (A), médio pesado (B), dorsal (C) |
+| Deltoide lateral | 9 | 12 | halter, cabo, máquina |
+| Glúteo | 7 (+ agacho, stiff) | 7 | encurtado + alongado, os 2 dele |
+| Deltoide posterior | 3 (+ remadas) | 4 | máquina |
+| Bíceps | 6 (+ puxadas) | 8 | 45°, martelo corda |
+| Tríceps | 6 (+ presses) | 8 | testa polia, corda |
+| Panturrilha | 8 | 8 | em pé + sentada |
+| Deltoide anterior | 0 direto | 0 | só indireto dos presses (ombro) |
 
 ## Ciclo de 8 semanas
 
 | Semanas | O que muda |
 |---|---|
-| **1–2** | Aprender as cargas. Tudo a 2 reps da falha (RIR 2), inclusive a 3ª série. Anotar a carga que fecha o topo da faixa. |
-| **3–4** | Regra cheia: 3ª série de cada exercício de superiores até a falha. Perna continua sem falha. Progressão de carga: fechou o topo da faixa nas 3 séries → +1 placa / +2 kg na próxima. |
-| **5–7** | **+1 série** (4ª) nos exercícios de peito, costas, lateral e posterior. Quadríceps fica em 3. Sessões passam pra ~28 séries, ~65 min. Se a força cair duas sessões seguidas no mesmo exercício → é sinal de recuperação insuficiente, não de fraqueza: segura a carga. |
-| **8** | **Regenerativa**: volta pra 2 séries por exercício, RIR 3, carga 10% menor. Ele: "semana com volume menor só pra não regredir". |
-| **Ciclo 2** | Trocar variantes ("o melhor treino é o que você ainda não fez"): supino cross reto → supino com halteres reto se os 20 kg derem carga suficiente; rosca 45° → Scott máquina; cabo diagonal → cabo na cintura; leg press → agachamento com mais amplitude **só com OK do fisio**. Meta de 15 séries em peito, costas, lateral. |
+| 1–2 | Aprender cargas. RIR 1–2 em tudo. |
+| 3–4 | Última série de cada exercício até a falha. Progressão de carga quando fechar o topo da faixa. |
+| 5–7 | +1 série em lateral, bíceps, tríceps e deltoide posterior. Se a força cair duas sessões seguidas → segurar carga, é recuperação. |
+| 8 | Regenerativa: metade das séries, RIR 3, carga −10%. |
+| Ciclo 2 | Trocar variantes: supino máquina no lugar do halter reto, mesa flexora no lugar da cadeira, hack no lugar do leg press, Scott máquina no lugar da 45°, cabo na cintura no lugar do diagonal. |
 
----
+## Onde se afasta do Refundini, e por quê
 
-## Onde a ficha se afasta do Refundini, e por quê
+- **Sem desenvolvimento.** Ele coloca desenvolvimento no fim do treino de peito. Ombro lesionado veta. Compensação: lateral em 3 faixas (o que ele já prioriza) e posterior em máquina.
+- **Tríceps testa na polia em vez de francês.** Ele chama o francês de "top dos tops", mas exige braço acima da cabeça. O testa na polia é a segunda opção dele mesmo.
+- **Core.** Não vem dele. Opcional.
+- **4 séries nos pesados desde a semana 1.** Ele fala em 3 como padrão e progressão de séries ao longo do ciclo. Como o nível é avançado, os pesados começam em 4 e a progressão vai pros isoladores.
 
-- **Press no cross sentado em vez de halteres/máquina.** Ele prefere halteres ao supino máquina e condena barra. Seus halteres param em 20 kg e a lombar não aceita banco de barra ou máquina. O cross sentado dá o que ele pede: resistência constante, escápulas apoiadas, cotovelo ajustável.
-- **Sem agachamento livre profundo, sem stiff, sem step-down.** Os três carregam joelho ou lombar em alongamento máximo. Cadeira flexora cobre o posterior alongado sem carregar a lombar. Step-down e agachamento profundo entram no ciclo 2 se o fisio liberar.
-- **Perna sem falha e sem progressão de volume.** Ele mesmo diz que iniciante e quem está em retomada não vai à falha, e que dor articular nunca é normal. Sua perna é tratada como "iniciante" enquanto o joelho não estiver 100%.
-- **Core.** Ele não prescreve. Mantido 1 exercício por semana da sua ficha atual, opcional.
-- **Sem técnicas intensificadoras** (rest-pause, drop set) que estavam nas fichas A–E. Ele fala de forçadas "em determinados momentos"; nesta base o estímulo vem da 3ª série na falha e da progressão. Podem voltar no ciclo 2 nos isoladores de superiores.
-
-## Checagem de sessão (os "7 sinais" dele)
-
-Treino bom: músculo tenso e pump durante, perda de força ao longo da sessão, ofegante, músculo cansado no dia seguinte. Não precisa de dor tardia. Se o músculo está "novo" no dia seguinte toda semana, a 3ª série não foi até a falha de verdade.
-
----
-
-*Fontes: os 24 vídeos listados em `METODO.md`. Conteúdo de vídeo é relato de criador; ele tem conflito de interesse declarado (consultoria e suplementos). O que aqui é ✅ consenso: proximidade da falha, progressão, amplitude, 3 comprimentos, posterior = quadríceps. O que é 🔵 lore dele: a sequência "médio → encurtado → alongado" dentro da sessão, "30° > 45°", "o que treina primeiro cresce mais".*
+*Fontes: os 24 vídeos listados em `METODO.md`. Conteúdo de vídeo é relato de criador com conflito de interesse declarado (consultoria e suplementos).*
