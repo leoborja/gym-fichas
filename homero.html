@@ -189,6 +189,11 @@ body.study .how > summary .chev{display:none}
 .vtog button{height:30px;font-size:12.5px}
 .vpane{display:grid;gap:10px}
 .vpane[hidden]{display:none}
+.set.aq{height:46px;background:transparent;border-style:dashed}
+.set.aq .s{color:var(--accent);font-size:13px}
+.set.aq .kg input{font-size:20px}
+.set.aq .kg .u{font-size:11.5px}
+.set.aq.on{border-style:solid}
 </style>
 </head>
 <body>
@@ -232,12 +237,9 @@ const EX = { manguito:"EcWRUlH63eg", supinoHalter:"tDxKGeY-hjQ", supinoHalterInc
   peckDeck:"FzCnfD0gOXo", rosca45:"ioML_NZH16M", testaPolia:"RE-MNWQOcSY", tricepsCorda:"KhK5HWJfsrQ", marteloCorda:"pHfjOl6JUSg", pantPe:"of5Z7yj-HqY",
   pantSentada:"1NBoneuGtQo", pranchaLat:"2NjO5KrlVEM" };
 
-const AQ_MANGUITO = {warm:true, name:"Manguito rotador externo", tags:["aquecimento","ombro"], sets:2, reps:"15–20", rest:0, yt:EX.manguito,
-  cues:["Cotovelo a 90° colado ao corpo, elástico ou halter leve","Só acordar o manguito: longe da fadiga","Sem descanso entre lados"],
+const AQ_MANGUITO = {warm:true, name:"5 min de cardio leve + manguito", tags:["aquecimento","ombro"], sets:2, reps:"15–20", rest:0, yt:EX.manguito,
+  cues:["Antes: 5 min de elíptico ou bike em ritmo leve, só pra aquecer o corpo","Manguito: cotovelo a 90° colado ao corpo, elástico ou halter leve, rotação externa","Só acordar o manguito, longe da fadiga. Sem descanso entre lados","As 2 séries leves do 1º exercício estão no card dele (A1 e A2)"],
   why:"Obrigatório com histórico de lesão no ombro. Refundini: aquecer o manguito sem fatigar, senão o deltoide anterior rouba o peito."};
-const AQ_GERAL = {warm:true, name:"Aquecimento geral", tags:["aquecimento"], sets:1, reps:"~8 min", rest:0, u:"round",
-  cues:["5 min de elíptico ou bike em ritmo leve, só pra aquecer o corpo","Depois, no 1º exercício do dia, 2 séries leves antes das séries valendo: 30% da carga × 15 reps, depois 50% × 10","Exemplo: vai fazer supino com 30 kg? Aquece com 10 kg × 15 e 15 kg × 10","Longe da falha: é só acordar o movimento e a articulação"],
-  why:"É o aquecimento que o Refundini prescreve: geral (cardio leve) e específico (2 séries leves do primeiro exercício)."};
 
 const RULES = `<details class="rules" id="rules">
   <summary>Regras da ficha · Refundini + ombro<span class="chev">▾</span></summary>
@@ -257,10 +259,10 @@ const FICHAS = {
   a:{tab:"Peito pesado", title:"Full Body · peito pesado", sub:"Segunda", sets:28, min:62, cycle:"Ciclo 1 · sem 1/8",
     brief:"<strong>Pesado do dia: supino reto com halteres.</strong> Posterior antes do quadríceps. Última série de cada exercício na falha. Manguito antes de tudo.",
     items:[
-      AQ_MANGUITO, AQ_GERAL,
+      AQ_MANGUITO,
       {block:"Pesado do dia"},
-      {n:1, name:"Supino reto com halteres", tags:["peito","médio"], tech:"Última série na falha", care:"Ombro: descer só até onde permitir", sets:4, reps:"6–10", rest:150, yt:EX.supinoHalter, lr:{yt:LR.melhores7, start:47},
-       cues:["Escápulas fechadas, pés firmes, halteres na linha do peito","Descer até o ombro “avisar”, nunca além; cotovelo um pouco mais perto do corpo se incomodar","Subir sem bater os halteres no topo: o peito não relaxa","Séries 1–3 a 1–2 reps da falha; a 4ª até a falha"],
+      {n:1, approach:true, name:"Supino reto com halteres", tags:["peito","médio"], tech:"Última série na falha", care:"Ombro: descer só até onde permitir", sets:4, reps:"6–10", rest:150, yt:EX.supinoHalter, lr:{yt:LR.melhores7, start:47},
+       cues:["Escápulas fechadas, pés firmes, halteres na linha do peito","Descer até o ombro “avisar”, nunca além; cotovelo um pouco mais perto do corpo se incomodar","Subir sem bater os halteres no topo: o peito não relaxa","A1 e A2: 30% e 50% da carga, longe da falha, só pra acordar o movimento","Séries 1–3 a 1–2 reps da falha; a 4ª até a falha"],
        why:"Nº 1 da lista dele de peito e o substituto declarado do supino com barra: mais amplitude, encurta mais, conforto articular. Com ombro lesionado, o halter deixa você ajustar o ângulo do cotovelo."},
       {block:"Perna · posterior primeiro"},
       {n:2, name:"Cadeira flexora bilateral", tags:["posterior","alongado"], tech:"Última série na falha", sets:4, reps:"10–12", rest:90, yt:EX.cadFlexora, lr:{yt:LR.posterior, start:115},
@@ -292,10 +294,10 @@ const FICHAS = {
   b:{tab:"Costas pesada", title:"Full Body · costas pesada", sub:"Quarta", sets:29, min:62, cycle:"Ciclo 1 · sem 1/8",
     brief:"<strong>Pesado do dia: puxada alta.</strong> Stiff antes do leg press. Peito hoje é pico de contração no crucifixo máquina. Tríceps na polia deitado, nada acima da cabeça.",
     items:[
-      AQ_MANGUITO, AQ_GERAL,
+      AQ_MANGUITO,
       {block:"Pesado do dia"},
-      {n:1, name:"Puxada alta pronada", tags:["costas","médio · pesado"], tech:"Última série na falha", sets:4, reps:"6–10", rest:150, yt:EX.puxadaAlta, lr:{yt:LR.puxar, start:41},
-       cues:["Cotovelos pra baixo, subir o peito no fim da puxada","Controlar a subida, não soltar","Pegada um pouco mais aberta que o ombro"],
+      {n:1, approach:true, name:"Puxada alta pronada", tags:["costas","médio · pesado"], tech:"Última série na falha", sets:4, reps:"6–10", rest:150, yt:EX.puxadaAlta, lr:{yt:LR.puxar, start:41},
+       cues:["A1 e A2: 30% e 50% da carga, longe da falha","Cotovelos pra baixo, subir o peito no fim da puxada","Controlar a subida, não soltar","Pegada um pouco mais aberta que o ombro"],
        why:"Ele abre o treino de puxar com puxada alta pesada em 6–10 reps: tensão mecânica no dorsal em comprimento médio."},
       {block:"Perna · posterior primeiro"},
       {n:2, name:"Stiff com barra", tags:["posterior","glúteo","alongado máximo"], tech:"Última série na falha técnica", sets:4, reps:"8–10", rest:120, yt:EX.stiff, lr:{yt:LR.posterior, start:118},
@@ -327,10 +329,10 @@ const FICHAS = {
   c:{tab:"Perna pesada", title:"Full Body · perna pesada", sub:"Sexta", sets:29, min:62, cycle:"Ciclo 1 · sem 1/8",
     brief:"<strong>Pesado do dia: glúteo e posterior.</strong> Hip thrust e step-down, os 2 exercícios de glúteo que ele endossa. Peito superior a 30° com halteres, remada “do Lalá”, lateral na máquina fecha 9 séries na semana.",
     items:[
-      AQ_MANGUITO, AQ_GERAL,
+      AQ_MANGUITO,
       {block:"Pesado do dia · glúteo e posterior"},
-      {n:1, name:"Elevação pélvica com barra (hip thrust)", tags:["glúteo","encurtado"], tech:"Última série na falha", sets:4, reps:"8–12", rest:120, yt:EX.hipThrust, lr:{yt:LR.gluteo, start:39},
-       cues:["Costas apoiadas no banco na altura da escápula","Empurrar com o calcanhar, contrair o glúteo 2s no topo","Queixo recolhido, costela pra baixo, sem hiperestender a lombar"],
+      {n:1, approach:true, name:"Elevação pélvica com barra (hip thrust)", tags:["glúteo","encurtado"], tech:"Última série na falha", sets:4, reps:"8–12", rest:120, yt:EX.hipThrust, lr:{yt:LR.gluteo, start:39},
+       cues:["A1 e A2: 30% e 50% da carga, longe da falha","Costas apoiadas no banco na altura da escápula","Empurrar com o calcanhar, contrair o glúteo 2s no topo","Queixo recolhido, costela pra baixo, sem hiperestender a lombar"],
        why:"Um dos 2 exercícios de glúteo que ele endossa (react ao Bret Contreras): o de posição encurtada. Hip thrust convencional antes de variar."},
       {n:2, name:"Step-down no caixote", tags:["glúteo","alongado"], tech:"Última série na falha", sets:3, reps:"10–12 cada", rest:90, yt:EX.stepDown, lr:{yt:LR.gluteo, start:271},
        cues:["Em pé no caixote, uma perna no ar, descer o pé livre até quase tocar o chão","Tronco inclinado à frente, joelho da perna de apoio segue o pé","Halter na mão oposta à perna de apoio"],
@@ -385,6 +387,16 @@ function setBox(key, i, unit){
       `<input inputmode="decimal" placeholder="${last??'–'}" value="${val}" aria-label="Carga série ${i+1}"><span class="u">${u}</span>${last?`<span class="last">últ. ${last}</span>`:''}`}</div>
     <button class="chk" type="button" aria-pressed="${on}" aria-label="Série ${i+1} feita">${on?'✓':'○'}</button></div>`;
 }
+function approachBoxes(key){
+  const rows=[["A1","30% × 15"],["A2","50% × 10"]];
+  return rows.map(([l,r],i)=>{
+    const k=key+'|aq', on=store(k+'|done'+i)==='1', val=store(k+'|kg'+i)??'', last=store(k+'|prev'+i);
+    return `<div class="set aq ${on?'on':''}" data-key="${k}" data-i="${i}">
+      <div class="s">${l}</div>
+      <div class="kg"><input inputmode="decimal" placeholder="${last??'–'}" value="${val}" aria-label="Aquecimento ${l}"><span class="u">kg · ${r}</span></div>
+      <button class="chk" type="button" aria-pressed="${on}" aria-label="${l} feita">${on?'✓':'○'}</button></div>`;
+  }).join('');
+}
 function media(yt, name, start, label){
   const st = start ? `${Math.floor(start/60)}:${String(start%60).padStart(2,'0')}` : '';
   return `<div class="media" data-yt="${yt}" data-start="${start||0}" role="button" tabindex="0" aria-label="Ver vídeo: ${name}">
@@ -429,7 +441,7 @@ function render(){
     const body = ex.parts
       ? ex.parts.map((p,pi)=>`<div class="row"><div class="l">${p.l}</div><div class="n">${p.name}<small>${p.sub}</small></div></div>
           <div class="sets">${Array.from({length:ex.sets},(_,i)=>setBox(key+'|'+pi,i,p.u)).join('')}</div>`).join('')
-      : `<div class="sets">${Array.from({length:ex.sets},(_,i)=>setBox(key,i,ex.u)).join('')}</div>`;
+      : `<div class="sets">${ex.approach?approachBoxes(key):''}${Array.from({length:ex.sets},(_,i)=>setBox(key,i,ex.u)).join('')}</div>`;
     return `<article class="ex" data-rest="${ex.rest}" data-next="${ex.name}">${head}${body}${howBlock(ex)}</article>`;
   }).join('');
   main.innerHTML = `
@@ -461,7 +473,7 @@ function bind(){
     m.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); play(); } });
   });
   document.querySelectorAll('.ex').forEach(card=>{
-    const all=[...card.querySelectorAll('.set')];
+    const all=[...card.querySelectorAll('.set:not(.aq)')];
     card.classList.toggle('done', all.length>0 && all.every(x=>x.classList.contains('on')));
   });
   document.querySelectorAll('.vtog button').forEach(b=>b.onclick=()=>{
@@ -478,13 +490,13 @@ function toggle(s){
   const b=s.querySelector('.chk'); b.textContent=on?'✓':'○'; b.setAttribute('aria-pressed',on);
   save(s.dataset.key+'|done'+s.dataset.i, on?'1':'0');
   const card = s.closest('.ex');
-  const all = [...card.querySelectorAll('.set')];
+  const all = [...card.querySelectorAll('.set:not(.aq)')];
   card.classList.toggle('done', all.every(x=>x.classList.contains('on')));
   progress();
-  if(on && +card.dataset.rest>0) startRest(+card.dataset.rest, card);
+  if(on && !s.classList.contains('aq') && +card.dataset.rest>0) startRest(+card.dataset.rest, card);
 }
 function progress(){
-  const all=[...document.querySelectorAll('.set')], done=all.filter(x=>x.classList.contains('on')).length;
+  const all=[...document.querySelectorAll('.set:not(.aq)')], done=all.filter(x=>x.classList.contains('on')).length;
   document.getElementById('bar').style.width=(all.length?done/all.length*100:0)+'%';
   const n=document.getElementById('doneN'); if(n) n.textContent=done;
 }
