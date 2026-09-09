@@ -235,9 +235,9 @@ const EX = { manguito:"EcWRUlH63eg", supinoHalter:"tDxKGeY-hjQ", supinoHalterInc
 const AQ_MANGUITO = {warm:true, name:"Manguito rotador externo", tags:["aquecimento","ombro"], sets:2, reps:"15–20", rest:0, yt:EX.manguito,
   cues:["Cotovelo a 90° colado ao corpo, elástico ou halter leve","Só acordar o manguito: longe da fadiga","Sem descanso entre lados"],
   why:"Obrigatório com histórico de lesão no ombro. Refundini: aquecer o manguito sem fatigar, senão o deltoide anterior rouba o peito."};
-const AQ_GERAL = {warm:true, name:"5 min de cardio leve + aproximação", tags:["aquecimento"], sets:2, reps:"30% × 15 · 50% × 10", rest:0, u:"round",
-  cues:["5 min de elíptico ou bike com braços","No 1º exercício do dia: 30% da carga × 15 reps, depois 50% × 10","Longe da falha, é só acordar o padrão"],
-  why:"Aquecimento específico que ele prescreve antes de todo exercício pesado."};
+const AQ_GERAL = {warm:true, name:"Aquecimento geral", tags:["aquecimento"], sets:1, reps:"~8 min", rest:0, u:"round",
+  cues:["5 min de elíptico ou bike em ritmo leve, só pra aquecer o corpo","Depois, no 1º exercício do dia, 2 séries leves antes das séries valendo: 30% da carga × 15 reps, depois 50% × 10","Exemplo: vai fazer supino com 30 kg? Aquece com 10 kg × 15 e 15 kg × 10","Longe da falha: é só acordar o movimento e a articulação"],
+  why:"É o aquecimento que o Refundini prescreve: geral (cardio leve) e específico (2 séries leves do primeiro exercício)."};
 
 const RULES = `<details class="rules" id="rules">
   <summary>Regras da ficha · Refundini + ombro<span class="chev">▾</span></summary>
@@ -381,7 +381,7 @@ function setBox(key, i, unit){
   const noInput = unit==='corpo' || unit==='round';
   return `<div class="set ${on?'on':''}" data-key="${key}" data-i="${i}">
     <div class="s">S${i+1}</div>
-    <div class="kg">${noInput ? `<span class="u">${unit==='corpo'?'peso do corpo':'round '+(i+1)}</span>` :
+    <div class="kg">${noInput ? `<span class="u">${unit==='corpo'?'peso do corpo':(unit==='round'?'marcar quando terminar':'round '+(i+1))}</span>` :
       `<input inputmode="decimal" placeholder="${last??'–'}" value="${val}" aria-label="Carga série ${i+1}"><span class="u">${u}</span>${last?`<span class="last">últ. ${last}</span>`:''}`}</div>
     <button class="chk" type="button" aria-pressed="${on}" aria-label="Série ${i+1} feita">${on?'✓':'○'}</button></div>`;
 }
