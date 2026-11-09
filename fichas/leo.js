@@ -42,24 +42,24 @@ const FICHAS = {
        cues:["Pullover: perpendicular no banco, quadril baixo, halter bem atrás da cabeça, voltar contraindo o peito","Supino halteres: banco inclinado 30°, descer fundo até o alongamento, subir juntando os halteres. 20 kg chega: aqui o peito já está cansado","Lombar reclamou no banco? Troca o supino por mais uma série de flexão"],
        why:"Mais um de peito pra fechar: o pullover estica a caixa torácica e o supino com halteres dá amplitude livre no peito superior já pré-cansado."},
       {block:"Bloco ombro · desenvolvimento + medial + posterior"},
-      {n:4, name:"Tri-set · Desenvolvimento + Elevação lateral + Face pull", tags:["ombro","deltóide medial","posterior"], tech:"Drop set no desenvolvimento (3ª)", sets:3, reps:"8–10 · 15 · 15", rest:75,
+      {n:4, name:"Superset · Arnold press + Elevação lateral", tags:["deltóide · 3 cabeças","deltóide medial"], tech:"Drop set no Arnold (3ª)", sets:3, reps:"8–10 + 15", rest:75,
        parts:[
-         {l:"A", name:"Desenvolvimento na máquina", sub:"Ombro pesado · 8–10", yt:V.desenvMaq},
-         {l:"B", name:"Elevação lateral com halteres", sub:"Medial · o 3D · 15", yt:V.lateralHalter},
-         {l:"C", name:"Face pull na corda", sub:"Posterior + saúde articular · 15", yt:V.facepull}
+         {l:"A", name:"Arnold press sentado", sub:"Halteres · pesado · 8–10", yt:V.arnold},
+         {l:"B", name:"Elevação lateral com halteres", sub:"Medial · o 3D · 15", yt:V.lateralHalter}
        ],
-       cues:["Desenvolvimento: descer abaixo do queixo, subir sem travar o cotovelo. Carrega pesado","3ª série do desenvolvimento: 8–10 → −30% → falha","Lateral: mindinho levemente pra cima, “derramar a jarra”, sem balançar o corpo","Face pull: cotovelos ALTOS, puxar pra cara, squeeze 2s"],
-       why:"Empurrar → abrir → puxar: as 3 cabeças do deltóide em sequência. O desenvolvimento abre pesado e a lateral pega o medial já aquecido."},
-      {n:5, name:"Superset · Lateral cruzada no cabo + Posterior curvado", tags:["deltóide medial","posterior"], tech:"Drop set na lateral (3ª)", sets:3, reps:"12 + 12", rest:45,
+       cues:["Arnold: sentado com encosto, palmas começam viradas pra você e giram durante a subida, descer até a altura do queixo","3ª série do Arnold: 8–10 → pega halteres 30% mais leves → falha","Lateral: mindinho levemente pra cima, “derramar a jarra”, sem balançar o corpo","Mesmo par de halteres na mão, mesma estação: zero tempo perdido"],
+       why:"O único exercício que leva o nome dele: as 3 cabeças do deltóide de uma vez, com a rotação que o desenvolvimento na máquina não tem. A lateral vem logo em seguida e pega o medial já aquecido."},
+      {n:5, name:"Tri-set · Lateral cruzada no cabo + Posterior curvado + Face pull", tags:["deltóide medial","posterior"], tech:"Drop set na lateral (3ª)", sets:3, reps:"12 · 12 · 15", rest:60,
        parts:[
          {l:"A", name:"Elevação lateral cruzada no cabo", sub:"Tensão constante · 12", yt:V.lateralCruzadaCabo},
-         {l:"B", name:"Elevação posterior curvado", sub:"Fecha o posterior · 12", yt:V.posteriorCurvado}
+         {l:"B", name:"Elevação posterior curvado", sub:"Abre o posterior · 12", yt:V.posteriorCurvado},
+         {l:"C", name:"Face pull na corda", sub:"Puxa · posterior + saúde articular · 15", yt:V.facepull}
        ],
-       cues:["Lateral no cabo: cabo baixo cruzando na frente do corpo, elevar até o paralelo","3ª série da lateral: 12 → −30% → falha","Curvado: tronco à frente, abrir pros lados, squeeze 2s no topo"],
-       why:"2ª dose de medial + posterior em outro ângulo: halter em pé no 4, cabo aqui. Com o rodízio dá ~10 séries diretas de lateral por semana, o alvo 3D."}
+       cues:["Lateral no cabo: cabo baixo cruzando na frente do corpo, elevar até o paralelo","3ª série da lateral: 12 → −30% → falha","Curvado: tronco à frente, abrir pros lados, squeeze 2s no topo","Face pull: cotovelos ALTOS, puxar pra cara, squeeze 2s. Fecha o treino cuidando do ombro"],
+       why:"2ª dose de medial em outro ângulo (cabo) e o posterior em dois padrões: abrir (curvado) e puxar (face pull). Com o rodízio dá ~10 séries diretas de lateral por semana, o alvo 3D."}
     ],
     volume:[["Peito (viés superior)",19],["Ombro",15],["Total",34]],
-    note:"Por semana (~1,7x): peito ~32 séries (bem acima da meta de 18–22, de propósito: peito é P0; se a recuperação pesar, corta uma rodada do superset 3), ombro ~25, lateral direto ~10. Abs fica todo na C. Técnicas: pirâmide + drop no press, flexão até a falha, drop set no desenvolvimento e na lateral."},
+    note:"Por semana (~1,7x): peito ~32 séries (bem acima da meta de 18–22, de propósito: peito é P0; se a recuperação pesar, corta uma rodada do superset 3), ombro ~25, lateral direto ~10. Abs fica todo na C. Técnicas: pirâmide + drop no press, flexão até a falha, drop set no Arnold e na lateral."},
 
   b:{tab:"Costas · Braços", title:"Costas + Bíceps + Tríceps", sub:"Denso", sets:29, min:40,
     brief:"<strong>Regra do dia:</strong> TODA a costas primeiro (dorsal fresco), depois bíceps, depois tríceps. Sem ping-pong entre estações. As puxadas já aquecem o bíceps; o tríceps chega inteiro pro bloco dele.",
