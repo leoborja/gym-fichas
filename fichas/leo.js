@@ -12,7 +12,7 @@ const RULES = `<details class="rules" id="rules">
     <tr><td>Ordem</td><td>Um grupo inteiro antes do próximo: todo peito → todo ombro (A); costas → bíceps → tríceps (B).</td></tr>
     <tr><td>Progressão</td><td>Fechou o topo da faixa em todas as séries → sobe a carga na próxima vez que a ficha cair (+2,5–5 kg em composto, +1–2,5 kg em isolador).</td></tr>
   </table>
-  <div class="foot">Volume semanal (com o rodízio, ~1,7x cada): peito ~27 · ombro ~25 (lateral direto ~10) · costas ~23 · bíceps ~10 + puxadas · tríceps ~15 · perna ~30 · abs ~25.</div>
+  <div class="foot">Volume semanal (com o rodízio, ~1,7x cada): peito ~32 · ombro ~25 (lateral direto ~10) · costas ~23 · bíceps ~10 + puxadas · tríceps ~15 · perna ~30 · abs ~20.</div>
 </details>`;
 
 const FICHAS = {
@@ -26,30 +26,30 @@ const FICHAS = {
       {n:1, name:"Supino sentado no cross · inclinado", tags:["peito superior"], tech:"Pirâmide + drop set na 4ª", sets:4, reps:"12 · 10 · 8 · 8", rest:90, yt:V.crossPressIncl,
        cues:["Banco a 30–40°, cabos na altura do peito alto","Pirâmide: SOBE o peso a cada série (12 → 10 → 8 → 8)","Descer em 3s, explodir na subida","4ª série: 8 reps → −30% → mais 8"],
        why:"Composto principal do dia, sem superset: foco total na carga. Mesmo press (é o único que não machuca a lombar), mas com pirâmide e drop no lugar do rest-pause: estímulo novo. Fechou as reps em todas → sobe a carga."},
-      {n:2, name:"Tri-set · Cross reto + Crucifixo inclinado no cross + Crossover baixo", tags:["peito médio","peito superior"], sets:3, reps:"10 · 12 · 15", rest:90,
+      {n:2, name:"Tri-set · Cross reto + Crucifixo inclinado no cross + Flexão", tags:["peito médio","peito superior"], sets:3, reps:"10 · 12 · máx", rest:90,
        parts:[
          {l:"A", name:"Supino sentado no cross · reto", sub:"Empurra · pesado · 10", yt:V.crossPressReto},
          {l:"B", name:"Crucifixo inclinado no cross", sub:"Estica · banco inclinado entre os cabos · 12", yt:V.crucInclCross},
-         {l:"C", name:"Crossover polia baixa", sub:"Aperta · superior contraído · 15", yt:V.crossoverBaixo}
+         {l:"C", name:"Flexão de braço", sub:"Peso do corpo · até a falha", yt:V.flexao, u:"reps"}
        ],
-       cues:["Tudo na mesma estação do cross: só troca o banco e a altura das polias, sem perder tempo","Cross reto: banco plano, cabos na altura do peito, descer 2–3s, explodir","Crucifixo no cross: banco a 30° no meio, cabos baixos, abrir até sentir o alongamento, fechar em arco","Crossover baixo: em pé, subir cruzando na frente até a altura do queixo, segurar 2s no pico"],
-       why:"Empurrar → esticar → apertar: três padrões diferentes, não três flys por fazer. O press cansa o peito, o crucifixo pega a fase alongada e o crossover espreme o que sobrou. É o peito pegando fogo."},
-      {n:3, name:"Tri-set · Pullover + Canivete + Desenvolvimento", tags:["peito","abs","ombro"], tech:"Drop set no desenvolvimento (3ª)", sets:3, reps:"12 · 15 · 8–10", rest:75,
+       cues:["Cross reto e crucifixo na mesma estação do cross: só troca o banco e a altura das polias","Cross reto: banco plano, cabos na altura do peito, descer 2–3s, explodir","Crucifixo no cross: banco a 30° no meio, cabos baixos, abrir até sentir o alongamento, fechar em arco","Flexão: mãos um pouco mais abertas que os ombros, abdômen e glúteo travados (corpo em prancha, lombar neutra), peito quase no chão, até a falha"],
+       why:"Empurrar → esticar → empurrar até a falha: o press cansa o peito, o crucifixo pega a fase alongada e a flexão arranca o que sobrou. Sem crossover em pé, que dava dor nas costas."},
+      {n:3, name:"Superset · Pullover + Supino inclinado com halteres", tags:["peito superior","caixa torácica","finisher"], sets:3, reps:"12 + 12–15", rest:75,
        parts:[
          {l:"A", name:"Pullover com halter", sub:"Caixa torácica · 12", yt:V.pullover},
-         {l:"B", name:"Canivete", sub:"Abs · 15", yt:V.canivete, u:"corpo"},
-         {l:"C", name:"Desenvolvimento na máquina", sub:"Ombro pesado · 8–10", yt:V.desenvMaq}
+         {l:"B", name:"Supino inclinado com halteres", sub:"Peito superior · 12–15", yt:V.supinoHalterIncl}
        ],
-       cues:["Pullover: perpendicular no banco, quadril baixo, halter bem atrás da cabeça","Canivete: pernas e tronco sobem juntos, sem impulso","Desenvolvimento: descer abaixo do queixo, subir sem travar o cotovelo","3ª série do desenvolvimento: 8–10 → −30% → falha"],
-       why:"Cada um pega uma área diferente, nenhum fatiga o deltóide. O desenvolvimento chega fresco: é o construtor pesado do ombro."},
-      {block:"Bloco ombro · medial + posterior"},
-      {n:4, name:"Superset · Elevação lateral + Face pull", tags:["deltóide medial","posterior"], sets:3, reps:"15 + 15", rest:60,
+       cues:["Pullover: perpendicular no banco, quadril baixo, halter bem atrás da cabeça, voltar contraindo o peito","Supino halteres: banco inclinado 30°, descer fundo até o alongamento, subir juntando os halteres. 20 kg chega: aqui o peito já está cansado","Lombar reclamou no banco? Troca o supino por mais uma série de flexão"],
+       why:"Mais um de peito pra fechar: o pullover estica a caixa torácica e o supino com halteres dá amplitude livre no peito superior já pré-cansado."},
+      {block:"Bloco ombro · desenvolvimento + medial + posterior"},
+      {n:4, name:"Tri-set · Desenvolvimento + Elevação lateral + Face pull", tags:["ombro","deltóide medial","posterior"], tech:"Drop set no desenvolvimento (3ª)", sets:3, reps:"8–10 · 15 · 15", rest:75,
        parts:[
-         {l:"A", name:"Elevação lateral com halteres", sub:"Medial · o 3D", yt:V.lateralHalter},
-         {l:"B", name:"Face pull na corda", sub:"Posterior + saúde articular", yt:V.facepull}
+         {l:"A", name:"Desenvolvimento na máquina", sub:"Ombro pesado · 8–10", yt:V.desenvMaq},
+         {l:"B", name:"Elevação lateral com halteres", sub:"Medial · o 3D · 15", yt:V.lateralHalter},
+         {l:"C", name:"Face pull na corda", sub:"Posterior + saúde articular · 15", yt:V.facepull}
        ],
-       cues:["Lateral: mindinho levemente pra cima, “derramar a jarra”, sem balançar o corpo","Face pull: cotovelos ALTOS, puxar pra cara, squeeze 2s"],
-       why:"As duas cabeças que os pressings não pegam. Anterior já foi martelado pelos presses."},
+       cues:["Desenvolvimento: descer abaixo do queixo, subir sem travar o cotovelo. Carrega pesado","3ª série do desenvolvimento: 8–10 → −30% → falha","Lateral: mindinho levemente pra cima, “derramar a jarra”, sem balançar o corpo","Face pull: cotovelos ALTOS, puxar pra cara, squeeze 2s"],
+       why:"Empurrar → abrir → puxar: as 3 cabeças do deltóide em sequência. O desenvolvimento abre pesado e a lateral pega o medial já aquecido."},
       {n:5, name:"Superset · Lateral cruzada no cabo + Posterior curvado", tags:["deltóide medial","posterior"], tech:"Drop set na lateral (3ª)", sets:3, reps:"12 + 12", rest:45,
        parts:[
          {l:"A", name:"Elevação lateral cruzada no cabo", sub:"Tensão constante · 12", yt:V.lateralCruzadaCabo},
@@ -58,8 +58,8 @@ const FICHAS = {
        cues:["Lateral no cabo: cabo baixo cruzando na frente do corpo, elevar até o paralelo","3ª série da lateral: 12 → −30% → falha","Curvado: tronco à frente, abrir pros lados, squeeze 2s no topo"],
        why:"2ª dose de medial + posterior em outro ângulo: halter em pé no 4, cabo aqui. Com o rodízio dá ~10 séries diretas de lateral por semana, o alvo 3D."}
     ],
-    volume:[["Peito (viés superior)",16],["Ombro",15],["Abs",3],["Total",34]],
-    note:"Por semana (~1,7x): peito ~27 séries (acima da meta de 18–22, de propósito: peito é P0), ombro ~25, lateral direto ~10. Técnicas: pirâmide + drop no press, tri-set de peito, drop set no desenvolvimento e na lateral."},
+    volume:[["Peito (viés superior)",19],["Ombro",15],["Total",34]],
+    note:"Por semana (~1,7x): peito ~32 séries (bem acima da meta de 18–22, de propósito: peito é P0; se a recuperação pesar, corta uma rodada do superset 3), ombro ~25, lateral direto ~10. Abs fica todo na C. Técnicas: pirâmide + drop no press, flexão até a falha, drop set no desenvolvimento e na lateral."},
 
   b:{tab:"Costas · Braços", title:"Costas + Bíceps + Tríceps", sub:"Denso", sets:29, min:40,
     brief:"<strong>Regra do dia:</strong> TODA a costas primeiro (dorsal fresco), depois bíceps, depois tríceps. Sem ping-pong entre estações. As puxadas já aquecem o bíceps; o tríceps chega inteiro pro bloco dele.",

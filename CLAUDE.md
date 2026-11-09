@@ -48,7 +48,7 @@ Itens de `items`, em ordem:
 ## Regras fixas do Leo (valem pra toda ficha dele)
 
 - Joelho pós-operatório: perna só com os exercícios do fisio (hoje na Ficha C, ~1,7x/semana no rodízio), carga conservadora, RPE ≤7, sem falha, sem técnica intensificadora na perna. Aquecimento do fisio (elástico 3 direções) obrigatório. Abdutora pendente de liberação.
-- Lombar: nada de supino com barra ou máquina de supino; press é o supino sentado no cross.
+- Lombar: nada de supino com barra ou máquina de supino; press é o supino sentado no cross. Crossover polia baixa em pé dá dor nas costas: usar flexão ou crucifixo no cross com banco.
 - Halteres da academia vão até 20 kg; cargas altas ficam pra cabo e máquina.
 - Prioridades: peito superior (P0), ombro lateral (P1). Ordem: todo um grupo antes do próximo, sem ping-pong.
 
