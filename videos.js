@@ -40,6 +40,7 @@ const V = {
   remadaBarraPronada:"pfgEEiouvAs",  // Remada baixa pegada pronada aberta · Treino Mestre · 0:28
   remadaMaq:"QyvIEdEHzHc",           // Remada máquina com apoio de peito (ficha Homero)
   remadaUni:"xgYWtfMBRbc",           // Remada unilateral (ficha Homero)
+  remadaApoioIncl:"pT_tRJFvSK0",     // Remada com halteres no banco inclinado (peito apoiado) · SKEL Treinamentos · 0:22
   barraFixa:"NTn_iTC8d_Q",           // Barra fixa pegada aberta · 0:12
   pulldownCorda:"h7q1mwzlDCY",       // Pulldown na corda (braço reto) · Adrenalina Training · 0:27
 

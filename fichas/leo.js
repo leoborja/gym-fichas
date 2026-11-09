@@ -77,14 +77,14 @@ const FICHAS = {
        cues:["Remada triângulo: puxar pro abdômen, peito estufado, cotovelos rentes, apertar a escápula 1s. NÃO usar a lombar. Sobe o peso a cada série","Supinada: mãos viradas pra você, puxar até o peito alto, cotovelos rentes ao corpo","Pulldown: polia alta, braços quase retos, levar a corda até a coxa em arco. Abdômen travado, leve inclinação do quadril, sem balançar a lombar"],
        why:"Três padrões diferentes: puxar na horizontal (espessura), puxar na vertical (dorsal inferior) e isolar o dorsal sem bíceps."},
       {block:"Bloco costas + tríceps + abs"},
-      {n:3, name:"Tri-set · Remada máquina apoio de peito + Pulley barra reta + Supra na corda", tags:["costas alta","tríceps","abs"], sets:3, reps:"10 · 10 · 20", rest:75,
+      {n:3, name:"Tri-set · Remada apoiada no banco inclinado + Pulley barra reta + Supra na corda", tags:["costas alta","tríceps","abs"], sets:3, reps:"12 · 10 · 20", rest:75,
        parts:[
-         {l:"A", name:"Remada na máquina com apoio de peito", sub:"Costas alta · pegada aberta · pesada · 10", yt:V.remadaMaq},
+         {l:"A", name:"Remada com halteres apoiado no banco inclinado", sub:"Costas alta · cotovelos abertos · 12", yt:V.remadaApoioIncl},
          {l:"B", name:"Tríceps pulley barra reta", sub:"Tríceps · pesado · 10", yt:V.tricepsBarraReta},
          {l:"C", name:"Abdominal supra na corda (polia)", sub:"Abs · 20", yt:V.supraCorda}
        ],
-       cues:["Remada máquina: peito colado no apoio, pegada aberta, puxar com os cotovelos abertos e apertar as escápulas 1s. A lombar fica apoiada, então dá pra carregar de verdade. Sem a máquina na academia → remada unilateral no cabo","Pulley barra reta: cotovelos colados ao corpo, estender até travar embaixo, subir controlando","Supra corda: ajoelhado, flexionar o tronco, expirar forte na contração","Monta o trio perto: máquina de remada + uma polia com barra reta e corda"],
-       why:"A remada com apoio de peito é melhor que a barra reta no cabo: o peito apoiado tira a lombar da jogada e o tronco não balança, então a carga vai toda pras costas (trapézio médio, romboides, posterior). Junto, já começa o tríceps e o abdômen: três áreas que não se atrapalham."},
+       cues:["Remada apoiada: banco a 30–45°, deitado de bruços com o peito no encosto, halteres pendurados. Puxar com os cotovelos ABERTOS (~45° do tronco) e apertar as escápulas 2s no topo, descer em 3s","20 kg fica leve? Segura 2s no topo e desce em 3s: o tempo sob tensão compensa a carga","Pulley barra reta: cotovelos colados ao corpo, estender até travar embaixo, subir controlando","Supra corda: ajoelhado, flexionar o tronco, expirar forte na contração","Monta o trio perto: banco inclinado do lado de uma polia com barra reta e corda"],
+       why:"É a versão com halteres da remada com apoio de peito: o peito no banco tira a lombar da jogada e o tronco não balança, então tudo vai pras costas (trapézio médio, romboides, posterior). Junto, já começa o tríceps e o abdômen: três áreas que não se atrapalham."},
       {block:"Bloco tríceps · fecha"},
       {n:4, name:"Superset · Francês unilateral + Mergulho", tags:["cabeça longa","todas"], sets:3, reps:"12 + máx", rest:60,
        parts:[
