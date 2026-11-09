@@ -12,7 +12,7 @@ const RULES = `<details class="rules" id="rules">
     <tr><td>Ordem</td><td>Um grupo inteiro antes do próximo: todo peito → todo ombro (A); costas → bíceps → tríceps (B).</td></tr>
     <tr><td>Progressão</td><td>Fechou o topo da faixa em todas as séries → sobe a carga na próxima vez que a ficha cair (+2,5–5 kg em composto, +1–2,5 kg em isolador).</td></tr>
   </table>
-  <div class="foot">Volume semanal (com o rodízio, ~1,7x cada): peito ~32 · ombro ~25 (lateral direto ~10) · costas ~23 · bíceps ~10 + puxadas · tríceps ~15 · perna ~30 · abs ~20.</div>
+  <div class="foot">Volume semanal (com o rodízio, ~1,7x cada): peito ~32 · ombro ~25 (lateral direto ~10) · costas ~22 · bíceps ~10 + puxadas · tríceps ~15 · perna ~30 · abs ~20.</div>
 </details>`;
 
 const FICHAS = {
@@ -61,29 +61,23 @@ const FICHAS = {
     volume:[["Peito (viés superior)",19],["Ombro",15],["Total",34]],
     note:"Por semana (~1,7x): peito ~32 séries (bem acima da meta de 18–22, de propósito: peito é P0; se a recuperação pesar, corta uma rodada do superset 3), ombro ~25, lateral direto ~10. Abs fica todo na C. Técnicas: pirâmide + drop no press, flexão até a falha, drop set no Arnold e na lateral."},
 
-  b:{tab:"Costas · Braços", title:"Costas + Bíceps + Tríceps", sub:"Denso", sets:29, min:40,
-    brief:"<strong>Regra do dia:</strong> TODA a costas primeiro (dorsal fresco), depois bíceps, depois tríceps. Sem ping-pong entre estações. As puxadas já aquecem o bíceps; o tríceps chega inteiro pro bloco dele.",
+  b:{tab:"Costas · Braços", title:"Costas + Bíceps + Tríceps", sub:"Pesado", sets:28, min:40,
+    brief:"<strong>Regra do dia:</strong> TODA a costas primeiro (dorsal fresco), depois bíceps, depois tríceps. Sem ping-pong entre estações. A puxada abre pesada e sozinha; o resto é tri-set pra ficar denso.",
     items:[
       {block:"Bloco costas · tudo primeiro"},
-      {n:1, name:"Superset · Puxada aberta + Remada triângulo", tags:["largura","espessura"], sets:3, reps:"12 + 10", rest:60,
+      {n:1, name:"Puxada frontal pegada aberta", tags:["largura"], tech:"Pirâmide + drop set na 4ª", sets:4, reps:"12 · 10 · 8 · 8", rest:90, yt:V.puxadaAlta,
+       cues:["Pirâmide: SOBE o peso a cada série (12 → 10 → 8 → 8)","Puxar até a clavícula, peito estufado, retrair as escápulas no fim","Subir em 2s controlando","4ª série: 8 reps → −30% → mais 8"],
+       why:"Composto principal do dia, sem superset: foco total na carga. Constrói a LARGURA, o “V”."},
+      {n:2, name:"Tri-set · Remada barra reta + Puxada supinada + Pulldown na corda", tags:["espessura","dorsal inferior","dorsal"], sets:3, reps:"10 · 12 · 15", rest:90,
        parts:[
-         {l:"A", name:"Puxada frontal pegada aberta", sub:"Largura · o “V” · 12", yt:V.puxadaAlta},
-         {l:"B", name:"Remada baixa com triângulo", sub:"Espessura · 10", yt:V.remadaTri}
+         {l:"A", name:"Remada baixa barra reta · pegada aberta", sub:"Puxa na horizontal · pesada · 10", yt:V.remadaBarraPronada},
+         {l:"B", name:"Puxada supinada · pegada fechada", sub:"Puxa na vertical · 12", yt:V.puxadaSupinada},
+         {l:"C", name:"Pulldown na corda (braço reto)", sub:"Isola o dorsal · 15", yt:V.pulldownCorda}
        ],
-       cues:["Puxada: puxar até a clavícula, retrair escápulas no fim, subir em 2s","Remada: puxar pro abdômen, peito estufado, cotovelos rentes, apertar a escápula. NÃO usar a lombar"],
-       why:"Largura + espessura: os dois pilares do dorsal."},
-      {n:2, name:"Superset · Remada barra reta + Puxada supinada", tags:["costas alta","dorsal inferior"], sets:3, reps:"10 + 12", rest:60,
-       parts:[
-         {l:"A", name:"Remada baixa barra reta · pegada aberta", sub:"Pronada, pesada · 10", yt:V.remadaBarraPronada},
-         {l:"B", name:"Puxada supinada · pegada fechada", sub:"Dorsal inferior · 12", yt:V.puxadaSupinada}
-       ],
-       cues:["Remada: pegada pronada e aberta, puxar pro baixo do peito, apertar a escápula 1s. Carrega de verdade, subindo a cada série","Supinada: mãos viradas pra você, puxar até o peito alto, cotovelos rentes ao corpo"],
-       why:"Costas aguentam muito peso: aqui resolve o limite do halter de 20kg. Ângulos totalmente diferentes do exercício 1."},
-      {n:3, name:"Barra fixa pegada aberta", tags:["largura","finisher"], sets:2, reps:"máx", rest:60, yt:V.barraFixa, u:"reps",
-       cues:["Pegada aberta, queixo passa a barra","Descer com controle","Registrar quantas reps saíram"],
-       why:"Favorito do Arnold pra largura. Fecha o bloco de costas com tudo que sobrou. “A última rep é a que constrói campeões.”"},
+       cues:["Remada: pegada pronada e aberta, puxar pro baixo do peito, apertar a escápula 1s. NÃO usar a lombar. Sobe o peso a cada série","Supinada: mãos viradas pra você, puxar até o peito alto, cotovelos rentes ao corpo","Pulldown: polia alta, braços quase retos, levar a corda até a coxa em arco. Abdômen travado, leve inclinação do quadril, sem balançar a lombar"],
+       why:"Três padrões diferentes: puxar na horizontal (espessura), puxar na vertical (dorsal inferior) e isolar o dorsal sem bíceps. O pulldown arranca o que sobrou do dorsal quando o braço já cansou."},
       {block:"Bloco bíceps"},
-      {n:4, name:"Superset · Rosca EZ + Martelo", tags:["bíceps","braquial"], tech:"21s na rosca EZ (3ª)", sets:3, reps:"10 + 12", rest:60,
+      {n:3, name:"Superset · Rosca EZ + Martelo", tags:["bíceps","braquial"], tech:"21s na rosca EZ (3ª)", sets:3, reps:"10 + 12", rest:60,
        parts:[
          {l:"A", name:"Rosca direta barra EZ", sub:"Bíceps · 10", yt:V.roscaEZ},
          {l:"B", name:"Rosca martelo", sub:"Braquial, espessura · 12", yt:V.martelo}
@@ -91,17 +85,17 @@ const FICHAS = {
        cues:["Rosca EZ: cotovelos colados, sem balançar","3ª série da EZ: 21s → 7 da base até a metade + 7 da metade até o topo + 7 completas, sem pausa","Martelo: pegada neutra. “Braço grosso é rosca martelo”"],
        why:"Bíceps + bíceps, fadiga local máxima. Os 21s eram o método do Arnold pra pico."},
       {block:"Bloco tríceps · por último"},
-      {n:5, name:"Tri-set · Testa EZ + Corda + Mergulho", tags:["cabeça longa","lateral","todas"], sets:3, reps:"10 · 15 · máx", rest:75,
+      {n:4, name:"Tri-set · Pulley barra reta + Francês unilateral + Mergulho", tags:["lateral/medial","cabeça longa","todas"], sets:3, reps:"10 · 12 · máx", rest:75,
        parts:[
-         {l:"A", name:"Tríceps testa barra EZ", sub:"Cabeça longa · 10", yt:V.testaEZ},
-         {l:"B", name:"Tríceps pulley corda", sub:"Lateral/medial · 15", yt:V.tricepsCorda},
+         {l:"A", name:"Tríceps pulley barra reta", sub:"Empurra pesado · 10", yt:V.tricepsBarraReta},
+         {l:"B", name:"Tríceps francês unilateral com halter", sub:"Cabeça longa alongada · 12 cada braço", yt:V.francesUni},
          {l:"C", name:"Mergulho no banco", sub:"Todas · até a falha", yt:V.mergulhoBanco, u:"reps"}
        ],
-       cues:["Testa: descer ATRÁS da cabeça, não na testa","Corda: abrir as mãos embaixo","Mergulho: mãos no banco atrás, pés à frente, cotovelo a 90°, até a falha"],
-       why:"As 3 cabeças em sequência: composto pesado → isolador → peso corporal até a falha."}
+       cues:["Pulley barra reta: cotovelos colados ao corpo, estender até travar embaixo, subir controlando. Carrega","Francês: sentado com encosto, halter atrás da cabeça, descer fundo até alongar o tríceps, cotovelo apontando pro teto","Mergulho: mãos no banco atrás, pés à frente, cotovelo a 90°, até a falha"],
+       why:"Pesado → alongado → até a falha. O francês pega a cabeça longa na posição alongada, onde ela mais cresce, e o mergulho fecha com tudo que sobrou."}
     ],
-    volume:[["Costas",14],["Bíceps",6],["Tríceps",9],["Total",29]],
-    note:"Por semana (~1,7x): costas ~23, bíceps ~10 diretas (+ o trabalho das puxadas), tríceps ~15 (+ os presses da A)."},
+    volume:[["Costas",13],["Bíceps",6],["Tríceps",9],["Total",28]],
+    note:"Por semana (~1,7x): costas ~22, bíceps ~10 diretas (+ o trabalho das puxadas), tríceps ~15 (+ os presses e a flexão da A). Técnicas: pirâmide + drop na puxada, 21s na rosca, mergulho até a falha."},
 
   c:{tab:"Perna · Abs", title:"Perna + Abdômen", sub:"Retomada", sets:30, min:38,
     brief:"<strong>Retomada pós-op joelho.</strong> Mesmo bloco de perna de antes: carga conservadora (40–50%), RPE máximo 7, sem falha e sem técnica intensificadora na perna. Qualquer desconforto no joelho → parar a série e reduzir. Abs intercalado: o joelho descansa enquanto o abdômen trabalha.", warn:true,

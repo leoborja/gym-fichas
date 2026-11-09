@@ -41,6 +41,7 @@ const V = {
   remadaMaq:"QyvIEdEHzHc",           // Remada máquina com apoio de peito (ficha Homero)
   remadaUni:"xgYWtfMBRbc",           // Remada unilateral (ficha Homero)
   barraFixa:"NTn_iTC8d_Q",           // Barra fixa pegada aberta · 0:12
+  pulldownCorda:"h7q1mwzlDCY",       // Pulldown na corda (braço reto) · Adrenalina Training · 0:27
 
   /* tríceps */
   testaEZ:"_sX2nTDhE1s",             // Tríceps testa barra W · Atlas · 0:38
@@ -48,6 +49,8 @@ const V = {
   tricepsCorda:"KhK5HWJfsrQ",        // Pulley tríceps corda · Miqueias Alves · 1:15
   mergulhoBanco:"8eFABDEBH-Y",       // Mergulho no banco · Daly Barbosa · 0:21
   coice:"cVvnXnyZ5eU",               // Tríceps coice com halteres · Via Brasil Club · 0:45
+  tricepsBarraReta:"9cmeOVHOjck",    // Tríceps na polia com barra reta · Treino Correto · 0:18
+  francesUni:"aM9c1OlLYLo",          // Tríceps francês unilateral sentado com halter · 4Nutrition Oficial · 0:16
 
   /* bíceps */
   roscaEZ:"0R7V2FXfFyQ",             // Rosca direta barra W · Via Brasil Club · 0:40
