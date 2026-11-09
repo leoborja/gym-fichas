@@ -74,6 +74,7 @@ const V = {
   /* abs / core */
   canivete:"yFKPFCnpFJs",            // Abdominal canivete · 4Nutrition · 0:15
   supraCorda:"7mUeDtB7nvM",          // Abdominal ajoelhado com corda na polia · Nei Farinazo · 0:17
+  infra:"lsfYFbfE45o",               // Abdominal Infra com Elevação de Pernas · Four Fit Academia · 0:10
   russian:"QxF3kDO74AA",             // Russian twist · Dicas do Salgueiro · 0:44
   prancha:"ty4jM83jKyE",             // Prancha frontal · Jr Vieira · 0:38
   pranchaLat:"2NjO5KrlVEM"           // Prancha lateral · Rodrigo Zago · 0:55

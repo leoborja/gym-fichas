@@ -1,29 +1,23 @@
-/* Fichas do Leo · A–E · mesociclo de Acumulação.
+/* Fichas do Leo · ABC em rodízio (5 dias/semana) · mesociclo de Acumulação.
+ * Ciclo anterior (A–E, jul–nov/2026): fichas/arquivo/leo-2026-07.js
  * Esquema dos campos: ver CLAUDE.md. Vídeos: videos.js (V.*). */
-const CICLO = { nome:"Acumulação", semana:"1/5", gerada:"2026-07-03", revisada:"2026-09-08" };
+const CICLO = { nome:"Acumulação · ABC", semana:"1/5", gerada:"2026-11-09" };
 
-/* bloco de perna compartilhado por C e E */
-const PERNA_AQ = {warm:true, name:"Elástico nas 3 direções", tags:["aquecimento","fisio"], sets:2, reps:"10 cada direção", rest:0, yt:V.elastico3dir, u:"round",
-  cues:["Elástico no tornozelo, apoio firme, abdômen contraído","Lado (glúteo médio) → frente (flexor) → trás (glúteo + posterior)","Sem descanso entre as direções"],
-  why:"Prescrito pelo fisio. É o que mantém o joelho seguro. Não pular."};
-const PERNA_3 = {n:3, name:"Superset · Extensora unilateral + Panturrilha em pé", tags:["quadríceps","panturrilha"], sets:3, reps:"12 + 15", rest:45,
-  parts:[
-    {l:"A", name:"Cadeira extensora unilateral", sub:"12 cada perna · fisio", yt:V.extensoraUni},
-    {l:"B", name:"Panturrilha em pé", sub:"Gastrocnêmio · 15", yt:V.pantPe}
-  ],
-  cues:["Extensora: uma perna por vez, subir 2s, segurar 1s, descer 2s. NÃO travar o joelho","Panturrilha: alongamento máximo embaixo, contração 1s no topo, ROM completo"],
-  why:"A panturrilha não estressa o joelho, então serve de descanso pro joelho entre as séries de extensora."};
-const PERNA_4 = {n:4, name:"Superset · Flexora unilateral + Abdutora", tags:["posterior de coxa","glúteo médio"], care:"Abdutora pendente de OK do fisio", sets:3, reps:"12 + 15", rest:45,
-  parts:[
-    {l:"A", name:"Cadeira flexora unilateral", sub:"12 cada perna · fisio", yt:V.flexoraUni},
-    {l:"B", name:"Cadeira abdutora", sub:"15 · ou elástico lateral", yt:V.abdutora}
-  ],
-  cues:["Flexora: uma perna por vez, subir 2s, segurar 1s, descer 2s. NÃO travar o joelho","Abdutora: tronco levemente à frente, abrir contra a resistência, contrair o glúteo médio no fim"],
-  why:"Abdutora é movimento de quadril, não estressa o joelho. Enquanto o fisio não liberar, usar o elástico de abertura lateral no lugar."};
+const RULES = `<details class="rules" id="rules">
+  <summary>Regras da ficha · ABC em rodízio<span class="chev">▾</span></summary>
+  <table>
+    <tr><td>Rodízio</td><td>5 dias por semana, sempre a <b>próxima letra</b>: A → B → C → A → B, e na semana seguinte continua de onde parou (C → A → B → C → A). Cada ficha cai ~1,7x por semana. Faltou um dia? Não pula letra, só segue a sequência.</td></tr>
+    <tr><td>Joelho</td><td>Perna só na C, com os exercícios do fisio. Carga 40–50% do pré-cirurgia, <b>RPE ≤7, sem falha, sem técnica intensificadora</b>. Elástico nas 3 direções antes, sempre. Abdutora só com OK do fisio (até lá, elástico lateral).</td></tr>
+    <tr><td>Lombar</td><td>Nada de supino com barra nem máquina de supino. Press de peito = supino sentado no cross.</td></tr>
+    <tr><td>Ordem</td><td>Um grupo inteiro antes do próximo: todo peito → todo ombro (A); costas → bíceps → tríceps (B).</td></tr>
+    <tr><td>Progressão</td><td>Fechou o topo da faixa em todas as séries → sobe a carga na próxima vez que a ficha cair (+2,5–5 kg em composto, +1–2,5 kg em isolador).</td></tr>
+  </table>
+  <div class="foot">Volume semanal (com o rodízio, ~1,7x cada): peito ~22 · ombro ~25 (lateral direto ~10) · costas ~23 · bíceps ~10 + puxadas · tríceps ~15 · perna ~30 · abs ~25.</div>
+</details>`;
 
 const FICHAS = {
-  a:{tab:"Peito · Ombro", title:"Peito superior + Ombro", sub:"Pesado", sets:31, min:38,
-    brief:"<strong>Regra do dia:</strong> completar TODO o peito antes de tocar em ombro. Press no supino sentado no cross (coluna apoiada, zero lombar). Lateral é o alvo 3D da semana.",
+  a:{tab:"Peito · Ombro", title:"Peito superior + Ombro", sub:"Pesado", sets:31, min:40,
+    brief:"<strong>Regra do dia:</strong> completar TODO o peito antes de tocar em ombro. Press no supino sentado no cross (coluna apoiada, zero lombar). Agora é a ÚNICA ficha de peito e ombro: cai ~1,7x por semana no rodízio, então cada sessão é pra valer.",
     items:[
       {warm:true, name:"Manguito rotador externo", tags:["aquecimento","ombro"], sets:3, reps:"15", rest:0, yt:V.manguito,
        cues:["Cotovelo a 90° colado ao corpo","Halter leve ou elástico, rotação externa","Sem descanso entre lados"],
@@ -54,20 +48,20 @@ const FICHAS = {
          {l:"B", name:"Face pull na corda", sub:"Posterior + saúde articular", yt:V.facepull}
        ],
        cues:["Lateral: mindinho levemente pra cima, “derramar a jarra”, sem balançar o corpo","Face pull: cotovelos ALTOS, puxar pra cara, squeeze 2s"],
-       why:"As duas cabeças que os pressings não pegam. Anterior já foi martelado pelos 3 presses."},
-      {n:5, name:"Superset · Lateral inclinada + Posterior curvado", tags:["deltóide medial","posterior"], sets:3, reps:"12 + 12", rest:45,
+       why:"As duas cabeças que os pressings não pegam. Anterior já foi martelado pelos presses."},
+      {n:5, name:"Superset · Lateral cruzada no cabo + Posterior curvado", tags:["deltóide medial","posterior"], tech:"Drop set na lateral (3ª)", sets:3, reps:"12 + 12", rest:45,
        parts:[
-         {l:"A", name:"Elevação lateral inclinada (leaning)", sub:"Isola o lateral puro", yt:V.lateralLeaning},
-         {l:"B", name:"Elevação posterior curvado", sub:"Fecha o posterior", yt:V.posteriorCurvado}
+         {l:"A", name:"Elevação lateral cruzada no cabo", sub:"Tensão constante · 12", yt:V.lateralCruzadaCabo},
+         {l:"B", name:"Elevação posterior curvado", sub:"Fecha o posterior · 12", yt:V.posteriorCurvado}
        ],
-       cues:["Apoiar num poste, inclinar o corpo, halter na mão de fora, tensão desde o início","Curvado: tronco à frente, abrir pros lados, squeeze 2s no topo"],
-       why:"2ª dose de medial + posterior, ângulos novos. Lateral segue prioridade."}
+       cues:["Lateral no cabo: cabo baixo cruzando na frente do corpo, elevar até o paralelo","3ª série da lateral: 12 → −30% → falha","Curvado: tronco à frente, abrir pros lados, squeeze 2s no topo"],
+       why:"2ª dose de medial + posterior em outro ângulo: halter em pé no 4, cabo aqui. Com o rodízio dá ~10 séries diretas de lateral por semana, o alvo 3D."}
     ],
     volume:[["Peito (viés superior)",13],["Ombro",15],["Abs",3],["Total",31]],
-    note:"Lateral direto: 6 séries aqui + 3 na D. Peito: press + estica + pullover = peito inteiro, viés superior."},
+    note:"Por semana (~1,7x): peito ~22 séries, ombro ~25, lateral direto ~10. Técnicas: rest-pause no press, drop set no desenvolvimento e na lateral."},
 
-  b:{tab:"Costas · Tríceps", title:"Costas + Tríceps", sub:"Denso", sets:29, min:40,
-    brief:"<strong>Regra do dia:</strong> TODA a costas primeiro (dorsal fresco), depois TODO o tríceps. As puxadas usam bíceps, então o tríceps chega inteiro pro bloco dele. Sem ping-pong entre estações.",
+  b:{tab:"Costas · Braços", title:"Costas + Bíceps + Tríceps", sub:"Denso", sets:29, min:40,
+    brief:"<strong>Regra do dia:</strong> TODA a costas primeiro (dorsal fresco), depois bíceps, depois tríceps. Sem ping-pong entre estações. As puxadas já aquecem o bíceps; o tríceps chega inteiro pro bloco dele.",
     items:[
       {block:"Bloco costas · tudo primeiro"},
       {n:1, name:"Superset · Puxada aberta + Remada triângulo", tags:["largura","espessura"], sets:3, reps:"12 + 10", rest:60,
@@ -87,119 +81,66 @@ const FICHAS = {
       {n:3, name:"Barra fixa pegada aberta", tags:["largura","finisher"], sets:2, reps:"máx", rest:60, yt:V.barraFixa, u:"reps",
        cues:["Pegada aberta, queixo passa a barra","Descer com controle","Registrar quantas reps saíram"],
        why:"Favorito do Arnold pra largura. Fecha o bloco de costas com tudo que sobrou. “A última rep é a que constrói campeões.”"},
-      {block:"Bloco tríceps · tudo depois"},
-      {n:4, name:"Tri-set · Testa EZ + Corda + Mergulho", tags:["cabeça longa","lateral","todas"], sets:3, reps:"10 · 15 · máx", rest:75,
+      {block:"Bloco bíceps"},
+      {n:4, name:"Superset · Rosca EZ + Martelo", tags:["bíceps","braquial"], tech:"21s na rosca EZ (3ª)", sets:3, reps:"10 + 12", rest:60,
+       parts:[
+         {l:"A", name:"Rosca direta barra EZ", sub:"Bíceps · 10", yt:V.roscaEZ},
+         {l:"B", name:"Rosca martelo", sub:"Braquial, espessura · 12", yt:V.martelo}
+       ],
+       cues:["Rosca EZ: cotovelos colados, sem balançar","3ª série da EZ: 21s → 7 da base até a metade + 7 da metade até o topo + 7 completas, sem pausa","Martelo: pegada neutra. “Braço grosso é rosca martelo”"],
+       why:"Bíceps + bíceps, fadiga local máxima. Os 21s eram o método do Arnold pra pico."},
+      {block:"Bloco tríceps · por último"},
+      {n:5, name:"Tri-set · Testa EZ + Corda + Mergulho", tags:["cabeça longa","lateral","todas"], sets:3, reps:"10 · 15 · máx", rest:75,
        parts:[
          {l:"A", name:"Tríceps testa barra EZ", sub:"Cabeça longa · 10", yt:V.testaEZ},
          {l:"B", name:"Tríceps pulley corda", sub:"Lateral/medial · 15", yt:V.tricepsCorda},
          {l:"C", name:"Mergulho no banco", sub:"Todas · até a falha", yt:V.mergulhoBanco, u:"reps"}
        ],
        cues:["Testa: descer ATRÁS da cabeça, não na testa","Corda: abrir as mãos embaixo","Mergulho: mãos no banco atrás, pés à frente, cotovelo a 90°, até a falha"],
-       why:"As 3 cabeças em sequência: composto pesado → isolador → peso corporal até a falha."},
-      {n:5, name:"Superset · Coice + Prancha lateral", tags:["tríceps","core"], tech:"Drop set no coice (3ª)", sets:3, reps:"12 + 45–60s", rest:45,
-       parts:[
-         {l:"A", name:"Tríceps coice com halter", sub:"12 cada braço", yt:V.coice},
-         {l:"B", name:"Prancha lateral", sub:"45–60s cada lado, ou até a falha", yt:V.pranchaLat, u:"seg"}
-       ],
-       cues:["Coice: cotovelo alinhado ao corpo, estender pra trás, contração máxima no topo","3ª série do coice: 12 → −30% → falha","Prancha: quadril ALTO, corpo em linha, alternar os lados a cada série"],
-       why:"Áreas diferentes, dá pra fazer junto sem interferência e ainda adianta o treino."}
+       why:"As 3 cabeças em sequência: composto pesado → isolador → peso corporal até a falha."}
     ],
-    volume:[["Costas",14],["Tríceps",12],["Abs",3],["Total",29]],
-    note:"Ordem: dorsal fresco primeiro (largura + espessura + finisher), depois todo o tríceps."},
+    volume:[["Costas",14],["Bíceps",6],["Tríceps",9],["Total",29]],
+    note:"Por semana (~1,7x): costas ~23, bíceps ~10 diretas (+ o trabalho das puxadas), tríceps ~15 (+ os presses da A)."},
 
-  c:{tab:"Perna · Bíceps", title:"Perna + Bíceps", sub:"Retomada", sets:30, min:37,
-    brief:"<strong>Retomada pós-op joelho.</strong> Carga conservadora (40–50%), RPE máximo 7, sem falha e sem técnica intensificadora na perna. Qualquer desconforto no joelho → parar a série e reduzir. O bloco de perna é idêntico ao da Ficha E.", warn:true,
+  c:{tab:"Perna · Abs", title:"Perna + Abdômen", sub:"Retomada", sets:30, min:38,
+    brief:"<strong>Retomada pós-op joelho.</strong> Mesmo bloco de perna de antes: carga conservadora (40–50%), RPE máximo 7, sem falha e sem técnica intensificadora na perna. Qualquer desconforto no joelho → parar a série e reduzir. Abs intercalado: o joelho descansa enquanto o abdômen trabalha.", warn:true,
     items:[
-      PERNA_AQ,
-      {n:1, name:"Tri-set · Agachamento + Rosca EZ + Martelo", tags:["perna","bíceps"], care:"Perna: RPE ≤7, sem falha", sets:3, reps:"12 · 10 · 12", rest:75,
-       parts:[
-         {l:"A", name:"Agachamento (pouco peso)", sub:"Sem passar do paralelo · 12", yt:V.agacho},
-         {l:"B", name:"Rosca direta barra EZ", sub:"Bíceps · 10", yt:V.roscaEZ},
-         {l:"C", name:"Rosca martelo", sub:"Braquial, espessura · 12", yt:V.martelo}
-       ],
-       cues:["Agachamento: 40–50% do pré-cirurgia, descer 2s, joelho alinhado à ponta do pé, NÃO valgizar","Rosca EZ: cotovelos colados, sem balançar","Martelo: pegada neutra. “Braço grosso é rosca martelo”"],
-       why:"A perna descansa enquanto DOIS bíceps trabalham: fadiga máxima no braço, zero fadiga cumulativa no joelho."},
-      {n:2, name:"Tri-set · Pélvica + Alternada + Scott", tags:["glúteo","bíceps"], sets:3, reps:"15 · 12 · 10", rest:75,
-       parts:[
-         {l:"A", name:"Elevação pélvica na máquina", sub:"Glúteo, seguro pro joelho · 15", yt:V.pelvicaMaq},
-         {l:"B", name:"Rosca alternada com halteres", sub:"12 (6 por braço)", yt:V.alternada},
-         {l:"C", name:"Rosca scott barra EZ", sub:"Pico · 10", yt:V.scott}
-       ],
-       cues:["Pélvica: empurrar com os calcanhares, contrair o glúteo 2s no topo","Alternada: supinar no topo (girar o mindinho pra fora)","Scott: cotovelo apoiado, descer com controle, sem trapaça"],
-       why:"Pélvica é o rei do glúteo com mínimo estresse no joelho."},
-      PERNA_3,
-      PERNA_4
-    ],
-    volume:[["Perna",18],["Bíceps",12],["Total",30]],
-    note:"~9 séries de carga direta no joelho (agachamento, extensora, flexora). O resto é quadril/tornozelo. Progredir só com todas as reps em RPE ≤7 e zero desconforto."},
-
-  d:{tab:"Peito · Ombro", title:"Peito superior + Ombro", sub:"2º dia forte", sets:29, min:40,
-    brief:"<strong>Não é o dia leve.</strong> É o 2º ataque pesado da semana em peito (P0) e ombro (P1): carga de verdade, perto da falha, técnicas nos principais. Ângulos diferentes da Ficha A pra bater o músculo de outro jeito.",
-    items:[
-      {warm:true, name:"Manguito rotador externo", tags:["aquecimento","ombro"], sets:3, reps:"15", rest:0, yt:V.manguito,
-       cues:["Cotovelo a 90° colado ao corpo","Rotação externa leve","Sem descanso entre lados"],
-       why:"Obrigatório antes de peito/ombro."},
-      {block:"Bloco peito · superior"},
-      {n:1, name:"Supino sentado no cross · inclinado", tags:["peito superior"], tech:"Rest-pause na 4ª", sets:4, reps:"8–10", rest:90, yt:V.crossPressIncl,
-       cues:["Banco a 30–40°, cabos na altura do peito alto","Empurrar à frente/cima, descer 3s, explodir","4ª série: 8 reps → 15s → +5 reps mesmo peso"],
-       why:"Mesmo press da Ficha A, aqui como 2ª dose pesada da semana. Coluna apoiada."},
-      {n:2, name:"Superset · Cross reto + Crossover polia baixa", tags:["peito médio","peito superior"], sets:3, reps:"10 + 15", rest:75,
-       parts:[
-         {l:"A", name:"Supino sentado no cross · reto", sub:"Empurra pesado · 10", yt:V.crossPressReto},
-         {l:"B", name:"Crossover polia baixa", sub:"Aperta, superior contraído · 15", yt:V.crossoverBaixo}
-       ],
-       cues:["Cross reto: banco plano, descer 2–3s, explodir","Crossover baixo: subir cruzando na frente até a altura do queixo, squeeze 2s"],
-       why:"Press + cabo: padrões diferentes, curvas de resistência opostas."},
-      {n:3, name:"Superset · Pullover + Canivete", tags:["peito","abs","finisher"], sets:3, reps:"12 + 15", rest:45,
-       parts:[
-         {l:"A", name:"Pullover com halter", sub:"Caixa torácica + serrátil · 12", yt:V.pullover},
-         {l:"B", name:"Canivete", sub:"Reto abdominal · 15", yt:V.canivete, u:"corpo"}
-       ],
-       cues:["Pullover: perpendicular no banco, quadril baixo, halter bem atrás da cabeça, voltar contraindo o peito","Canivete: pernas e tronco sobem juntos"],
-       why:"O Arnold sagrado fecha o peito e já adianta o abs."},
-      {block:"Bloco ombro"},
-      {n:4, name:"Arnold press sentado", tags:["deltóide · 3 cabeças"], tech:"Drop set na 4ª", sets:4, reps:"8–10", rest:90, yt:V.arnold,
-       cues:["Palmas começam viradas pra você, rotacionar durante a subida","Carga pesada, perto da falha","4ª série: 8–10 → −30% → falha"],
-       why:"O único exercício que leva o nome dele. As 3 cabeças do deltóide de uma vez."},
-      {n:5, name:"Superset · Lateral sentado + Posterior no cabo", tags:["deltóide medial","posterior"], sets:3, reps:"12 + 15", rest:60,
-       parts:[
-         {l:"A", name:"Elevação lateral sentado", sub:"Sem impulso do corpo · 12", yt:V.lateralSentado},
-         {l:"B", name:"Elevação posterior no cabo (reverse)", sub:"Cabo cruzado · 15", yt:V.crucInversoCabo}
-       ],
-       cues:["Sentado elimina o impulso: isolamento puro do medial. Mindinho levemente pra cima","Cabo na altura do ombro, abrir pra trás, squeeze 2s"],
-       why:"Medial + posterior, ângulos diferentes da Ficha A."},
-      {n:6, name:"Elevação lateral cruzada no cabo", tags:["deltóide medial"], tech:"Drop set na 3ª", sets:3, reps:"12", rest:45, yt:V.lateralCruzadaCabo,
-       cues:["Cabo baixo cruzando na frente do corpo","Elevar até o paralelo, tensão constante","3ª série: 12 → −30% → falha"],
-       why:"Bombeamento final no ombro. Lateral direto: 6 séries aqui + 6 na A = ~12/semana."}
-    ],
-    volume:[["Peito (viés superior)",13],["Ombro",13],["Abs",3],["Total",29]],
-    note:"2º dia forte: rest-pause no cross inclinado, drop set no Arnold e na lateral cruzada."},
-
-  e:{tab:"Perna · Abs", title:"Perna + Abdômen", sub:"Retomada", sets:30, min:37,
-    brief:"<strong>Retomada pós-op joelho.</strong> Bloco de perna IDÊNTICO ao da Ficha C: mesmos exercícios, séries, reps e carga. A diferença é só o parceiro: aqui a perna casa com abs. RPE máximo 7, sem falha.", warn:true,
-    items:[
-      PERNA_AQ,
-      {n:1, name:"Tri-set · Agachamento + Supra corda + Canivete", tags:["perna","abs"], care:"Perna: RPE ≤7, sem falha", sets:3, reps:"12 · 20 · 15", rest:75,
+      {warm:true, name:"Elástico nas 3 direções", tags:["aquecimento","fisio"], sets:2, reps:"10 cada direção", rest:0, yt:V.elastico3dir, u:"round",
+       cues:["Elástico no tornozelo, apoio firme, abdômen contraído","Lado (glúteo médio) → frente (flexor) → trás (glúteo + posterior)","Sem descanso entre as direções"],
+       why:"Prescrito pelo fisio. É o que mantém o joelho seguro. Não pular."},
+      {n:1, name:"Tri-set · Agachamento + Supra corda + Infra", tags:["perna","abs"], care:"Perna: RPE ≤7, sem falha", sets:3, reps:"12 · 20 · 15", rest:75,
        parts:[
          {l:"A", name:"Agachamento (pouco peso)", sub:"Sem passar do paralelo · 12", yt:V.agacho},
          {l:"B", name:"Abdominal supra na corda (polia)", sub:"Reto superior · 20", yt:V.supraCorda},
-         {l:"C", name:"Canivete", sub:"Reto completo · 15", yt:V.canivete, u:"corpo"}
+         {l:"C", name:"Abdominal infra · elevação de pernas", sub:"Reto inferior · 15", yt:V.infra, u:"corpo"}
        ],
-       cues:["Agachamento: idêntico à Ficha C. 40–50%, joelho alinhado, sem falha","Supra corda: ajoelhado, flexionar o tronco, expirar forte na contração","Canivete: pernas e tronco sobem juntos, sem impulso"],
-       why:"A perna descansa enquanto DOIS abs trabalham. Abs intercalado desde o começo."},
-      {n:2, name:"Tri-set · Pélvica + Russian twist + Prancha", tags:["glúteo","abs"], sets:3, reps:"15 · 20 · 30s", rest:75,
+       cues:["Agachamento: 40–50% do pré-cirurgia, descer 2s, joelho alinhado à ponta do pé, NÃO valgizar","Supra corda: ajoelhado, flexionar o tronco, expirar forte na contração","Infra: deitado, lombar colada no chão, subir as pernas e tirar o quadril do chão no fim. Descer devagar sem encostar os pés"],
+       why:"A perna descansa enquanto DOIS abs trabalham. Infra no lugar do canivete, que já está na Ficha A."},
+      {n:2, name:"Tri-set · Pélvica + Russian twist + Prancha lateral", tags:["glúteo","abs"], sets:3, reps:"15 · 20 · 45s", rest:75,
        parts:[
-         {l:"A", name:"Elevação pélvica na máquina", sub:"Glúteo · 15", yt:V.pelvicaMaq},
+         {l:"A", name:"Elevação pélvica na máquina", sub:"Glúteo, seguro pro joelho · 15", yt:V.pelvicaMaq},
          {l:"B", name:"Russian twist", sub:"Oblíquos · 20 (10 por lado)", yt:V.russian},
-         {l:"C", name:"Prancha frontal", sub:"Core · 30s", yt:V.prancha, u:"seg"}
+         {l:"C", name:"Prancha lateral", sub:"45s cada lado, alternando por série", yt:V.pranchaLat, u:"seg"}
        ],
-       cues:["Pélvica: empurrar com os calcanhares, contrair o glúteo 2s no topo","Twist: tronco a 45°, pés no ar, rotacionar com halter ou anilha","Prancha: corpo em linha reta, abdômen e glúteo contraídos"],
-       why:"Mesma pélvica da Ficha C, mesma carga."},
-      PERNA_3,
-      PERNA_4
+       cues:["Pélvica: empurrar com os calcanhares, contrair o glúteo 2s no topo","Twist: tronco a 45°, pés no ar, rotacionar com halter ou anilha","Prancha lateral: quadril ALTO, corpo em linha reta"],
+       why:"Pélvica é o rei do glúteo com mínimo estresse no joelho. A prancha lateral veio da antiga B: core anti-rotação."},
+      {n:3, name:"Superset · Extensora unilateral + Panturrilha em pé", tags:["quadríceps","panturrilha"], sets:3, reps:"12 + 15", rest:45,
+       parts:[
+         {l:"A", name:"Cadeira extensora unilateral", sub:"12 cada perna · fisio", yt:V.extensoraUni},
+         {l:"B", name:"Panturrilha em pé", sub:"Gastrocnêmio · 15", yt:V.pantPe}
+       ],
+       cues:["Extensora: uma perna por vez, subir 2s, segurar 1s, descer 2s. NÃO travar o joelho","Panturrilha: alongamento máximo embaixo, contração 1s no topo, ROM completo"],
+       why:"A panturrilha não estressa o joelho, então serve de descanso pro joelho entre as séries de extensora."},
+      {n:4, name:"Superset · Flexora unilateral + Abdutora", tags:["posterior de coxa","glúteo médio"], care:"Abdutora pendente de OK do fisio", sets:3, reps:"12 + 15", rest:45,
+       parts:[
+         {l:"A", name:"Cadeira flexora unilateral", sub:"12 cada perna · fisio", yt:V.flexoraUni},
+         {l:"B", name:"Cadeira abdutora", sub:"15 · ou elástico lateral", yt:V.abdutora}
+       ],
+       cues:["Flexora: uma perna por vez, subir 2s, segurar 1s, descer 2s. NÃO travar o joelho","Abdutora: tronco levemente à frente, abrir contra a resistência, contrair o glúteo médio no fim"],
+       why:"Abdutora é movimento de quadril, não estressa o joelho. Enquanto o fisio não liberar, usar o elástico de abertura lateral no lugar."}
     ],
     volume:[["Perna",18],["Abs",12],["Total",30]],
-    note:"Bloco de perna idêntico à Ficha C: mesma carga, mesma progressão. Perna 2x/semana no total."}
+    note:"Perna ~1,7x por semana, mesmo bloco de sempre. ~9 séries de carga direta no joelho por sessão (agachamento, extensora, flexora); o resto é quadril e tornozelo. Progredir só com todas as reps em RPE ≤7 e zero desconforto."}
 };
 
-window.GB = { prefix:'gb2_', fichas:FICHAS, ciclo:CICLO, rules:null };
+window.GB = { prefix:'gb2_', fichas:FICHAS, ciclo:CICLO, rules:RULES };

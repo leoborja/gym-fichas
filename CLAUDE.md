@@ -6,7 +6,7 @@ Site estático em https://leoborja.github.io/gym-fichas/ . Sem build: editar arq
 
 | Arquivo | Papel |
 |---|---|
-| `index.html` | Casca da página do Leo (fichas A–E). Só HTML fixo + `<script>` das três peças abaixo. |
+| `index.html` | Casca da página do Leo (fichas ABC em rodízio, desde 2026-11; ciclo A–E arquivado em `fichas/arquivo/leo-2026-07.js`). Só HTML fixo + `<script>` das três peças abaixo. |
 | `app.css` / `app.js` | Template compartilhado: visual, abas, registro de séries, cronômetro, vídeos, "Finalizar treino". **Toda mudança de design/comportamento vai aqui**, nunca inline nas páginas. |
 | `videos.js` | Biblioteca `V` de vídeos de execução (ID do YouTube por exercício), com canal e duração no comentário. |
 | `fichas/leo.js` | Dados das fichas do Leo + `CICLO` + `window.GB` (config da página). |
@@ -47,7 +47,7 @@ Itens de `items`, em ordem:
 
 ## Regras fixas do Leo (valem pra toda ficha dele)
 
-- Joelho pós-operatório: perna 2x/semana com o MESMO bloco, carga conservadora, RPE ≤7, sem falha, sem técnica intensificadora na perna. Aquecimento do fisio (elástico 3 direções) obrigatório. Abdutora pendente de liberação.
+- Joelho pós-operatório: perna só com os exercícios do fisio (hoje na Ficha C, ~1,7x/semana no rodízio), carga conservadora, RPE ≤7, sem falha, sem técnica intensificadora na perna. Aquecimento do fisio (elástico 3 direções) obrigatório. Abdutora pendente de liberação.
 - Lombar: nada de supino com barra ou máquina de supino; press é o supino sentado no cross.
 - Halteres da academia vão até 20 kg; cargas altas ficam pra cabo e máquina.
 - Prioridades: peito superior (P0), ombro lateral (P1). Ordem: todo um grupo antes do próximo, sem ping-pong.
