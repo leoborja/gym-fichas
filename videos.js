@@ -12,6 +12,7 @@ const V = {
   crossPressReto:"nybEfmrz1Ro",      // Supino vertical no crossover sentado · Mayara Ramos · 0:16
   crucIncl:"RIfdP8Jfc-Q",            // Crucifixo inclinado com halter · Gabriel Rodrigues · 0:50
   crossoverBaixo:"QUcXXwxa6hE",      // Crucifixo na polia baixa · Miqueias Alves · 1:18
+  crucInclCross:"vW2dwK9BOMw",       // Crucifixo inclinado com banco no cross over · 4Nutrition Oficial · 0:14
   pullover:"UicU0kXYKTI",            // Pullover com halter · MyTrainingPRO · 0:55
   supinoHalter:"tDxKGeY-hjQ",        // Supino reto com halteres (ficha Homero)
   supinoHalterIncl:"F4Q1g2z8MWM",    // Supino inclinado com halteres (ficha Homero)

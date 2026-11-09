@@ -12,27 +12,28 @@ const RULES = `<details class="rules" id="rules">
     <tr><td>Ordem</td><td>Um grupo inteiro antes do próximo: todo peito → todo ombro (A); costas → bíceps → tríceps (B).</td></tr>
     <tr><td>Progressão</td><td>Fechou o topo da faixa em todas as séries → sobe a carga na próxima vez que a ficha cair (+2,5–5 kg em composto, +1–2,5 kg em isolador).</td></tr>
   </table>
-  <div class="foot">Volume semanal (com o rodízio, ~1,7x cada): peito ~22 · ombro ~25 (lateral direto ~10) · costas ~23 · bíceps ~10 + puxadas · tríceps ~15 · perna ~30 · abs ~25.</div>
+  <div class="foot">Volume semanal (com o rodízio, ~1,7x cada): peito ~27 · ombro ~25 (lateral direto ~10) · costas ~23 · bíceps ~10 + puxadas · tríceps ~15 · perna ~30 · abs ~25.</div>
 </details>`;
 
 const FICHAS = {
-  a:{tab:"Peito · Ombro", title:"Peito superior + Ombro", sub:"Pesado", sets:31, min:40,
+  a:{tab:"Peito · Ombro", title:"Peito superior + Ombro", sub:"Pesado", sets:34, min:42,
     brief:"<strong>Regra do dia:</strong> completar TODO o peito antes de tocar em ombro. Press no supino sentado no cross (coluna apoiada, zero lombar). Agora é a ÚNICA ficha de peito e ombro: cai ~1,7x por semana no rodízio, então cada sessão é pra valer.",
     items:[
       {warm:true, name:"Manguito rotador externo", tags:["aquecimento","ombro"], sets:3, reps:"15", rest:0, yt:V.manguito,
        cues:["Cotovelo a 90° colado ao corpo","Halter leve ou elástico, rotação externa","Sem descanso entre lados"],
        why:"Não é treino, é seguro de vida do ombro. Pula e paga com lesão."},
       {block:"Bloco peito · superior"},
-      {n:1, name:"Supino sentado no cross · inclinado", tags:["peito superior"], tech:"Rest-pause na 4ª", sets:4, reps:"8–10", rest:90, yt:V.crossPressIncl,
-       cues:["Banco a 30–40°, cabos na altura do peito alto","Empurrar à frente/cima juntando na linha do peito","Descer em 3s, explodir na subida","4ª série: 8 reps → 15s → +5 reps mesmo peso"],
-       why:"Composto principal do dia, sem superset. Tensão constante, coluna apoiada, zero lombar. Bateu 10 limpas nas 4 séries → sobe a carga."},
-      {n:2, name:"Superset · Crucifixo inclinado + Supino cross reto", tags:["peito superior","peito médio"], sets:3, reps:"10–12", rest:75,
+      {n:1, name:"Supino sentado no cross · inclinado", tags:["peito superior"], tech:"Pirâmide + drop set na 4ª", sets:4, reps:"12 · 10 · 8 · 8", rest:90, yt:V.crossPressIncl,
+       cues:["Banco a 30–40°, cabos na altura do peito alto","Pirâmide: SOBE o peso a cada série (12 → 10 → 8 → 8)","Descer em 3s, explodir na subida","4ª série: 8 reps → −30% → mais 8"],
+       why:"Composto principal do dia, sem superset: foco total na carga. Mesmo press (é o único que não machuca a lombar), mas com pirâmide e drop no lugar do rest-pause: estímulo novo. Fechou as reps em todas → sobe a carga."},
+      {n:2, name:"Tri-set · Cross reto + Crucifixo inclinado no cross + Crossover baixo", tags:["peito médio","peito superior"], sets:3, reps:"10 · 12 · 15", rest:90,
        parts:[
-         {l:"A", name:"Crucifixo inclinado com halteres", sub:"Estica · fase alongada", yt:V.crucIncl},
-         {l:"B", name:"Supino sentado no cross · reto", sub:"Empurra · ângulo reto", yt:V.crossPressReto}
+         {l:"A", name:"Supino sentado no cross · reto", sub:"Empurra · pesado · 10", yt:V.crossPressReto},
+         {l:"B", name:"Crucifixo inclinado no cross", sub:"Estica · banco inclinado entre os cabos · 12", yt:V.crucInclCross},
+         {l:"C", name:"Crossover polia baixa", sub:"Aperta · superior contraído · 15", yt:V.crossoverBaixo}
        ],
-       cues:["Crucifixo: banco 30°, abertura ampla, cotovelos levemente flexionados, squeeze 1–2s no topo","Cross reto: banco plano, cabos na altura do peito, descer 2–3s, explodir"],
-       why:"Dois padrões diferentes, não dois flys: um estica, o outro empurra num ângulo novo. Isso arredonda o peitoral inteiro."},
+       cues:["Tudo na mesma estação do cross: só troca o banco e a altura das polias, sem perder tempo","Cross reto: banco plano, cabos na altura do peito, descer 2–3s, explodir","Crucifixo no cross: banco a 30° no meio, cabos baixos, abrir até sentir o alongamento, fechar em arco","Crossover baixo: em pé, subir cruzando na frente até a altura do queixo, segurar 2s no pico"],
+       why:"Empurrar → esticar → apertar: três padrões diferentes, não três flys por fazer. O press cansa o peito, o crucifixo pega a fase alongada e o crossover espreme o que sobrou. É o peito pegando fogo."},
       {n:3, name:"Tri-set · Pullover + Canivete + Desenvolvimento", tags:["peito","abs","ombro"], tech:"Drop set no desenvolvimento (3ª)", sets:3, reps:"12 · 15 · 8–10", rest:75,
        parts:[
          {l:"A", name:"Pullover com halter", sub:"Caixa torácica · 12", yt:V.pullover},
@@ -57,8 +58,8 @@ const FICHAS = {
        cues:["Lateral no cabo: cabo baixo cruzando na frente do corpo, elevar até o paralelo","3ª série da lateral: 12 → −30% → falha","Curvado: tronco à frente, abrir pros lados, squeeze 2s no topo"],
        why:"2ª dose de medial + posterior em outro ângulo: halter em pé no 4, cabo aqui. Com o rodízio dá ~10 séries diretas de lateral por semana, o alvo 3D."}
     ],
-    volume:[["Peito (viés superior)",13],["Ombro",15],["Abs",3],["Total",31]],
-    note:"Por semana (~1,7x): peito ~22 séries, ombro ~25, lateral direto ~10. Técnicas: rest-pause no press, drop set no desenvolvimento e na lateral."},
+    volume:[["Peito (viés superior)",16],["Ombro",15],["Abs",3],["Total",34]],
+    note:"Por semana (~1,7x): peito ~27 séries (acima da meta de 18–22, de propósito: peito é P0), ombro ~25, lateral direto ~10. Técnicas: pirâmide + drop no press, tri-set de peito, drop set no desenvolvimento e na lateral."},
 
   b:{tab:"Costas · Braços", title:"Costas + Bíceps + Tríceps", sub:"Denso", sets:29, min:40,
     brief:"<strong>Regra do dia:</strong> TODA a costas primeiro (dorsal fresco), depois bíceps, depois tríceps. Sem ping-pong entre estações. As puxadas já aquecem o bíceps; o tríceps chega inteiro pro bloco dele.",
