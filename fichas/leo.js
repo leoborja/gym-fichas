@@ -12,7 +12,7 @@ const RULES = `<details class="rules" id="rules">
     <tr><td>Ordem</td><td>Um grupo inteiro antes do próximo: todo peito → todo ombro (A); costas → tríceps (B), e na C a perna alterna com o bíceps.</td></tr>
     <tr><td>Progressão</td><td>Fechou o topo da faixa em todas as séries → sobe a carga na próxima vez que a ficha cair (+2,5–5 kg em composto, +1–2,5 kg em isolador).</td></tr>
   </table>
-  <div class="foot">Volume semanal (com o rodízio, ~1,7x cada): peito ~32 · ombro ~25 (lateral direto ~10) · costas ~27 · tríceps ~15 · bíceps ~20 · perna ~30 · abs ~5.</div>
+  <div class="foot">Volume semanal (com o rodízio, ~1,7x cada): peito ~32 · ombro ~25 (lateral direto ~10) · costas ~27 · tríceps ~20 · bíceps ~20 · perna ~30 · abs ~5.</div>
 </details>`;
 
 const FICHAS = {
@@ -61,30 +61,30 @@ const FICHAS = {
     volume:[["Peito (viés superior)",19],["Ombro",15],["Total",34]],
     note:"Por semana (~1,7x): peito ~32 séries (bem acima da meta de 18–22, de propósito: peito é P0; se a recuperação pesar, corta uma rodada do superset 3), ombro ~25, lateral direto ~10. Abs fica todo na C. Técnicas: pirâmide + drop no press, flexão até a falha, drop set no Arnold e na lateral."},
 
-  b:{tab:"Costas · Tríceps", title:"Costas + Tríceps", sub:"Pesado", sets:28, min:40,
+  b:{tab:"Costas · Tríceps", title:"Costas + Tríceps", sub:"Pesado", sets:31, min:43,
     brief:"<strong>Regra do dia:</strong> a puxada abre pesada e sozinha, depois tri-set só de costas. Aí entra o tri-set costas + tríceps + abdominal (tudo no cabo, áreas que não se atrapalham) e fecha com o tríceps. Bíceps agora é na Ficha C.",
     items:[
       {block:"Bloco costas"},
       {n:1, name:"Puxada frontal pegada aberta", tags:["largura"], tech:"Pirâmide + drop set na 4ª", sets:4, reps:"12 · 10 · 8 · 8", rest:90, yt:V.puxadaAlta,
        cues:["Pirâmide: SOBE o peso a cada série (12 → 10 → 8 → 8)","Puxar até a clavícula, peito estufado, retrair as escápulas no fim","Subir em 2s controlando","4ª série: 8 reps → −30% → mais 8"],
        why:"Composto principal do dia, sem superset: foco total na carga. Constrói a LARGURA, o “V”."},
-      {n:2, name:"Tri-set · Remada barra reta + Puxada supinada + Pulldown na corda", tags:["espessura","dorsal inferior","dorsal"], sets:3, reps:"10 · 12 · 15", rest:90,
+      {n:2, name:"Tri-set · Remada triângulo + Puxada supinada + Pulldown na corda", tags:["espessura","dorsal inferior","dorsal"], sets:3, reps:"10 · 12 · 15", rest:90,
        parts:[
-         {l:"A", name:"Remada baixa barra reta · pegada aberta", sub:"Puxa na horizontal · pesada · 10", yt:V.remadaBarraPronada},
+         {l:"A", name:"Remada baixa com triângulo", sub:"Puxa na horizontal · pesada · 10", yt:V.remadaTri},
          {l:"B", name:"Puxada supinada · pegada fechada", sub:"Puxa na vertical · 12", yt:V.puxadaSupinada},
          {l:"C", name:"Pulldown na corda (braço reto)", sub:"Isola o dorsal · 15", yt:V.pulldownCorda}
        ],
-       cues:["Remada: pegada pronada e aberta, puxar pro baixo do peito, apertar a escápula 1s. NÃO usar a lombar. Sobe o peso a cada série","Supinada: mãos viradas pra você, puxar até o peito alto, cotovelos rentes ao corpo","Pulldown: polia alta, braços quase retos, levar a corda até a coxa em arco. Abdômen travado, leve inclinação do quadril, sem balançar a lombar"],
+       cues:["Remada triângulo: puxar pro abdômen, peito estufado, cotovelos rentes, apertar a escápula 1s. NÃO usar a lombar. Sobe o peso a cada série","Supinada: mãos viradas pra você, puxar até o peito alto, cotovelos rentes ao corpo","Pulldown: polia alta, braços quase retos, levar a corda até a coxa em arco. Abdômen travado, leve inclinação do quadril, sem balançar a lombar"],
        why:"Três padrões diferentes: puxar na horizontal (espessura), puxar na vertical (dorsal inferior) e isolar o dorsal sem bíceps."},
       {block:"Bloco costas + tríceps + abs"},
-      {n:3, name:"Tri-set · Remada triângulo + Pulley barra reta + Supra na corda", tags:["espessura","tríceps","abs"], sets:3, reps:"10 · 10 · 20", rest:75,
+      {n:3, name:"Tri-set · Remada máquina apoio de peito + Pulley barra reta + Supra na corda", tags:["costas alta","tríceps","abs"], sets:3, reps:"10 · 10 · 20", rest:75,
        parts:[
-         {l:"A", name:"Remada baixa com triângulo", sub:"Costas · espessura · 10", yt:V.remadaTri},
+         {l:"A", name:"Remada na máquina com apoio de peito", sub:"Costas alta · pegada aberta · pesada · 10", yt:V.remadaMaq},
          {l:"B", name:"Tríceps pulley barra reta", sub:"Tríceps · pesado · 10", yt:V.tricepsBarraReta},
          {l:"C", name:"Abdominal supra na corda (polia)", sub:"Abs · 20", yt:V.supraCorda}
        ],
-       cues:["Remada triângulo: puxar pro abdômen, peito estufado, cotovelos rentes, apertar a escápula. NÃO usar a lombar","Pulley barra reta: cotovelos colados ao corpo, estender até travar embaixo, subir controlando","Supra corda: ajoelhado, flexionar o tronco, expirar forte na contração","Tudo no cabo: escolhe duas polias vizinhas e roda o trio sem andar pela academia"],
-       why:"Mais uma de costas, agora com a pegada neutra fechada, e já começando o tríceps. Três áreas que não se atrapalham: costas puxa, tríceps empurra, abdômen flexiona."},
+       cues:["Remada máquina: peito colado no apoio, pegada aberta, puxar com os cotovelos abertos e apertar as escápulas 1s. A lombar fica apoiada, então dá pra carregar de verdade. Sem a máquina na academia → remada unilateral no cabo","Pulley barra reta: cotovelos colados ao corpo, estender até travar embaixo, subir controlando","Supra corda: ajoelhado, flexionar o tronco, expirar forte na contração","Monta o trio perto: máquina de remada + uma polia com barra reta e corda"],
+       why:"A remada com apoio de peito é melhor que a barra reta no cabo: o peito apoiado tira a lombar da jogada e o tronco não balança, então a carga vai toda pras costas (trapézio médio, romboides, posterior). Junto, já começa o tríceps e o abdômen: três áreas que não se atrapalham."},
       {block:"Bloco tríceps · fecha"},
       {n:4, name:"Superset · Francês unilateral + Mergulho", tags:["cabeça longa","todas"], sets:3, reps:"12 + máx", rest:60,
        parts:[
@@ -92,10 +92,13 @@ const FICHAS = {
          {l:"B", name:"Mergulho no banco", sub:"Todas · até a falha", yt:V.mergulhoBanco, u:"reps"}
        ],
        cues:["Francês: sentado com encosto, halter atrás da cabeça, descer fundo até alongar o tríceps, cotovelo apontando pro teto","Mergulho: mãos no banco atrás, pés à frente, cotovelo a 90°, até a falha"],
-       why:"O francês pega a cabeça longa na posição alongada, onde ela mais cresce, e o mergulho fecha com tudo que sobrou."}
+       why:"O francês pega a cabeça longa na posição alongada, onde ela mais cresce, e o mergulho fecha com tudo que sobrou."},
+      {n:5, name:"Tríceps pulley corda", tags:["lateral/medial","finisher"], tech:"Drop set na 3ª", sets:3, reps:"15", rest:45, yt:V.tricepsCorda,
+       cues:["Cotovelos colados ao corpo, estender e ABRIR a corda embaixo, segurar 1s","Subir controlando, sem deixar o cotovelo ir pra frente","3ª série: 15 → −30% → falha"],
+       why:"Finisher de bombeamento: a corda deixa abrir as mãos no fim e espremer a cabeça lateral, a que dá o formato de ferradura."}
     ],
-    volume:[["Costas",16],["Tríceps",9],["Abs",3],["Total",28]],
-    note:"Por semana (~1,7x): costas ~27 (acima da meta de 12–16, você pediu mais costas), tríceps ~15 (+ os presses e a flexão da A), abs ~5. Técnicas: pirâmide + drop na puxada, mergulho até a falha."},
+    volume:[["Costas",16],["Tríceps",12],["Abs",3],["Total",31]],
+    note:"Por semana (~1,7x): costas ~27 (acima da meta de 12–16, você pediu mais costas), tríceps ~20 (+ os presses e a flexão da A), abs ~5. Técnicas: pirâmide + drop na puxada, mergulho até a falha, drop set na corda."},
 
   c:{tab:"Perna · Bíceps", title:"Perna + Bíceps", sub:"Retomada", sets:30, min:38,
     brief:"<strong>Retomada pós-op joelho.</strong> Mesmo bloco de perna de antes: carga conservadora (40–50%), RPE máximo 7, sem falha e sem técnica intensificadora na perna. Qualquer desconforto no joelho → parar a série e reduzir. A perna descansa enquanto o bíceps trabalha: as técnicas são só pro bíceps.", warn:true,
